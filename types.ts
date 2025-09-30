@@ -19,6 +19,16 @@ export enum ToolComponentType {
   ImageGenerator = 'ImageGenerator',
   GroundedQA = 'GroundedQA',
   BlogPost = 'BlogPost',
+  GrammarTool = 'GrammarTool',
+  ToneChangerTool = 'ToneChangerTool',
+  EmailWriterTool = 'EmailWriterTool',
+  StudyTool = 'StudyTool',
+  ResumeTool = 'ResumeTool', // Deprecated, will be replaced by IndustryInputTool
+  // New granular tool types for enhanced features
+  SingleSelectTool = 'SingleSelectTool',
+  DoubleSelectTool = 'DoubleSelectTool',
+  DualTextareaTool = 'DualTextareaTool',
+  IndustryInputTool = 'IndustryInputTool',
 }
 
 export interface ToolContext {
@@ -49,6 +59,7 @@ export interface BlogPostToolProps {
   placeholder: string;
   tones: string[];
   styles: string[];
+  audiences: string[];
 }
 
 export interface ImageInputToolProps {
@@ -64,6 +75,74 @@ export interface GroundedQAToolProps {
   placeholder: string;
 }
 
+export interface GrammarToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  styles: string[];
+}
+
+export interface ToneChangerToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  tones: string[];
+  intensities: string[];
+}
+
+export interface EmailWriterToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  politenessLevels: string[];
+}
+
+export interface StudyToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  difficulties: string[];
+}
+
+// Kept for backward compatibility for now, but should be removed.
+export interface ResumeToolProps {
+  promptTemplate: string;
+  placeholder: string;
+}
+
+export interface SingleSelectToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  select: {
+    label: string;
+    options: string[];
+  };
+}
+
+export interface DoubleSelectToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  select1: {
+    label: string;
+    options: string[];
+  };
+  select2: {
+    label: string;
+    options: string[];
+  };
+}
+
+export interface DualTextareaToolProps {
+  promptTemplate: string;
+  placeholder1: string;
+  placeholder2: string;
+  label1: string;
+  label2: string;
+}
+
+export interface IndustryInputToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  industryLabel: string;
+  industryPlaceholder: string;
+}
+
 
 export interface Tool {
   id: string;
@@ -72,8 +151,13 @@ export interface Tool {
   category: ToolCategory;
   icon: React.ReactNode;
   component: ToolComponentType;
-  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps;
+  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | GrammarToolProps | ToneChangerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps;
   systemInstruction: string;
   context: ToolContext;
   featured?: boolean;
+}
+
+export interface ChatMessage {
+  role: 'user' | 'model';
+  content: string;
 }

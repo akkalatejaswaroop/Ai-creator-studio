@@ -1,4 +1,5 @@
 
+
 import React, { useMemo } from 'react';
 import { Tool } from '../types';
 
@@ -17,11 +18,25 @@ const LogoIcon = () => (
 );
 
 const SearchIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>;
-const DocumentDuplicateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>;
-const CodeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>;
-const PenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>;
-const SparklesIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6.343 6.343l-2.828 2.829M17.657 17.657l2.828 2.829M18 5v.01M19.071 6.929l-2.829 2.829M12 2v2m-6.857 4.929l-2.829-2.829M21 12h-2m.465 6.464l-2.829-2.829M12 18v2m3.636-3.636l2.828-2.829" /></svg>;
-const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+const LinkedinIcon = () => <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>;
+const TwitterIcon = () => <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>;
+const MailIcon = () => <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>;
+
+// Icons for Feature Showcase
+const PenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-cyan-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>;
+const CodeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-cyan-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>;
+const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-cyan-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+const GraduationCapIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-cyan-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M1 12v5a2 2 0 002 2h18a2 2 0 002-2v-5" /></svg>;
+const MegaphoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-cyan-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-2.236 9.168-5.514C18.358 1.84 19.17 1 20.243 1c.67 0 1.313.327 1.745.87l.271.305a1.5 1.5 0 010 2.118l-6.195 6.195a2.25 2.25 0 01-3.183 0l-1.42-1.42a2.25 2.25 0 00-3.182 0l-1.42 1.42a2.25 2.25 0 000 3.182l.026.026a2.25 2.25 0 003.182 0l1.42-1.42" /></svg>;
+const PhotoIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-4 text-cyan-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>;
+
+const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
+    <div className="bg-white/5 p-6 rounded-xl border border-white/10 text-center transform hover:-translate-y-2 transition-transform duration-300">
+        {icon}
+        <h3 className="font-bold text-white text-lg mb-2">{title}</h3>
+        <p className="text-gray-400 text-sm">{description}</p>
+    </div>
+);
 
 
 interface HomePageProps {
@@ -30,26 +45,6 @@ interface HomePageProps {
   tools: Tool[];
   onSelectTool: (tool: Tool) => void;
 }
-
-const MetricCard: React.FC<{ icon: React.ReactNode; number: string; label: string }> = ({ icon, number, label }) => (
-    <div className="bg-white/5 p-8 rounded-2xl border border-white/10">
-        <div className="text-cyan-400 mx-auto mb-4 w-12 h-12 flex items-center justify-center bg-gray-800/50 rounded-xl border border-white/10">
-            {icon}
-        </div>
-        <p className="text-4xl font-bold text-white">{number}</p>
-        <p className="text-gray-400 mt-2">{label}</p>
-    </div>
-);
-
-const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({ icon, title, description }) => (
-    <div className="bg-white/5 p-6 rounded-2xl border border-white/10 transform transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-900/20 hover:-translate-y-2">
-        <div className="bg-gray-800/50 border border-white/10 p-3 rounded-xl mb-4 inline-block">
-            <span className="text-cyan-400">{icon}</span>
-        </div>
-        <h3 className="font-bold text-white text-lg mb-2">{title}</h3>
-        <p className="text-gray-400 text-sm">{description}</p>
-    </div>
-);
 
 export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, tools, onSelectTool }) => {
     const filteredTools = useMemo(() => {
@@ -63,8 +58,8 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
     const hasSearch = searchTerm.length > 0;
 
     return (
-        <div className="flex flex-col items-center opacity-0 animate-fade-in-up w-full">
-            <div className={`flex flex-col items-center justify-center text-center w-full transition-all duration-500 ${hasSearch ? 'min-h-[25vh] pt-10' : 'min-h-[calc(100vh-10rem)] py-10'}`}>
+        <div className="flex flex-col items-center opacity-0 animate-fade-in-up w-full min-h-full">
+            <header className={`flex flex-col items-center justify-center text-center w-full transition-all duration-500 ${hasSearch ? 'min-h-[25vh] pt-10' : 'pt-20 pb-16'}`}>
                 <div className="mb-6">
                     <LogoIcon />
                 </div>
@@ -87,9 +82,9 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                         aria-label="Search for a tool"
                     />
                 </div>
-            </div>
+            </header>
             
-            <div className="w-full max-w-6xl mx-auto px-4 pb-12">
+            <main className="w-full max-w-6xl mx-auto px-4 pb-12 flex-grow">
                 {hasSearch ? (
                     <div>
                         {filteredTools.length > 0 ? (
@@ -116,52 +111,35 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                         )}
                     </div>
                 ) : (
-                    <div className="space-y-24">
-                        <div className="text-center">
-                            <h2 className="text-3xl font-bold text-white mb-4">Powering Innovation at Scale</h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto mb-12">
-                                Join thousands of creators, developers, and professionals building the future with IntelliForge Ai.
-                            </p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <MetricCard icon={<DocumentDuplicateIcon/>} number="150,000+" label="Projects Created" />
-                                <MetricCard icon={<CodeIcon/>} number="2.5M+" label="Lines of Code Generated" />
-                                <MetricCard icon={<PenIcon/>} number="45,000+" label="Blog Posts Drafted" />
-                            </div>
-                        </div>
-
-                        <div className="text-center">
-                             <h2 className="text-3xl font-bold text-white mb-4">A Tool for Every Task</h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto mb-12">
-                                From writing and coding to professional development, our comprehensive suite of AI tools has you covered.
-                            </p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-                               <FeatureCard 
-                                 icon={<PenIcon/>} 
-                                 title="Content Creation" 
-                                 description="Generate blog posts, social media updates, and professional emails in seconds." 
-                               />
-                               <FeatureCard 
-                                 icon={<CodeIcon/>} 
-                                 title="Code Assistance" 
-                                 description="Explain, debug, and refactor code to accelerate your development workflow." 
-                               />
-                               <FeatureCard 
-                                 icon={<SparklesIcon/>} 
-                                 title="Creative Ideation" 
-                                 description="Brainstorm story plots, generate unique images, and create video scripts effortlessly." 
-                               />
-                               <FeatureCard 
-                                 icon={<BriefcaseIcon/>} 
-                                 title="Professional Growth" 
-                                 description="Craft the perfect resume, prepare for interviews, and optimize your LinkedIn profile." 
-                               />
-                            </div>
+                    <div className="text-center animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+                        <h2 className="text-3xl font-bold text-white mb-4">A Universe of Capabilities</h2>
+                        <p className="text-gray-400 mb-12 max-w-2xl mx-auto">Explore a powerful suite of AI tools designed to enhance your workflow, from content creation and code assistance to professional and career development.</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <FeatureCard icon={<PenIcon />} title="Advanced Content Creation" description="Generate blog posts, marketing copy, emails, and creative stories with fine-tuned control over tone and style." />
+                            <FeatureCard icon={<CodeIcon />} title="Intelligent Code Assistance" description="Explain, debug, refactor, and document your code. Translate natural language into SQL queries or pseudocode." />
+                            <FeatureCard icon={<BriefcaseIcon />} title="Professional Career Development" description="Craft the perfect resume, write tailored cover letters, and prepare for interviews with targeted questions and feedback." />
+                            <FeatureCard icon={<GraduationCapIcon />} title="Accelerated Learning & Research" description="Summarize lectures, create study guides and quizzes, and get up-to-date answers on current events with cited sources." />
+                            <FeatureCard icon={<MegaphoneIcon />} title="SEO & Marketing Suite" description="Discover keywords, generate ad copy, and create social media posts to boost your online presence and engagement." />
+                            <FeatureCard icon={<PhotoIcon />} title="Creative Visual Generation" description="Turn your text descriptions into unique images, and enhance simple ideas into detailed prompts for stunning AI art." />
                         </div>
                     </div>
                 )}
-            </div>
-            <footer className="text-center py-8 text-gray-600 text-sm">
-                 &copy; {new Date().getFullYear()} IntelliForge Ai. v1.0.0
+            </main>
+
+            <footer className="text-center py-8 text-gray-500 text-sm w-full">
+                 <div className="mb-4 font-semibold text-gray-400">Contact Developer</div>
+                 <div className="flex justify-center items-center gap-6 mb-6">
+                    <a href="https://www.linkedin.com/in/akkalatejaswaroop/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors" aria-label="LinkedIn">
+                        <LinkedinIcon />
+                    </a>
+                    <a href="https://x.com/tejaswaroop_a" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors" aria-label="Twitter X">
+                        <TwitterIcon />
+                    </a>
+                    <a href="mailto:Tejaswaroopakkala@gmail.com" className="hover:text-cyan-400 transition-colors" aria-label="Email Developer">
+                        <MailIcon />
+                    </a>
+                 </div>
+                 <p className="text-gray-600">&copy; {new Date().getFullYear()} IntelliForge Ai. v1.0.0</p>
             </footer>
         </div>
     );

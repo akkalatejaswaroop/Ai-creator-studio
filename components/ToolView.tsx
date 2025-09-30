@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Tool, ToolComponentType, GenericToolProps, SocialMediaToolProps, VideoScriptToolProps, ImageInputToolProps, GroundedQAToolProps, ImageGeneratorToolProps, BlogPostToolProps } from '../types';
+import { Tool, ToolComponentType, GenericToolProps, SocialMediaToolProps, VideoScriptToolProps, ImageInputToolProps, GroundedQAToolProps, ImageGeneratorToolProps, BlogPostToolProps, GrammarToolProps, ToneChangerToolProps, EmailWriterToolProps, StudyToolProps, SingleSelectToolProps, DoubleSelectToolProps, DualTextareaToolProps, IndustryInputToolProps } from '../types';
 import { generateTextContent, generateTextFromImage, generateGroundedContent, generateImages, isApiAvailable } from '../services/geminiService';
 import { Loader } from './Loader';
 
@@ -21,13 +21,39 @@ const Select = ({ label, value, onChange, options }: { label: string, value: str
   </div>
 );
 
+const CopyButton = ({ text }: { text: string }) => {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button onClick={handleCopy} className="absolute top-3 right-3 bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors">
+      {copied ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
+    </button>
+  );
+};
+
+const OutputDisplay = ({ isLoading, error, content, defaultText }: { isLoading: boolean; error: string; content: string; defaultText: string; }) => (
+  <div className="w-full flex-grow bg-black/30 border border-white/10 rounded-lg p-4 overflow-y-auto relative text-sm">
+    {isLoading && <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm z-10"><Loader /><p className="mt-4 text-gray-300 animate-pulse">AI is thinking...</p></div>}
+    {error && <div className="text-red-400 p-4 bg-red-900/50 rounded-lg">{error}</div>}
+    {content ? (
+      <>
+        <CopyButton text={content} />
+        <pre className="whitespace-pre-wrap text-gray-200 font-sans leading-relaxed">{content}</pre>
+      </>
+    ) : (!isLoading && <div className="text-gray-500 flex items-center justify-center h-full">{defaultText}</div>)}
+  </div>
+);
+
 const GenericTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
   const { promptTemplate, placeholder } = tool.props as GenericToolProps;
   const [userInput, setUserInput] = useState('');
   const [generatedContent, setGeneratedContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [copied, setCopied] = useState(false);
 
   const handleGenerate = useCallback(async () => {
     if (!userInput) return;
@@ -40,18 +66,7 @@ const GenericTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
     setError('');
 
     try {
-      let finalPrompt;
-      if (tool.id === 'cover-letter' && userInput.includes('---JOB DESCRIPTION---')) {
-        const parts = userInput.split('---JOB DESCRIPTION---');
-        const experience = parts[0] || '';
-        const jobDescription = parts[1] || '';
-        finalPrompt = promptTemplate
-          .replace('{userInput}', experience.trim())
-          .replace('{jobDescription}', jobDescription.trim());
-      } else {
-        finalPrompt = promptTemplate.replace('{userInput}', userInput);
-      }
-      
+      const finalPrompt = promptTemplate.replace('{userInput}', userInput);
       const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
       setGeneratedContent(result);
     } catch (err) {
@@ -59,13 +74,7 @@ const GenericTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [userInput, promptTemplate, tool.systemInstruction, tool.id, language]);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generatedContent);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  }, [userInput, promptTemplate, tool.systemInstruction, language]);
 
   return (
     <div className="flex flex-col h-full gap-4">
@@ -82,28 +91,18 @@ const GenericTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
       >
         {isLoading ? <><Loader /> Generating...</> : 'Generate'}
       </button>
-      <div className="w-full flex-grow bg-black/30 border border-white/10 rounded-lg p-4 overflow-y-auto relative text-sm">
-        {isLoading && <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm z-10"><Loader /><p className="mt-4 text-gray-300 animate-pulse">AI is thinking...</p></div>}
-        {error && <div className="text-red-400 p-4 bg-red-900/50 rounded-lg">{error}</div>}
-        {generatedContent ? (
-          <>
-            <button onClick={handleCopy} className="absolute top-3 right-3 bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors">
-              {copied ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
-            </button>
-            <pre className="whitespace-pre-wrap text-gray-200 font-sans leading-relaxed">{generatedContent}</pre>
-          </>
-        ) : (!isLoading && <div className="text-gray-500 flex items-center justify-center h-full">Your generated content will appear here.</div>)}
-      </div>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated content will appear here." />
     </div>
   );
 };
 
 const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
-  const { promptTemplate, placeholder, tones, styles } = tool.props as BlogPostToolProps;
+  const { promptTemplate, placeholder, tones, styles, audiences } = tool.props as BlogPostToolProps;
   const [userInput, setUserInput] = useState('');
   const [keywords, setKeywords] = useState('');
   const [tone, setTone] = useState(tones[0]);
   const [style, setStyle] = useState(styles[0]);
+  const [audience, setAudience] = useState(audiences[0]);
   const [generatedContent, setGeneratedContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -124,7 +123,8 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
         .replace('{userInput}', userInput)
         .replace('{keywords}', keywords || 'none')
         .replace('{tone}', tone)
-        .replace('{style}', style);
+        .replace('{style}', style)
+        .replace('{audience}', audience);
         
       const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
       setGeneratedContent(result);
@@ -133,7 +133,7 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [userInput, keywords, tone, style, promptTemplate, tool.systemInstruction, language]);
+  }, [userInput, keywords, tone, style, audience, promptTemplate, tool.systemInstruction, language]);
   
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedContent);
@@ -143,9 +143,10 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
   
   return (
     <div className="flex flex-col h-full gap-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Select label="Tone" value={tone} onChange={(e) => setTone(e.target.value)} options={tones} />
         <Select label="Style" value={style} onChange={(e) => setStyle(e.target.value)} options={styles} />
+        <Select label="Audience" value={audience} onChange={(e) => setAudience(e.target.value)} options={audiences} />
         <div>
           <label className="block text-xs text-gray-400 mb-1">Optional Keywords</label>
           <input
@@ -199,7 +200,6 @@ const SocialMediaTool: React.FC<AiToolComponentProps> = ({ tool, language }) => 
   const [generatedContent, setGeneratedContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [copied, setCopied] = useState(false);
 
   const handleGenerate = useCallback(async () => {
     if (!userInput) return;
@@ -226,12 +226,6 @@ const SocialMediaTool: React.FC<AiToolComponentProps> = ({ tool, language }) => 
     }
   }, [userInput, platform, tone, promptTemplate, tool.systemInstruction, language]);
   
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generatedContent);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  
   return (
     <div className="flex flex-col h-full gap-4">
       <div className="flex gap-4">
@@ -252,18 +246,7 @@ const SocialMediaTool: React.FC<AiToolComponentProps> = ({ tool, language }) => 
       >
         {isLoading ? <><Loader /> Generating...</> : 'Generate'}
       </button>
-      <div className="w-full flex-grow bg-black/30 border border-white/10 rounded-lg p-4 overflow-y-auto relative text-sm">
-      {isLoading && <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm z-10"><Loader /><p className="mt-4 text-gray-300 animate-pulse">AI is thinking...</p></div>}
-        {error && <div className="text-red-400 p-4 bg-red-900/50 rounded-lg">{error}</div>}
-        {generatedContent ? (
-          <>
-            <button onClick={handleCopy} className="absolute top-3 right-3 bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors">
-              {copied ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
-            </button>
-            <pre className="whitespace-pre-wrap text-gray-200 font-sans leading-relaxed">{generatedContent}</pre>
-          </>
-        ) : (!isLoading && <div className="text-gray-500 flex items-center justify-center h-full">Your generated content will appear here.</div>)}
-      </div>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated post will appear here." />
     </div>
   );
 };
@@ -276,7 +259,6 @@ const VideoScriptTool: React.FC<AiToolComponentProps> = ({ tool, language }) => 
   const [generatedContent, setGeneratedContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [copied, setCopied] = useState(false);
 
   const handleGenerate = useCallback(async () => {
     if (!userInput) return;
@@ -302,12 +284,6 @@ const VideoScriptTool: React.FC<AiToolComponentProps> = ({ tool, language }) => 
     }
   }, [userInput, platform, style, promptTemplate, tool.systemInstruction, language]);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generatedContent);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  
   return (
     <div className="flex flex-col h-full gap-4">
       <div className="flex gap-4">
@@ -328,18 +304,7 @@ const VideoScriptTool: React.FC<AiToolComponentProps> = ({ tool, language }) => 
       >
         {isLoading ? <><Loader /> Generating...</> : 'Generate'}
       </button>
-      <div className="w-full flex-grow bg-black/30 border border-white/10 rounded-lg p-4 overflow-y-auto relative text-sm">
-        {isLoading && <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm z-10"><Loader /><p className="mt-4 text-gray-300 animate-pulse">AI is thinking...</p></div>}
-        {error && <div className="text-red-400 p-4 bg-red-900/50 rounded-lg">{error}</div>}
-        {generatedContent ? (
-          <>
-            <button onClick={handleCopy} className="absolute top-3 right-3 bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors">
-              {copied ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
-            </button>
-            <pre className="whitespace-pre-wrap text-gray-200 font-sans leading-relaxed">{generatedContent}</pre>
-          </>
-        ) : (!isLoading && <div className="text-gray-500 flex items-center justify-center h-full">Your generated content will appear here.</div>)}
-      </div>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated script will appear here." />
     </div>
   );
 };
@@ -409,11 +374,7 @@ const ImageInputTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
       <button onClick={handleGenerate} disabled={isLoading || !image} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
         {isLoading ? <><Loader /> Generating...</> : 'Generate'}
       </button>
-      <div className="w-full flex-grow bg-black/30 border border-white/10 rounded-lg p-4 overflow-y-auto relative text-sm">
-        {isLoading && <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm z-10"><Loader /><p className="mt-4 text-gray-300 animate-pulse">AI is analyzing...</p></div>}
-        {error && <div className="text-red-400 p-4 bg-red-900/50 rounded-lg">{error}</div>}
-        {generatedContent ? <pre className="whitespace-pre-wrap text-gray-200 font-sans leading-relaxed">{generatedContent}</pre> : (!isLoading && <div className="text-gray-500 flex items-center justify-center h-full">Generated caption & alt text will appear here.</div>)}
-      </div>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Generated caption & alt text will appear here." />
     </div>
   );
 };
@@ -536,6 +497,431 @@ const GroundedQATool: React.FC<AiToolComponentProps> = ({ tool }) => {
   );
 };
 
+const GrammarTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+  const { promptTemplate, placeholder, styles } = tool.props as GrammarToolProps;
+  const [userInput, setUserInput] = useState('');
+  const [style, setStyle] = useState(styles[0]);
+  const [generatedContent, setGeneratedContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = useCallback(async () => {
+    if (!userInput) return;
+    if (!isApiAvailable()) {
+      setError('Gemini API key is not configured.');
+      return;
+    }
+    setIsLoading(true);
+    setGeneratedContent('');
+    setError('');
+
+    try {
+      const finalPrompt = promptTemplate
+        .replace('{style}', style)
+        .replace('{userInput}', userInput);
+      const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+      setGeneratedContent(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [userInput, style, promptTemplate, tool.systemInstruction, language]);
+
+  return (
+    <div className="flex flex-col h-full gap-4">
+      <div className="max-w-xs">
+        <Select label="Target Writing Style" value={style} onChange={(e) => setStyle(e.target.value)} options={styles} />
+      </div>
+      <textarea
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
+        className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+      />
+      <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+        {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+      </button>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your corrected text will appear here." />
+    </div>
+  );
+};
+
+const ToneChangerTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+  const { promptTemplate, placeholder, tones, intensities } = tool.props as ToneChangerToolProps;
+  const [userInput, setUserInput] = useState('');
+  const [tone, setTone] = useState(tones[0]);
+  const [intensity, setIntensity] = useState(intensities[1]);
+  const [generatedContent, setGeneratedContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = useCallback(async () => {
+    if (!userInput) return;
+    if (!isApiAvailable()) {
+      setError('Gemini API key is not configured.');
+      return;
+    }
+    setIsLoading(true);
+    setGeneratedContent('');
+    setError('');
+
+    try {
+      const finalPrompt = promptTemplate
+        .replace('{intensity}', intensity)
+        .replace('{tone}', tone)
+        .replace('{userInput}', userInput);
+      const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+      setGeneratedContent(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [userInput, tone, intensity, promptTemplate, tool.systemInstruction, language]);
+
+  return (
+    <div className="flex flex-col h-full gap-4">
+      <div className="flex gap-4">
+        <Select label="Target Tone" value={tone} onChange={(e) => setTone(e.target.value)} options={tones} />
+        <Select label="Intensity" value={intensity} onChange={(e) => setIntensity(e.target.value)} options={intensities} />
+      </div>
+      <textarea
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
+        className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+      />
+      <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+        {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+      </button>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your rewritten text will appear here." />
+    </div>
+  );
+};
+
+const EmailWriterTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+  const { promptTemplate, placeholder, politenessLevels } = tool.props as EmailWriterToolProps;
+  const [userInput, setUserInput] = useState('');
+  const [politeness, setPoliteness] = useState(politenessLevels[0]);
+  const [generatedContent, setGeneratedContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = useCallback(async () => {
+    if (!userInput) return;
+    if (!isApiAvailable()) {
+      setError('Gemini API key is not configured.');
+      return;
+    }
+    setIsLoading(true);
+    setGeneratedContent('');
+    setError('');
+
+    try {
+      const finalPrompt = promptTemplate
+        .replace('{politeness}', politeness)
+        .replace('{userInput}', userInput);
+      const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+      setGeneratedContent(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [userInput, politeness, promptTemplate, tool.systemInstruction, language]);
+  
+  return (
+    <div className="flex flex-col h-full gap-4">
+      <div className="max-w-xs">
+        <Select label="Politeness Level" value={politeness} onChange={(e) => setPoliteness(e.target.value)} options={politenessLevels} />
+      </div>
+      <textarea
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
+        className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+      />
+      <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+        {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+      </button>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated email will appear here." />
+    </div>
+  );
+};
+
+const StudyTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+  const { promptTemplate, placeholder, difficulties } = tool.props as StudyToolProps;
+  const [userInput, setUserInput] = useState('');
+  const [difficulty, setDifficulty] = useState(difficulties[0]);
+  const [generatedContent, setGeneratedContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = useCallback(async () => {
+    if (!userInput) return;
+    if (!isApiAvailable()) {
+      setError('Gemini API key is not configured.');
+      return;
+    }
+    setIsLoading(true);
+    setGeneratedContent('');
+    setError('');
+
+    try {
+      const finalPrompt = promptTemplate
+        .replace('{difficulty}', difficulty)
+        .replace('{userInput}', userInput);
+      const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+      setGeneratedContent(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [userInput, difficulty, promptTemplate, tool.systemInstruction, language]);
+  
+  return (
+    <div className="flex flex-col h-full gap-4">
+      <div className="max-w-xs">
+        <Select label="Difficulty Level" value={difficulty} onChange={(e) => setDifficulty(e.target.value)} options={difficulties} />
+      </div>
+      <textarea
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
+        className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+      />
+      <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+        {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+      </button>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your study guide will appear here." />
+    </div>
+  );
+};
+
+const SingleSelectTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+  const { promptTemplate, placeholder, select } = tool.props as SingleSelectToolProps;
+  const [userInput, setUserInput] = useState('');
+  const [selectValue, setSelectValue] = useState(select.options[0]);
+  const [generatedContent, setGeneratedContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = useCallback(async () => {
+    if (!userInput) return;
+    if (!isApiAvailable()) {
+      setError('Gemini API key is not configured.');
+      return;
+    }
+    setIsLoading(true);
+    setGeneratedContent('');
+    setError('');
+
+    try {
+      const finalPrompt = promptTemplate
+        .replace('{selectValue}', selectValue)
+        .replace('{userInput}', userInput);
+      const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+      setGeneratedContent(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [userInput, selectValue, promptTemplate, tool.systemInstruction, language]);
+
+  return (
+    <div className="flex flex-col h-full gap-4">
+      <div className="max-w-xs">
+        <Select label={select.label} value={selectValue} onChange={(e) => setSelectValue(e.target.value)} options={select.options} />
+      </div>
+      <textarea
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
+        className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+      />
+      <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+        {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+      </button>
+      <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated content will appear here." />
+    </div>
+  );
+};
+
+const DoubleSelectTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+    const { promptTemplate, placeholder, select1, select2 } = tool.props as DoubleSelectToolProps;
+    const [userInput, setUserInput] = useState('');
+    const [selectValue1, setSelectValue1] = useState(select1.options[0]);
+    const [selectValue2, setSelectValue2] = useState(select2.options[0]);
+    const [generatedContent, setGeneratedContent] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+  
+    const handleGenerate = useCallback(async () => {
+      if (!userInput) return;
+      if (!isApiAvailable()) {
+        setError('Gemini API key is not configured.');
+        return;
+      }
+      setIsLoading(true);
+      setGeneratedContent('');
+      setError('');
+  
+      try {
+        const finalPrompt = promptTemplate
+          .replace('{select1}', selectValue1)
+          .replace('{select2}', selectValue2)
+          .replace('{userInput}', userInput);
+        const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+        setGeneratedContent(result);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+      } finally {
+        setIsLoading(false);
+      }
+    }, [userInput, selectValue1, selectValue2, promptTemplate, tool.systemInstruction, language]);
+  
+    return (
+      <div className="flex flex-col h-full gap-4">
+        <div className="flex gap-4">
+          <Select label={select1.label} value={selectValue1} onChange={(e) => setSelectValue1(e.target.value)} options={select1.options} />
+          <Select label={select2.label} value={selectValue2} onChange={(e) => setSelectValue2(e.target.value)} options={select2.options} />
+        </div>
+        <textarea
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          placeholder={placeholder}
+          className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+        />
+        <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+          {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+        </button>
+        <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated content will appear here." />
+      </div>
+    );
+  };
+  
+const DualTextareaTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+    const { promptTemplate, placeholder1, placeholder2, label1, label2 } = tool.props as DualTextareaToolProps;
+    const [userInput1, setUserInput1] = useState('');
+    const [userInput2, setUserInput2] = useState('');
+    const [generatedContent, setGeneratedContent] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleGenerate = useCallback(async () => {
+        if (!userInput1 || !userInput2) return;
+        if (!isApiAvailable()) {
+        setError('Gemini API key is not configured.');
+        return;
+        }
+        setIsLoading(true);
+        setGeneratedContent('');
+        setError('');
+
+        try {
+        const finalPrompt = promptTemplate
+            .replace('{userInput1}', userInput1)
+            .replace('{userInput2}', userInput2);
+        const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+        setGeneratedContent(result);
+        } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+        } finally {
+        setIsLoading(false);
+        }
+    }, [userInput1, userInput2, promptTemplate, tool.systemInstruction, language]);
+
+    return (
+        <div className="flex flex-col h-full gap-4">
+        <div className="flex flex-col md:flex-row gap-4 flex-grow">
+            <div className="w-full md:w-1/2 flex flex-col gap-2">
+                <label className="text-sm font-semibold text-gray-300">{label1}</label>
+                <textarea
+                    value={userInput1}
+                    onChange={(e) => setUserInput1(e.target.value)}
+                    placeholder={placeholder1}
+                    className="w-full h-full p-3 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+                />
+            </div>
+            <div className="w-full md:w-1/2 flex flex-col gap-2">
+                <label className="text-sm font-semibold text-gray-300">{label2}</label>
+                <textarea
+                    value={userInput2}
+                    onChange={(e) => setUserInput2(e.target.value)}
+                    placeholder={placeholder2}
+                    className="w-full h-full p-3 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+                />
+            </div>
+        </div>
+        <button onClick={handleGenerate} disabled={isLoading || !userInput1 || !userInput2} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+            {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+        </button>
+        <div className="h-2/5">
+            <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated content will appear here." />
+        </div>
+        </div>
+    );
+};
+
+const IndustryInputTool: React.FC<AiToolComponentProps> = ({ tool, language }) => {
+    const { promptTemplate, placeholder, industryLabel, industryPlaceholder } = tool.props as IndustryInputToolProps;
+    const [userInput, setUserInput] = useState('');
+    const [industry, setIndustry] = useState('');
+    const [generatedContent, setGeneratedContent] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleGenerate = useCallback(async () => {
+        if (!userInput) return;
+        if (!isApiAvailable()) {
+        setError('Gemini API key is not configured.');
+        return;
+        }
+        setIsLoading(true);
+        setGeneratedContent('');
+        setError('');
+
+        try {
+        const finalPrompt = promptTemplate
+            .replace('{industry}', industry || 'general')
+            .replace('{userInput}', userInput);
+        const result = await generateTextContent(finalPrompt, tool.systemInstruction, language);
+        setGeneratedContent(result);
+        } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+        } finally {
+        setIsLoading(false);
+        }
+    }, [userInput, industry, promptTemplate, tool.systemInstruction, language]);
+
+    return (
+        <div className="flex flex-col h-full gap-4">
+        <div className="max-w-xs">
+            <label className="block text-xs text-gray-400 mb-1">{industryLabel}</label>
+            <input
+            type="text"
+            value={industry}
+            onChange={(e) => setIndustry(e.target.value)}
+            placeholder={industryPlaceholder}
+            className="w-full p-2 bg-black/30 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+            />
+        </div>
+        <textarea
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder={placeholder}
+            className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+        />
+        <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
+            {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+        </button>
+        <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated content will appear here." />
+        </div>
+    );
+};
 
 // --- Main ContentPanel Component ---
 
@@ -548,13 +934,7 @@ const GlobeAltIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-
 export const ContentPanel: React.FC<ContentPanelProps> = ({ tool, onBack }) => {
   const [language, setLanguage] = useState(LANGUAGES[0]);
 
-  const showLanguageSelector = [
-    ToolComponentType.Generic,
-    ToolComponentType.SocialMedia,
-    ToolComponentType.VideoScript,
-    ToolComponentType.ImageInput,
-    ToolComponentType.BlogPost,
-  ].includes(tool.component);
+  const showLanguageSelector = tool.component !== ToolComponentType.ImageGenerator && tool.component !== ToolComponentType.GroundedQA;
 
   const renderTool = () => {
     const props = { tool, language };
@@ -565,6 +945,14 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ tool, onBack }) => {
       case ToolComponentType.ImageInput: return <ImageInputTool {...props} />;
       case ToolComponentType.ImageGenerator: return <ImageGeneratorTool {...props} />;
       case ToolComponentType.GroundedQA: return <GroundedQATool {...props} />;
+      case ToolComponentType.GrammarTool: return <GrammarTool {...props} />;
+      case ToolComponentType.ToneChangerTool: return <ToneChangerTool {...props} />;
+      case ToolComponentType.EmailWriterTool: return <EmailWriterTool {...props} />;
+      case ToolComponentType.StudyTool: return <StudyTool {...props} />;
+      case ToolComponentType.SingleSelectTool: return <SingleSelectTool {...props} />;
+      case ToolComponentType.DoubleSelectTool: return <DoubleSelectTool {...props} />;
+      case ToolComponentType.DualTextareaTool: return <DualTextareaTool {...props} />;
+      case ToolComponentType.IndustryInputTool: return <IndustryInputTool {...props} />;
       case ToolComponentType.Generic:
       default:
         return <GenericTool {...props} />;

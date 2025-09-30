@@ -1,11 +1,11 @@
 
-
 import React, { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { ContentPanel } from './components/ToolView';
 import { HomePage } from './components/HomePage';
 import { Tool } from './types';
 import { TOOLS, CATEGORIES } from './constants';
+import { ChatAssistant } from './components/ChatAssistant';
 
 const MenuIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,6 +73,7 @@ const App: React.FC = () => {
             )}
         </div>
       </main>
+      <ChatAssistant tools={TOOLS} />
     </div>
   );
 };

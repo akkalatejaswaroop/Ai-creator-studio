@@ -32,7 +32,7 @@ const ArrowsPointingOutIcon = () => <svg xmlns="http://www.w3.org/2000/svg" clas
 const DocumentDuplicateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>;
 const TagIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>;
 const StarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.25l-6.18 3.77L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>;
-const RectangleStackIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm14 0H6v12h12V6zM4 9h16M4 12h16M4 15h16" /></svg>;
+const RectangleStackIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2-2H6a2 2 0 01-2-2V6zm14 0H6v12h12V6zM4 9h16M4 12h16M4 15h16" /></svg>;
 const MusicalNoteIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-16l-3.328 1.11a2 2 0 00-1.672 1.89V19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" /></svg>;
 const ArrowPathIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h5M20 20v-5h-5M4 4l16 16m0-16L4 20" /></svg>;
 const ServerStackIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18M3 20h18" /></svg>;
@@ -61,12 +61,13 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Writing,
     icon: <PenIcon />,
     component: ToolComponentType.BlogPost,
-    systemInstruction: 'You are an expert copywriter, SEO specialist, and content strategist. Your goal is to write a compelling, well-structured, and SEO-friendly blog post based on the user\'s topic, keywords, tone, and style. The output should be comprehensive, including SEO metadata and related social media posts. Where appropriate, enrich the content with relevant data or conceptual quotes.',
+    systemInstruction: 'You are an expert copywriter, SEO specialist, and content strategist. Your goal is to write a compelling, well-structured, and SEO-friendly blog post based on the user\'s topic, keywords, tone, style, and target audience. The output should be comprehensive, including SEO metadata and related social media posts. Where appropriate, enrich the content with relevant data or conceptual quotes.',
     props: {
-      promptTemplate: 'Write a blog post about the following topic or text: "{userInput}".\n\nOptional Keywords for guidance: {keywords}\nRequested Tone: {tone}\nRequested Style: {style}\n\nThe output must be a single block of text and include the following clearly labeled sections in order:\n\n1.  **SEO Title:** (A compelling title around 60 characters)\n2.  **Meta Description:** (An engaging summary around 160 characters)\n3.  **SEO Keywords:** (A comma-separated list of 10-15 relevant keywords based on the content)\n4.  **Blog Post Body:** (The full article, with a catchy title, introduction, several body paragraphs with subheadings, and a strong conclusion. It must be written in a {tone}, {style} manner.)\n5.  **Related Social media Posts:** (Two short posts, one for Twitter/X and one for LinkedIn, to promote the article.)',
+      promptTemplate: 'Write a blog post about the following topic or text: "{userInput}".\n\nOptional Keywords for guidance: {keywords}\nRequested Tone: {tone}\nRequested Style: {style}\nTarget Audience: {audience}\n\nThe output must be a single block of text and include the following clearly labeled sections in order:\n\n1.  **SEO Title:** (A compelling title around 60 characters)\n2.  **Meta Description:** (An engaging summary around 160 characters)\n3.  **SEO Keywords:** (A comma-separated list of 10-15 relevant keywords based on the content)\n4.  **Blog Post Body:** (The full article, with a catchy title, introduction, several body paragraphs with subheadings, and a strong conclusion. It must be written for a {audience} audience in a {tone}, {style} manner.)\n5.  **Related Social media Posts:** (Two short posts, one for Twitter/X and one for LinkedIn, to promote the article.)',
       placeholder: 'e.g., The future of AI in marketing. You can also paste a long article here to have it summarized and rewritten as a blog post.',
       tones: ['Formal', 'Conversational', 'Technical', 'Humorous', 'Persuasive'],
-      styles: ['News Report', 'How-To Guide', 'Listicle', 'Opinion Piece', 'Case Study']
+      styles: ['News Report', 'How-To Guide', 'Listicle', 'Opinion Piece', 'Case Study'],
+      audiences: ['General Public', 'Industry Experts', 'Beginners', 'Students'],
     },
     context: {
       purpose: "Generates full-length blog articles from a single topic idea, complete with SEO metadata and social media snippets.",
@@ -80,16 +81,17 @@ export const TOOLS: Tool[] = [
     description: 'Correct grammar and improve the style and clarity of your writing.',
     category: ToolCategory.Writing,
     icon: <CheckBadgeIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert copy editor. Your task is to correct any grammatical errors, spelling mistakes, and awkward phrasing in the provided text. You should also offer suggestions to enhance style, clarity, and flow. Present the corrected text first, followed by a brief explanation of the key changes.',
+    component: ToolComponentType.GrammarTool,
+    systemInstruction: 'You are an expert copy editor. Your task is to correct grammar and spelling, and rewrite the provided text to match a specified style. You should also improve sentence clarity and conciseness, and enhance vocabulary. Present the corrected text first, followed by a bulleted list explaining the key changes (Grammar, Style, Vocabulary, Clarity).',
     props: {
-      promptTemplate: 'Please correct the grammar and improve the style of the following text: {userInput}',
+      promptTemplate: 'Please correct the grammar and rewrite the following text in a {style} style. Improve its clarity and vocabulary. Text: {userInput}',
       placeholder: 'Paste any text here to check for errors and get style suggestions...',
+      styles: ['Formal', 'Casual', 'Technical', 'Creative', 'Academic'],
     },
     context: {
       purpose: 'Checks your text for grammatical errors, spelling mistakes, and stylistic issues.',
       benefit: 'Ensures your writing is professional, clear, and error-free, whether it\'s for an email, a report, or a blog post.',
-      proFeature: 'Paste in the text and ask it to "correct this and also make it sound more formal" for specific style adjustments.'
+      proFeature: 'Select a target style (e.g., "Formal") to not only correct errors but also align the text with a specific voice.'
     }
   },
    {
@@ -98,16 +100,18 @@ export const TOOLS: Tool[] = [
     description: 'Rewrite your text to adopt a different tone, such as professional, casual, or confident.',
     category: ToolCategory.Writing,
     icon: <AdjustmentsHorizontalIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert editor and communication specialist. Your task is to rewrite the given text to match the specified tone, while preserving the core message. The user will provide the target tone and the original text.',
+    component: ToolComponentType.ToneChangerTool,
+    systemInstruction: 'You are an expert editor and communication specialist. Your task is to rewrite the given text to match the specified tone and intensity, while preserving the core message.',
     props: {
-      promptTemplate: 'Please rewrite the text provided by the user to adopt the specified tone. Input: {userInput}',
-      placeholder: 'First, specify the new tone, then on a new line, paste your text.\n\nExample:\nNew Tone: More Confident\n\nI think maybe we could try this idea if that\'s okay.',
+      promptTemplate: 'Rewrite the following text with a {intensity} {tone} tone: {userInput}',
+      placeholder: 'Paste the text you want to transform here...',
+      tones: ['Professional', 'Friendly', 'Persuasive', 'Humorous', 'Empathetic', 'Confident'],
+      intensities: ['Mild', 'Moderate', 'Strong'],
     },
     context: {
       purpose: 'Modifies the tone of your writing to suit different audiences and situations.',
       benefit: 'Helps you communicate more effectively by ensuring your message has the right emotional impact, from a formal business proposal to a friendly social media post.',
-      proFeature: 'Try complex tones like "confidently persuasive but not aggressive" or "empathetic but professional" for nuanced results.'
+      proFeature: 'Use the intensity control to fine-tune the strength of the selected tone for more nuanced results.'
     }
   },
   {
@@ -116,16 +120,20 @@ export const TOOLS: Tool[] = [
     description: 'Rephrase sentences and paragraphs to improve clarity and avoid repetition.',
     category: ToolCategory.Writing,
     icon: <ArrowsPointingOutIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a skilled writer and editor. Your task is to rephrase the given paragraph to improve its clarity, flow, and vocabulary. Provide a few different versions if possible, each with a slightly different focus.',
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are a skilled writer and editor. Your task is to rephrase the given paragraph based on a specific goal (e.g., improving clarity, making it more concise, or boosting creativity). You must preserve the original meaning. Provide a few different versions if possible.',
     props: {
-      promptTemplate: 'Please rephrase the following paragraph to make it clearer and more engaging. Provide 2-3 alternative versions. Paragraph: {userInput}',
+      promptTemplate: 'Please rephrase the following paragraph with the goal of making it more "{selectValue}". Provide 2-3 alternative versions. Paragraph: {userInput}',
       placeholder: 'Paste a sentence or paragraph here to get alternative phrasings...',
+      select: {
+        label: 'Rephrasing Goal',
+        options: ['Clarity', 'Conciseness', 'Creativity', 'Formality'],
+      },
     },
     context: {
       purpose: 'Rewrites your text to say the same thing in a different way.',
       benefit: 'Helps you avoid plagiarism, improve sentence variety, find more powerful ways to express your ideas, and overcome writer\'s block.',
-      proFeature: 'Ask it to "rephrase this for a 5th-grade reading level" to simplify complex text.'
+      proFeature: 'Use the "Rephrasing Goal" selector to control the style of the output, whether you need to simplify text or make it more creative.'
     }
   },
   {
@@ -135,9 +143,9 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Writing,
     icon: <SparklesIcon />,
     component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert editor specializing in refining AI-generated text. Your task is to revise the given text to make it sound more natural, engaging, and less robotic. Focus on varying sentence structure, using more vivid language, and adopting a more conversational tone.',
+    systemInstruction: 'You are an expert editor specializing in refining AI-generated text. Your task is to revise the given text to make it sound more natural, engaging, and less robotic. Focus on varying sentence structure, using more vivid language, adding idiomatic expressions, improving the logical flow, and adopting a more conversational and authentic human tone.',
     props: {
-      promptTemplate: 'Please rewrite the following text to make it sound more human. Original text: {userInput}',
+      promptTemplate: 'Please rewrite the following text to make it sound more human, with varied sentence structure and more natural language flow. Original text: {userInput}',
       placeholder: 'Paste the AI-generated text you want to humanize...',
     },
     context: {
@@ -152,16 +160,17 @@ export const TOOLS: Tool[] = [
     description: 'Draft professional emails for situations like outreach, follow-ups, or formal requests.',
     category: ToolCategory.Writing,
     icon: <EnvelopeIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a professional communications expert. Your task is to write a clear, concise, and professional email based on the user\'s objective.',
+    component: ToolComponentType.EmailWriterTool,
+    systemInstruction: 'You are a professional communications expert. Your task is to write a clear, concise, and professional email based on the user\'s objective and desired politeness level. The email must include a clear subject line, a concise body with a clear call-to-action, and a professional closing. The user may specify a custom salutation or sign-off.',
     props: {
-        promptTemplate: 'Write a professional email for the following purpose: {userInput}. The email should have a clear subject line, a polite opening, a concise body, and a professional closing.',
-        placeholder: 'e.g., Follow up on a job application, or request a meeting with a potential client',
+        promptTemplate: 'Write a professional email for the following purpose with a {politeness} politeness level: {userInput}. The email should have a clear subject line, a concise body with a strong call-to-action, and a professional closing.',
+        placeholder: 'e.g., Follow up on a job application, or request a meeting with a potential client. You can specify a sign-off like "End with Regards,"',
+        politenessLevels: ['Formal', 'Neutral', 'Friendly'],
     },
     context: {
         purpose: "Generates well-structured professional emails for any situation.",
         benefit: "Saves time and ensures your communication is professional and effective, improving response rates.",
-        proFeature: "Specify a desired tone (e.g., 'formal,' 'friendly but professional') in your prompt for a more tailored email."
+        proFeature: "Use the politeness level control to perfectly match the tone of your email to the recipient and context."
     }
   },
   {
@@ -170,11 +179,15 @@ export const TOOLS: Tool[] = [
     description: 'Structure a compelling argument with an introduction, key points, and a conclusion.',
     category: ToolCategory.Writing,
     icon: <MegaphoneIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a master debater and rhetoric expert. Your task is to structure a persuasive argument based on a given topic and stance.',
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are a master debater and rhetoric expert. Your task is to structure a persuasive argument based on a given topic and stance, tailored to a specific tone. You should integrate evidence or examples where appropriate.',
     props: {
-        promptTemplate: 'Create a persuasive argument for the following topic/stance: {userInput}. The argument should include an introduction, three distinct supporting points with brief explanations, and a strong concluding statement.',
+        promptTemplate: 'Create a persuasive argument for the following topic/stance: {userInput}. The argument should have an "{selectValue}" tone and include an introduction, three distinct supporting points with brief explanations or examples, and a strong concluding statement.',
         placeholder: 'e.g., The importance of renewable energy, or why remote work is the future',
+        select: {
+          label: 'Argument Tone',
+          options: ['Assertive', 'Balanced', 'Empathetic', 'Analytical'],
+        }
     },
     context: {
         purpose: "Outlines a strong, logical argument for any topic.",
@@ -189,9 +202,9 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Writing,
     icon: <DocumentDuplicateIcon />,
     component: ToolComponentType.Generic,
-    systemInstruction: 'You are a professional executive assistant. Your task is to read a meeting transcript and produce a concise summary. The summary must include a list of attendees, key discussion points, and a clearly labeled "Action Items" section with assigned owners.',
+    systemInstruction: 'You are a professional executive assistant. Your task is to read a meeting transcript and produce a concise summary. The summary must include a list of attendees, key discussion points, decisions made, and a clearly labeled "Action Items" section with assigned owners.',
     props: {
-      promptTemplate: 'Summarize the following meeting transcript:\n\n{userInput}',
+      promptTemplate: 'Summarize the following meeting transcript, extracting attendees, key points, decisions, and action items:\n\n{userInput}',
       placeholder: 'Paste the full meeting transcript here...',
     },
     context: {
@@ -206,11 +219,19 @@ export const TOOLS: Tool[] = [
     description: 'Create natural and engaging dialogue between two or more characters.',
     category: ToolCategory.Writing,
     icon: <ChatBubbleLeftRightIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an experienced novelist and screenwriter. Your task is to write a short scene of dialogue based on the user\'s prompt. The dialogue should be natural, reflect the characters\' personalities, and move the plot forward.',
+    component: ToolComponentType.DoubleSelectTool,
+    systemInstruction: 'You are an experienced novelist and screenwriter. Your task is to write a short scene of dialogue based on the user\'s prompt, genre, and mood. The dialogue should be natural, reflect the characters\' personalities, and move the plot forward.',
     props: {
-      promptTemplate: 'Write a dialogue scene based on the following: {userInput}',
+      promptTemplate: 'Write a dialogue scene for the "{select1}" genre with a "{select2}" mood, based on the following: {userInput}',
       placeholder: 'e.g., Two characters, a veteran detective and a rookie cop, are arguing about a case in a coffee shop.',
+      select1: {
+        label: 'Genre',
+        options: ['Sci-Fi', 'Fantasy', 'Thriller', 'Romance', 'Comedy', 'Drama'],
+      },
+      select2: {
+        label: 'Mood',
+        options: ['Tense', 'Humorous', 'Romantic', 'Somber', 'Action-packed'],
+      },
     },
     context: {
       purpose: "Generates realistic and compelling conversations for stories or scripts.",
@@ -226,11 +247,11 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Marketing,
     icon: <MegaphoneIcon />,
     component: ToolComponentType.SocialMedia,
-    systemInstruction: 'You are a social media marketing expert. Your task is to create an engaging social media post tailored to a specific platform and tone.',
+    systemInstruction: 'You are a social media marketing expert. Your task is to create an engaging social media post tailored to a specific platform and tone. Include relevant hashtags and suggest trending ones if applicable.',
     props: {
       promptTemplate: 'Create a social media post for {platform} with a {tone} tone about: {userInput}. Include a caption, relevant hashtags, and a suggestion for a visual.',
-      platforms: ['Instagram', 'Twitter', 'LinkedIn', 'Facebook'],
-      tones: ['Professional', 'Casual', 'Humorous', 'Inspirational'],
+      platforms: ['Instagram', 'Twitter', 'LinkedIn', 'Facebook', 'TikTok'],
+      tones: ['Professional', 'Casual', 'Humorous', 'Inspirational', 'Sales-oriented'],
     },
     context: {
       purpose: "Crafts optimized posts for different social media channels.",
@@ -245,10 +266,10 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Marketing,
     icon: <CameraIcon />,
     component: ToolComponentType.ImageInput,
-    systemInstruction: 'You are an expert social media manager and web accessibility specialist. Analyze the provided image and generate both an engaging social media caption and a descriptive, SEO-friendly alt text.',
+    systemInstruction: 'You are an expert social media manager and web accessibility specialist. Analyze the provided image and generate both an engaging, platform-aware social media caption and a descriptive, keyword-rich, SEO-friendly alt text.',
     props: {
-        promptTemplate: 'Based on the image, generate a social media caption and alt text. If the user provides additional context, use it to tailor the output. Context: {userInput}',
-        placeholder: '(Optional) Add context, like what this image is for...',
+        promptTemplate: 'Based on the image, generate a social media caption and a detailed alt text. If the user provides additional context, use it to tailor the output. Context: {userInput}',
+        placeholder: '(Optional) Add context, like "Caption for an Instagram post about a new product"',
     },
     context: {
         purpose: "Creates captions and alt text by analyzing an image.",
@@ -263,7 +284,7 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Marketing,
     icon: <MagnifyingGlassIcon />,
     component: ToolComponentType.Generic,
-    systemInstruction: 'You are an SEO strategist with expertise in keyword research. Your task is to generate a comprehensive list of keywords related to a given topic. Include a mix of short-tail, long-tail, and LSI (Latent Semantic Indexing) keywords.',
+    systemInstruction: 'You are an SEO strategist with expertise in keyword research. Your task is to generate a comprehensive list of keywords related to a given topic. Include a mix of short-tail, long-tail, LSI (Latent Semantic Indexing) keywords, and question-based keywords.',
     props: {
       promptTemplate: 'Generate a list of SEO keywords for the topic: {userInput}. Organize them into categories like "Primary Keywords", "Long-Tail Questions", and "Related Concepts".',
       placeholder: 'e.g., sustainable home gardening',
@@ -281,9 +302,9 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Marketing,
     icon: <HashtagIcon />,
     component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert SEO and social media strategist. Your task is to generate a complete SEO and social media package for a given topic. The output must be well-structured with clear headings.',
+    systemInstruction: 'You are an expert SEO and social media strategist. Your task is to generate a complete SEO and social media package for a given topic. The output must be well-structured with clear headings and provide on-page SEO tips.',
     props: {
-      promptTemplate: 'For the content topic "{userInput}", please generate the following, with each section clearly labeled:\n\n1.  **SEO Title:** (A compelling title around 60 characters)\n2.  **Meta Description:** (An engaging summary around 160 characters)\n3.  **SEO Keywords:** (A comma-separated list of 10-15 relevant keywords)\n4.  **Social Media Hashtags:**\n    - **Instagram/TikTok:** (A mix of popular and niche hashtags)\n    - **LinkedIn/Twitter:** (More professional and topic-focused hashtags)',
+      promptTemplate: 'For the content topic "{userInput}", please generate the following, with each section clearly labeled:\n\n1.  **SEO Title:** (A compelling title around 60 characters)\n2.  **Meta Description:** (An engaging summary around 160 characters)\n3.  **SEO Keywords:** (A comma-separated list of 10-15 relevant keywords)\n4.  **Social Media Hashtags:**\n    - **Instagram/TikTok:** (A mix of popular and niche hashtags)\n    - **LinkedIn/Twitter:** (More professional and topic-focused hashtags)\n5. **On-Page SEO Tips:** (3 actionable tips for optimizing content on this topic)',
       placeholder: 'e.g., A guide to indoor vertical farming for beginners',
     },
     context: {
@@ -298,16 +319,20 @@ export const TOOLS: Tool[] = [
     description: 'Create compelling ad copy for platforms like Google and Facebook.',
     category: ToolCategory.Marketing,
     icon: <LightbulbIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a direct response copywriter specializing in high-converting ad copy. Your goal is to write persuasive and attention-grabbing ad copy for a specific product or service.',
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are a direct response copywriter specializing in high-converting ad copy. Your goal is to write persuasive and attention-grabbing ad copy for a specific product or service, driven by a specific emotion.',
     props: {
-      promptTemplate: 'Write 3 variations of ad copy for the following product/service. Include a compelling headline, a short description, and a clear call-to-action. Product/Service: {userInput}',
+      promptTemplate: 'Write 3 variations of ad copy for the following product/service, focusing on an emotion of "{selectValue}". Include a compelling headline, a short description, and a clear call-to-action for each. Product/Service: {userInput}',
       placeholder: 'e.g., A mobile app that tracks water intake',
+      select: {
+        label: 'Emotion to Evoke',
+        options: ['Excitement', 'Urgency', 'Trust', 'Humor', 'Curiosity'],
+      }
     },
     context: {
       purpose: "Writes persuasive copy for digital advertising campaigns.",
       benefit: "Increases click-through rates and conversions by crafting powerful, benefit-driven ad messages that resonate with target audiences.",
-      proFeature: "Specify the advertising framework you want to use, such as 'AIDA' (Attention, Interest, Desire, Action) or 'PAS' (Problem, Agitate, Solve)."
+      proFeature: "Use the emotion selector to A/B test different angles for your ad campaigns."
     }
   },
   {
@@ -334,16 +359,20 @@ export const TOOLS: Tool[] = [
     description: 'Write compelling product descriptions for e-commerce stores that sell.',
     category: ToolCategory.Marketing,
     icon: <TagIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an e-commerce copywriter. Your task is to write a persuasive and benefit-driven product description based on the user\'s input. The description should have a catchy headline, highlight key features as benefits, and use bullet points for readability.',
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are an e-commerce copywriter. Your task is to write a persuasive and benefit-driven product description based on the user\'s input and a specified tone. The description should have a catchy headline, highlight key features as benefits (translating features into what they do for the customer), and use bullet points for readability.',
     props: {
-      promptTemplate: 'Write a product description for the following product: {userInput}',
+      promptTemplate: 'Write a product description with a "{selectValue}" tone for the following product: {userInput}',
       placeholder: 'e.g., A smart water bottle that glows to remind you to drink. Made of stainless steel, has a 24-hour battery.',
+      select: {
+        label: 'Brand Tone',
+        options: ['Professional', 'Playful', 'Luxurious', 'Minimalist', 'Technical'],
+      }
     },
     context: {
       purpose: "Creates persuasive copy for e-commerce product pages.",
       benefit: "Increases sales by highlighting product benefits in a way that resonates with customers and encourages them to purchase.",
-      proFeature: "Specify the target audience (e.g., 'for fitness enthusiasts') to get more tailored and effective copy."
+      proFeature: "Use the Brand Tone selector to ensure the copy perfectly matches your brand's voice."
     }
   },
   {
@@ -353,9 +382,9 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Marketing,
     icon: <StarIcon />,
     component: ToolComponentType.Generic,
-    systemInstruction: 'You are a marketing strategist and branding expert. Your task is to create a clear and compelling unique value proposition (UVP) based on a description of a product or company. The UVP should be a concise statement that explains what you do, for whom, and what makes you different.',
+    systemInstruction: 'You are a marketing strategist and branding expert. Your task is to create a clear and compelling unique value proposition (UVP) based on a description of a product or company. The UVP should be a concise statement that explains what you do, for whom, and what makes you different from competitors.',
     props: {
-      promptTemplate: 'Create a unique value proposition for the following business/product: {userInput}',
+      promptTemplate: 'Create a unique value proposition for the following business/product, emphasizing its key differentiators: {userInput}',
       placeholder: 'e.g., An online-only bank that offers zero fees and a high-yield savings account for millennials.',
     },
     context: {
@@ -406,16 +435,17 @@ export const TOOLS: Tool[] = [
     description: 'Automatically create study guides from your course materials.',
     category: ToolCategory.Learning,
     icon: <GraduationCapIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a helpful study buddy. Your job is to create comprehensive study guides from topics or notes.',
+    component: ToolComponentType.StudyTool,
+    systemInstruction: 'You are a helpful study buddy. Your job is to create a comprehensive study guide from a topic or notes, tailored to a specific difficulty level. The guide should include key terms and definitions, important concepts explained simply, and practice questions with answers appropriate for the selected level.',
     props: {
-      promptTemplate: 'Create a comprehensive study guide based on the following topic or notes. The guide should include key terms and definitions, important concepts explained simply, and a few practice questions with answers. Topic/Notes: {userInput}',
+      promptTemplate: 'Create a comprehensive study guide for a {difficulty} level based on the following topic or notes. The guide should include key terms and definitions, important concepts explained simply, and a few practice questions with answers. Topic/Notes: {userInput}',
       placeholder: 'e.g., The causes of World War I',
+      difficulties: ['Beginner', 'Intermediate', 'Advanced'],
     },
     context: {
       purpose: "Generates a structured study guide from a topic or raw notes.",
       benefit: "Organizes study material into a clear and effective format, highlighting key information and improving test preparation.",
-      proFeature: "Paste in a full chapter from a textbook and ask it to generate a guide specifically for that chapter."
+      proFeature: "Use the difficulty selector to get a guide that's either a high-level overview or a deep dive into complex details."
     }
   },
   {
@@ -460,16 +490,20 @@ export const TOOLS: Tool[] = [
     description: 'Generate a multiple-choice quiz on any topic to test your knowledge.',
     category: ToolCategory.Learning,
     icon: <QuestionMarkCircleIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a teacher and quiz creator. Your task is to create a multiple-choice quiz based on a topic or a block of text provided by the user. The quiz should have a set number of questions, each with four options (one correct, three incorrect but plausible distractors), and an answer key at the end.',
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are a teacher and quiz creator. Your task is to create a multiple-choice quiz based on a topic or a block of text provided by the user, tailored to a specific difficulty level. The quiz should have 5 questions, each with four options (one correct, three incorrect but plausible distractors), and an answer key at the end.',
     props: {
-      promptTemplate: 'Create a 5-question multiple choice quiz on the following topic/text: {userInput}. Provide an answer key at the end.',
-      placeholder: 'Enter a topic like "The American Revolution" or paste a block of text to generate a quiz from.'
+      promptTemplate: 'Create a 5-question multiple choice quiz with "{selectValue}" difficulty on the following topic/text: {userInput}. Provide an answer key at the end.',
+      placeholder: 'Enter a topic like "The American Revolution" or paste a block of text to generate a quiz from.',
+      select: {
+        label: 'Quiz Difficulty',
+        options: ['Easy', 'Medium', 'Hard'],
+      }
     },
     context: {
       purpose: "Creates practice quizzes on any subject.",
       benefit: "Helps students test their knowledge, identify areas for improvement, and prepare for exams in an interactive way.",
-      proFeature: "Specify the difficulty level of the quiz (e.g., 'an expert-level quiz') for more targeted questions."
+      proFeature: "Use the difficulty selector to create quizzes that match your current knowledge level."
     }
   },
   // --- Research & Review ---
@@ -696,16 +730,20 @@ export const TOOLS: Tool[] = [
     description: 'Brainstorm compelling plot ideas and outlines for your next story.',
     category: ToolCategory.Creative,
     icon: <BookIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a master storyteller and creative writing coach. Your goal is to generate intriguing story plots with a clear beginning, middle, and end.',
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are a master storyteller and creative writing coach. Your goal is to generate intriguing story plots in a specific genre, with a clear beginning, middle, and end.',
     props: {
-      promptTemplate: 'Generate a story plot outline based on the following idea. Include a protagonist, a central conflict, rising action, a climax, and a resolution. Idea: {userInput}',
+      promptTemplate: 'Generate a story plot outline for the "{selectValue}" genre based on the following idea. Include a protagonist, a central conflict, rising action, a climax, and a resolution. Idea: {userInput}',
       placeholder: 'e.g., A librarian who discovers a book that writes itself',
+      select: {
+        label: 'Genre',
+        options: ['Sci-Fi', 'Fantasy', 'Mystery', 'Romance', 'Horror', 'Adventure'],
+      }
     },
     context: {
       purpose: "Creates structured plot outlines for stories, novels, or screenplays.",
       benefit: "Overcomes writer's block by providing a solid foundation for your narrative, complete with key plot points and character arcs.",
-      proFeature: "Specify a genre (e.g., 'sci-fi mystery' or 'fantasy romance') to get a more tailored plot structure."
+      proFeature: "Use the Genre selector to get a plot structure that fits the conventions you're aiming for."
     }
   },
   {
@@ -1078,16 +1116,18 @@ export const TOOLS: Tool[] = [
     description: 'Craft powerful, action-oriented bullet points for your resume.',
     category: ToolCategory.Professional,
     icon: <DocumentTextIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a professional resume writer and career coach. Your expertise is in crafting impactful, action-oriented resume bullet points.',
+    component: ToolComponentType.IndustryInputTool,
+    systemInstruction: 'You are a professional resume writer and career coach specializing in various industries. Your expertise is in crafting impactful, action-oriented resume bullet points that incorporate industry-specific keywords.',
     props: {
-      promptTemplate: 'Based on the following job responsibility, write 3-5 impactful, action-oriented resume bullet points using the STAR (Situation, Task, Action, Result) method. Job responsibility: {userInput}',
+      promptTemplate: 'For the {industry} industry, write 3-5 impactful, action-oriented resume bullet points using the STAR (Situation, Task, Action, Result) method for this responsibility: {userInput}.',
       placeholder: 'e.g., Managed social media accounts for a tech startup',
+      industryLabel: 'Target Industry (Optional)',
+      industryPlaceholder: 'e.g., Tech, Healthcare, Finance',
     },
     context: {
       purpose: "Transforms job duties into compelling, achievement-oriented resume bullet points.",
       benefit: "Makes your resume stand out to recruiters by showcasing your accomplishments, not just your responsibilities.",
-      proFeature: "Provide a metric or result (e.g., 'increased engagement by 20%') for even more powerful bullet points."
+      proFeature: "Provide a target industry to get bullet points tailored with relevant keywords and action verbs for that field."
     }
   },
    {
@@ -1114,11 +1154,14 @@ export const TOOLS: Tool[] = [
     description: 'Analyze your resume against a job description to identify gaps and keywords.',
     category: ToolCategory.Professional,
     icon: <ClipboardCheckIcon />,
-    component: ToolComponentType.Generic,
+    component: ToolComponentType.DualTextareaTool,
     systemInstruction: 'You are an expert ATS (Applicant Tracking System) analyst and career coach. Your task is to compare a resume to a job description, identify missing keywords, and provide actionable advice to improve the resume\'s match score.',
     props: {
-      promptTemplate: 'Analyze the following resume against the provided job description. Provide a match score out of 100, list missing keywords from the job description, and suggest specific improvements to the resume. My Resume:\n\n{userInput}\n\n---JOB DESCRIPTION---\n\n{jobDescription}',
-      placeholder: 'Paste your resume here... then add "---JOB DESCRIPTION---" followed by the job description.',
+      promptTemplate: 'Analyze the following resume against the provided job description. Provide a match score out of 100, list missing keywords from the job description, and suggest specific improvements to the resume. My Resume:\n\n{userInput1}\n\n---JOB DESCRIPTION---\n\n{userInput2}',
+      label1: 'Your Resume',
+      placeholder1: 'Paste your full resume here...',
+      label2: 'Job Description',
+      placeholder2: 'Paste the target job description here...',
     },
     context: {
       purpose: 'Compares your resume to a job description to see how well it matches.',
@@ -1132,11 +1175,14 @@ export const TOOLS: Tool[] = [
     description: 'Generate a professional cover letter tailored to a job description.',
     category: ToolCategory.Professional,
     icon: <BriefcaseIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a career coach and expert cover letter writer. Your task is to write a professional and persuasive cover letter that is tailored to a specific job.',
+    component: ToolComponentType.DualTextareaTool,
+    systemInstruction: 'You are a career coach and expert cover letter writer. Your task is to write a professional and persuasive cover letter that is tailored to a specific job description, using the user\'s experience.',
     props: {
-      promptTemplate: 'Write a professional and persuasive cover letter. Here is my information:\n\nMy Experience: {userInput}\n\nAnd here is the Job Description I am applying for:\n\n{jobDescription}\n\nPlease tailor the cover letter to the job description, highlighting my most relevant skills and experience. The input contains both my experience and the job description, separated by "---JOB DESCRIPTION---".',
-      placeholder: 'Start with your experience, then add "---JOB DESCRIPTION---" followed by the job description you are applying for.',
+      promptTemplate: 'Write a professional and persuasive cover letter. Here is my information:\n\nMy Experience: {userInput1}\n\nAnd here is the Job Description I am applying for:\n\n{userInput2}\n\nPlease tailor the cover letter to the job description, highlighting my most relevant skills and experience.',
+      label1: 'Your Experience / Resume',
+      placeholder1: 'Paste your resume or a summary of your key experiences...',
+      label2: 'Job Description',
+      placeholder2: 'Paste the job description you are applying for...',
     },
     context: {
       purpose: "Generates a tailored cover letter based on your experience and a job description.",
@@ -1168,11 +1214,13 @@ export const TOOLS: Tool[] = [
     description: 'Optimize your LinkedIn headline and summary to attract recruiters.',
     category: ToolCategory.Professional,
     icon: <UserCircleIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a personal branding expert and career coach specializing in LinkedIn. Your goal is to rewrite LinkedIn profile sections to be more impactful and keyword-rich, attracting recruiters.',
+    component: ToolComponentType.IndustryInputTool,
+    systemInstruction: 'You are a personal branding expert and career coach specializing in LinkedIn. Your goal is to rewrite a LinkedIn profile section (like a headline or summary) to be more impactful and keyword-rich for a specific target role, attracting recruiters.',
     props: {
-      promptTemplate: 'Optimize the following LinkedIn profile section. Make it more compelling, professional, and include relevant keywords for my target role. Section: {userInput}',
-      placeholder: 'Paste your current LinkedIn headline or summary here, and mention your target job role (e.g., "Targeting a Senior Product Manager role. My summary is...")',
+      promptTemplate: 'Optimize the following LinkedIn profile section to be more compelling and professional for a target role in "{industry}". Include relevant keywords. Section: {userInput}',
+      placeholder: 'Paste your current LinkedIn headline or "About" summary here...',
+      industryLabel: 'Target Role or Industry',
+      industryPlaceholder: 'e.g., Senior Product Manager at a SaaS company'
     },
     context: {
       purpose: "Rewrites your LinkedIn headline and 'About' section for maximum impact.",
