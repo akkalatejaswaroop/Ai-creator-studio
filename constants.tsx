@@ -606,7 +606,6 @@ export const TOOLS: Tool[] = [
     description: 'Generate high-quality, unique images from a text description.',
     category: ToolCategory.Creative,
     icon: <PhotoIcon />,
-    featured: true,
     component: ToolComponentType.ImageGenerator,
     systemInstruction: '', // Not needed for image gen
     props: {
@@ -817,15 +816,31 @@ export const TOOLS: Tool[] = [
       proFeature: "Ask for a specific poetic form, like 'write a sonnet' or 'write a villanelle,' to explore classic structures."
     }
   },
+  {
+    id: 'prompt-engineer',
+    name: 'AI Prompt Engineer',
+    description: 'Craft a detailed, structured JSON prompt to get the best possible output from AI models.',
+    category: ToolCategory.Creative,
+    icon: <WrenchScrewdriverIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are an expert AI Prompt Engineer. Your task is to take a user\'s simple idea and transform it into a highly detailed and structured JSON object that can be used as a prompt for another AI model. The JSON should break down the request into key components like persona, task, context, constraints, and output format to ensure the highest quality response.',
+    props: {
+        promptTemplate: 'Create a structured JSON prompt for the following idea: {userInput}. The JSON output should include keys such as "persona", "task_description", "context", "key_details", "constraints", "output_format", and "example_output".',
+        placeholder: 'e.g., A marketing email for a new product launch, or a function to sort an array in Python.',
+    },
+    context: {
+        purpose: "Transforms a simple request into a professional, structured JSON prompt for advanced AI models.",
+        benefit: "Dramatically improves the quality and reliability of AI-generated content by providing clear, detailed, and unambiguous instructions.",
+        proFeature: "Ask it to include a 'chain-of-thought' section in the JSON to guide the AI's reasoning process for complex tasks."
+    }
+  },
   // --- Coding & Development ---
   {
     id: 'code-explainer',
     name: 'Code Explainer',
     description: 'Get a clear, line-by-line explanation of any code snippet.',
     category: ToolCategory.Coding,
-    // Fix: Added missing icon property
     icon: <CodeIcon />,
-    featured: true,
     component: ToolComponentType.Generic,
     systemInstruction: 'You are an expert programmer and code reviewer with a talent for explaining complex topics simply. Your goal is to explain code clearly.',
     props: {
@@ -929,6 +944,24 @@ export const TOOLS: Tool[] = [
       proFeature: "Provide a code snippet and ask it to generate documentation in a specific format, like OpenAPI (Swagger) YAML."
     }
   },
+  {
+    id: 'github-readme-generator',
+    name: 'GitHub README Generator',
+    description: 'Create a professional README.md for your project repository.',
+    category: ToolCategory.Coding,
+    icon: <DocumentTextIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a developer relations expert and technical writer. Your task is to create a professional, well-formatted GitHub README.md file in Markdown, based on user-provided project details. The README should be clear, concise, and encourage community engagement.',
+    props: {
+        promptTemplate: 'Generate a GitHub README.md file for the following project: {userInput}. Include sections for: Project Title, a brief Description, key Features, Tech Stack used, Installation/Getting Started instructions, and a simple Usage example.',
+        placeholder: 'Provide details about your project. e.g.,\nTitle: Image-Optimizer-CLI\nFeatures: Compresses JPEGs and PNGs, resizes images.\nTech Stack: Node.js, Sharp.js, Commander.js',
+    },
+    context: {
+        purpose: "Generates a well-structured and professional README file for your code repositories.",
+        benefit: "Improves your project's presentation, making it easier for other developers to understand, use, and contribute to your work.",
+        proFeature: "Ask it to include a 'Contributing' section with a template for bug reports and feature requests to foster collaboration."
+    }
+  },
   // --- Engineering & Tech ---
   {
     id: 'technical-explainer',
@@ -946,6 +979,24 @@ export const TOOLS: Tool[] = [
       purpose: "Breaks down complex technical subjects into easy-to-understand explanations.",
       benefit: "Aids students and professionals in grasping difficult concepts quickly, improving learning and knowledge retention.",
       proFeature: "Ask it to explain the concept 'to a 5-year-old' or 'to a marketing manager' for different levels of simplification."
+    }
+  },
+  {
+    id: 'prd-generator',
+    name: 'Project Requirements (PRD) Generator',
+    description: 'Generate a comprehensive Project Requirements Document from a high-level idea.',
+    category: ToolCategory.Engineering,
+    icon: <ClipboardListIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a Senior Product Manager at a leading tech company. Your task is to generate a comprehensive Project Requirements Document (PRD) in Markdown format based on a user\'s high-level project idea. The PRD must be well-structured and include all essential sections.',
+    props: {
+        promptTemplate: 'Generate a Project Requirements Document (PRD) in Markdown for the following project idea: {userInput}. The PRD must include these sections:\n\n1.  **Problem Statement:** (What problem are we solving?)\n2.  **Target Audience:** (Who are the primary users?)\n3.  **Features & User Stories:** (List key features with user stories in the format: "As a [user type], I want to [action] so that [benefit].")\n4.  **Non-Functional Requirements:** (e.g., Performance, Security, Scalability)\n5.  **Success Metrics:** (How will we measure success? e.g., User engagement, conversion rate)',
+        placeholder: 'e.g., A mobile app that helps users find and book local sports facilities.',
+    },
+    context: {
+        purpose: "Transforms a high-level project idea into a structured Project Requirements Document (PRD).",
+        benefit: "Provides a solid foundation for project planning, aligning stakeholders and giving engineering teams a clear specification to build from.",
+        proFeature: "Specify a project management methodology (e.g., 'with a focus on Agile principles') to get a PRD tailored to that workflow."
     }
   },
   {
@@ -1002,6 +1053,24 @@ export const TOOLS: Tool[] = [
       proFeature: "Specify the user's technical skill level (e.g., 'for a complete beginner') to get a more tailored guide."
     }
   },
+  {
+    id: 'hackathon-idea-generator',
+    name: 'Hackathon & Project Idea Generator',
+    description: 'Generate innovative project ideas for technical competitions like hackathons.',
+    category: ToolCategory.Engineering,
+    icon: <RocketLaunchIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are an innovation expert and a seasoned hackathon judge. Your task is to generate creative and technically feasible project ideas for a competition based on a user\'s theme or technology stack. Each idea should include a catchy name, a one-sentence pitch, a brief description of the core functionality, the potential tech stack, and a unique \'wow\' factor.',
+    props: {
+      promptTemplate: 'Generate 3 unique project ideas for a technical competition. The theme or technology stack is: {userInput}. For each idea, provide a project name, a one-sentence pitch, a description, a potential tech stack, and a unique \'wow\' factor to make it stand out.',
+      placeholder: 'e.g., AI for social good, Web3 gaming, or using Python and React.',
+    },
+    context: {
+      purpose: "Brainstorms innovative and viable project ideas for hackathons, coding competitions, and personal portfolio building.",
+      benefit: "Helps you quickly find a creative and impactful project to work on, giving you a competitive edge and a solid starting point for development.",
+      proFeature: "Specify constraints like 'a project that can be built in 24 hours' or 'must use a specific API' to get more tailored and realistic ideas."
+    }
+  },
   // --- Professional Growth ---
   {
     id: 'resume-writer',
@@ -1009,7 +1078,6 @@ export const TOOLS: Tool[] = [
     description: 'Craft powerful, action-oriented bullet points for your resume.',
     category: ToolCategory.Professional,
     icon: <DocumentTextIcon />,
-    featured: true,
     component: ToolComponentType.Generic,
     systemInstruction: 'You are a professional resume writer and career coach. Your expertise is in crafting impactful, action-oriented resume bullet points.',
     props: {
@@ -1200,6 +1268,78 @@ export const TOOLS: Tool[] = [
       purpose: "Generates novel startup concepts within a specified domain.",
       benefit: "Provides aspiring entrepreneurs with creative and viable business ideas to explore, complete with a basic strategic framework.",
       proFeature: "Ask for ideas that combine two seemingly unrelated industries, like 'AI and gardening' or 'blockchain and travel'."
+    }
+  },
+  {
+    id: 'public-speaking-coach',
+    name: 'Public Speaking Coach',
+    description: 'Get feedback on your speech scripts and tips to improve delivery and confidence.',
+    category: ToolCategory.Professional,
+    icon: <MegaphoneIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a world-class public speaking coach and communication expert. Your task is to analyze a speech or presentation script. Provide constructive feedback on its structure, clarity, and persuasiveness. Offer specific suggestions to improve engagement, flow, and impact. Also, provide 3 general tips for confident delivery based on the script\'s content.',
+    props: {
+      promptTemplate: 'Please provide feedback on the following speech script: {userInput}',
+      placeholder: 'Paste your speech or presentation script here...',
+    },
+    context: {
+      purpose: "Analyzes your speech script to provide actionable feedback on structure, clarity, and impact.",
+      benefit: "Helps you craft more compelling presentations and builds your confidence as a speaker.",
+      proFeature: "Ask for feedback on a specific section, like 'How can I make my introduction more impactful?' or 'Is my call to action strong enough?'"
+    }
+  },
+  {
+    id: 'conflict-resolution-scripter',
+    name: 'Conflict Resolution Scripter',
+    description: 'Generate talking points for navigating difficult professional conversations.',
+    category: ToolCategory.Professional,
+    icon: <ChatBubbleLeftRightIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are an expert in conflict resolution, HR, and professional communication. The user will describe a difficult situation. Your task is to provide a structured set of talking points and a strategy for the conversation. Use a calm, professional, and empathetic tone. The output should include an \'Opening Statement\', \'Key Talking Points\' (using phrases that focus on behavior and impact, not blame), and \'Potential Resolutions\'.',
+    props: {
+      promptTemplate: 'Provide a script and strategy for the following difficult conversation: {userInput}',
+      placeholder: 'e.g., Giving a team member feedback about missing deadlines, or asking your boss for a raise.',
+    },
+    context: {
+      purpose: "Provides a roadmap and talking points for navigating challenging workplace conversations.",
+      benefit: "Reduces anxiety and prepares you to handle difficult situations constructively, professionally, and effectively.",
+      proFeature: "Specify the other person's likely personality (e.g., 'they might get defensive') to get tailored de-escalation tactics."
+    }
+  },
+  {
+    id: 'active-listening-trainer',
+    name: 'Active Listening Trainer',
+    description: 'Generate paraphrasing and clarifying questions to become a better listener.',
+    category: ToolCategory.Professional,
+    icon: <QuestionMarkCircleIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a communication skills trainer specializing in active listening. The user will provide a statement that someone might say. Your task is to generate examples of good active listening responses. The output should include: 1. A Paraphrased version (to confirm understanding). 2. A Clarifying Question (to gather more information). 3. An Empathetic Response (to validate feelings).',
+    props: {
+      promptTemplate: "Generate active listening responses for the following statement: '{userInput}'",
+      placeholder: "Enter a statement you might hear at work, e.g., 'I'm so overwhelmed with this project, I don't think I can meet the deadline.'",
+    },
+    context: {
+      purpose: "Teaches the core skills of active listening by generating example responses.",
+      benefit: "Improves your communication skills, helps build stronger professional relationships, and makes you a more effective team member and leader.",
+      proFeature: "Provide a longer piece of dialogue and ask the AI to 'identify key points and generate clarifying questions for the entire conversation'."
+    }
+  },
+  {
+    id: 'networking-icebreakers',
+    name: 'Networking Icebreakers',
+    description: 'Generate context-aware icebreakers for professional networking events.',
+    category: ToolCategory.Professional,
+    icon: <UserCircleIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a networking expert and career coach. The user will describe a networking event or situation. Your task is to generate 5-7 context-aware icebreakers and opening questions that are professional, open-ended, and encourage conversation.',
+    props: {
+      promptTemplate: 'Generate networking icebreakers for the following situation: {userInput}',
+      placeholder: 'e.g., A tech conference on AI, a local business meetup, or reaching out to someone on LinkedIn.',
+    },
+    context: {
+      purpose: "Provides conversation starters for professional networking situations.",
+      benefit: "Reduces networking anxiety and helps you make meaningful connections by starting conversations that go beyond small talk.",
+      proFeature: "Specify your own job title and goals (e.g., 'As a student looking for an internship...') to get icebreakers that align with your objectives."
     }
   },
 ];

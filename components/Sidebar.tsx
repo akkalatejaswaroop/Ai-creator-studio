@@ -137,9 +137,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
                     })}
                 </ul>
             </nav>
-            <footer className="text-center py-2 px-4 text-gray-600 text-xs shrink-0 whitespace-nowrap">
-                 &copy; {new Date().getFullYear()} IntelliForge Ai. v1.0.0
-            </footer>
         </aside>
     );
 };

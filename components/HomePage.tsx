@@ -1,6 +1,4 @@
 
-
-
 import React, { useMemo } from 'react';
 import { Tool } from '../types';
 
@@ -19,45 +17,12 @@ const LogoIcon = () => (
 );
 
 const SearchIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>;
+const DocumentDuplicateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>;
+const CodeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>;
+const PenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>;
+const SparklesIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6.343 6.343l-2.828 2.829M17.657 17.657l2.828 2.829M18 5v.01M19.071 6.929l-2.829 2.829M12 2v2m-6.857 4.929l-2.829-2.829M21 12h-2m.465 6.464l-2.829-2.829M12 18v2m3.636-3.636l2.828-2.829" /></svg>;
+const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
 
-// --- Icons for Features & Metrics ---
-const CheckCircleIcon = ({ className = "h-8 w-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-const CodeBracketIcon = ({ className = "h-8 w-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" /></svg>;
-const DocumentTextIcon = ({ className = "h-8 w-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>;
-const SparklesIcon = ({ className = "h-6 w-6" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.5 21.75l-.398-1.188a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.188-.398a2.25 2.25 0 001.423-1.423L16.5 15.75l.398 1.188a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.188.398a2.25 2.25 0 00-1.423 1.423z" /></svg>;
-const MagnifyingGlassCircleIcon = ({ className = "h-6 w-6" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-
-
-const metrics = [
-    { icon: <CheckCircleIcon className="h-8 w-8 text-cyan-400"/>, value: "1M+", label: "Projects Created" },
-    { icon: <CodeBracketIcon className="h-8 w-8 text-cyan-400"/>, value: "50M+", label: "Lines of Code Written" },
-    { icon: <DocumentTextIcon className="h-8 w-8 text-cyan-400"/>, value: "500K+", label: "Blog Posts Drafted" },
-];
-
-const featureSets = [
-    {
-        title: "Generation & Editing",
-        icon: <SparklesIcon className="h-7 w-7 text-cyan-300" />,
-        features: [
-            "Customizable tone and style options (e.g., formal, conversational, technical).",
-            "Topic and keyword suggestion based on trending searches or user input.",
-            "Multi-language support for creating content in different languages like English and Telugu.",
-            "Real-time content preview as the blog post is generated.",
-            "Editable sections with AI suggestions for improving clarity or impact.",
-            "Inline grammar and plagiarism check integrated in the editor.",
-        ],
-    },
-    {
-        title: "Publishing & Enhancement",
-        icon: <MagnifyingGlassCircleIcon className="h-7 w-7 text-cyan-300" />,
-        features: [
-            "Automatic generation of SEO-friendly titles, meta descriptions, and tags.",
-            "Summarization of long articles into concise blog posts.",
-            "Content enrichment with relevant data, quotes, or references from trusted sources.",
-            "Ability to generate related social media posts or email newsletters from the blog content.",
-        ],
-    },
-];
 
 interface HomePageProps {
   searchTerm: string;
@@ -66,35 +31,25 @@ interface HomePageProps {
   onSelectTool: (tool: Tool) => void;
 }
 
-const MetricCard: React.FC<{ icon: React.ReactNode, value: string, label: string }> = ({ icon, value, label }) => (
-    <div className="bg-white/5 p-6 rounded-xl flex items-center gap-6 border border-white/10">
-        {icon}
-        <div>
-            <p className="text-3xl font-bold text-white">{value}</p>
-            <p className="text-gray-400">{label}</p>
+const MetricCard: React.FC<{ icon: React.ReactNode; number: string; label: string }> = ({ icon, number, label }) => (
+    <div className="bg-white/5 p-8 rounded-2xl border border-white/10">
+        <div className="text-cyan-400 mx-auto mb-4 w-12 h-12 flex items-center justify-center bg-gray-800/50 rounded-xl border border-white/10">
+            {icon}
         </div>
+        <p className="text-4xl font-bold text-white">{number}</p>
+        <p className="text-gray-400 mt-2">{label}</p>
     </div>
 );
 
-const FeatureCard: React.FC<{ title: string, icon: React.ReactNode, features: string[] }> = ({ title, icon, features }) => (
-    <div className="bg-white/5 p-8 rounded-xl border border-white/10 h-full">
-        <div className="flex items-center gap-4 mb-6">
-            <div className="bg-cyan-500/10 p-2 rounded-full">
-                {icon}
-            </div>
-            <h3 className="text-xl font-bold text-white">{title}</h3>
+const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({ icon, title, description }) => (
+    <div className="bg-white/5 p-6 rounded-2xl border border-white/10 transform transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-900/20 hover:-translate-y-2">
+        <div className="bg-gray-800/50 border border-white/10 p-3 rounded-xl mb-4 inline-block">
+            <span className="text-cyan-400">{icon}</span>
         </div>
-        <ul className="space-y-4">
-            {features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3">
-                    <CheckCircleIcon className="h-5 w-5 text-green-400 mt-0.5 shrink-0" />
-                    <span className="text-gray-300">{feature}</span>
-                </li>
-            ))}
-        </ul>
+        <h3 className="font-bold text-white text-lg mb-2">{title}</h3>
+        <p className="text-gray-400 text-sm">{description}</p>
     </div>
 );
-
 
 export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, tools, onSelectTool }) => {
     const filteredTools = useMemo(() => {
@@ -108,7 +63,7 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
     const hasSearch = searchTerm.length > 0;
 
     return (
-        <div className="flex flex-col items-center opacity-0 animate-fade-in-up">
+        <div className="flex flex-col items-center opacity-0 animate-fade-in-up w-full">
             <div className={`flex flex-col items-center justify-center text-center w-full transition-all duration-500 ${hasSearch ? 'min-h-[25vh] pt-10' : 'min-h-[calc(100vh-10rem)] py-10'}`}>
                 <div className="mb-6">
                     <LogoIcon />
@@ -117,7 +72,7 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                     IntelliForge Ai
                 </h1>
                 <p className="text-gray-400 mt-4 max-w-xl mx-auto">
-                    Your intelligent partner for content creation. Select a tool from the sidebar or search below to begin.
+                    An AI-powered toolkit to accelerate your creativity and productivity. What will you build today?
                 </p>
                 <div className="relative mt-8 w-full max-w-lg">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -125,7 +80,7 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                     </div>
                     <input
                         type="text"
-                        placeholder="Search for a tool, e.g., 'Blog Post Generator'"
+                        placeholder="Search for a tool, e.g., 'Blog Post'"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="w-full bg-white/5 border border-white/10 rounded-lg py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-lg"
@@ -161,21 +116,53 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                         )}
                     </div>
                 ) : (
-                    <div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                            {metrics.map(metric => <MetricCard key={metric.label} {...metric} />)}
+                    <div className="space-y-24">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold text-white mb-4">Powering Innovation at Scale</h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto mb-12">
+                                Join thousands of creators, developers, and professionals building the future with IntelliForge Ai.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <MetricCard icon={<DocumentDuplicateIcon/>} number="150,000+" label="Projects Created" />
+                                <MetricCard icon={<CodeIcon/>} number="2.5M+" label="Lines of Code Generated" />
+                                <MetricCard icon={<PenIcon/>} number="45,000+" label="Blog Posts Drafted" />
+                            </div>
                         </div>
 
-                        <div className="mt-24 text-center">
-                            <h2 className="text-3xl font-bold text-white mb-4">Powerful Features for Every Creator</h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto mb-12">Leverage cutting-edge AI to enhance your workflow, from content generation to advanced SEO and publishing.</p>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left">
-                                {featureSets.map(set => <FeatureCard key={set.title} {...set} />)}
+                        <div className="text-center">
+                             <h2 className="text-3xl font-bold text-white mb-4">A Tool for Every Task</h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto mb-12">
+                                From writing and coding to professional development, our comprehensive suite of AI tools has you covered.
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                               <FeatureCard 
+                                 icon={<PenIcon/>} 
+                                 title="Content Creation" 
+                                 description="Generate blog posts, social media updates, and professional emails in seconds." 
+                               />
+                               <FeatureCard 
+                                 icon={<CodeIcon/>} 
+                                 title="Code Assistance" 
+                                 description="Explain, debug, and refactor code to accelerate your development workflow." 
+                               />
+                               <FeatureCard 
+                                 icon={<SparklesIcon/>} 
+                                 title="Creative Ideation" 
+                                 description="Brainstorm story plots, generate unique images, and create video scripts effortlessly." 
+                               />
+                               <FeatureCard 
+                                 icon={<BriefcaseIcon/>} 
+                                 title="Professional Growth" 
+                                 description="Craft the perfect resume, prepare for interviews, and optimize your LinkedIn profile." 
+                               />
                             </div>
                         </div>
                     </div>
                 )}
             </div>
+            <footer className="text-center py-8 text-gray-600 text-sm">
+                 &copy; {new Date().getFullYear()} IntelliForge Ai. v1.0.0
+            </footer>
         </div>
     );
 };
