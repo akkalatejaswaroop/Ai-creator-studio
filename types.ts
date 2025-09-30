@@ -10,6 +10,7 @@ export enum ToolCategory {
   Marketing = 'SEO & Marketing',
   Creative = 'Creative Content',
   Engineering = 'Engineering & Tech',
+  FileUtilities = 'File & Media Utilities',
 }
 
 export enum ToolComponentType {

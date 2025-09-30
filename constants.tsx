@@ -45,6 +45,12 @@ const CalendarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-
 const GitCommitIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h3m-3 12h3m-6-6h9M4.5 12a7.5 7.5 0 1115 0 7.5 7.5 0 01-15 0z" /></svg>;
 const ShieldCheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>;
 const MapIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.5-10.5h.75a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25-2.25h-7.5a2.25 2.25 0 01-2.25-2.25V8.25a2.25 2.25 0 012.25-2.25h.75" /></svg>;
+// New Icons for File Utilities
+const FileDocumentIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>;
+const ArrowDownOnSquareIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3v11.25" /></svg>;
+const ArrowsRightLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>;
+const DocumentPlusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>;
+const ScissorsIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.848 8.25l1.536 1.536m-1.536-1.536l6.364 6.364m-7.9 0l6.364-6.364m-1.536 1.536l1.536-1.536M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm-3.375 0h.008v.008h-.008V6.375zm10.5 8.25a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm-3.375 0h.008v.008h-.008v-.008z" /></svg>;
 
 
 export const CATEGORIES: ToolCategory[] = [
@@ -57,6 +63,7 @@ export const CATEGORIES: ToolCategory[] = [
   ToolCategory.Coding,
   ToolCategory.Engineering,
   ToolCategory.Professional,
+  ToolCategory.FileUtilities,
 ];
 
 export const TOOLS: Tool[] = [
@@ -1778,6 +1785,143 @@ export const TOOLS: Tool[] = [
       purpose: "Provides conversation starters for professional networking situations.",
       benefit: "Reduces networking anxiety and helps you make meaningful connections by starting conversations that go beyond small talk.",
       proFeature: "Specify your own job title and goals (e.g., 'As a student looking for an internship...') to get icebreakers that align with your objectives."
+    }
+  },
+  // --- File & Media Utilities ---
+  {
+    id: 'document-summarizer',
+    name: 'PDF & DOCX Summarizer',
+    description: 'Paste text from a document to get a concise summary of its key points.',
+    category: ToolCategory.FileUtilities,
+    icon: <FileDocumentIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are an expert at summarizing technical and business documents. Analyze the provided text and extract the key findings, main arguments, and any action items. Present the summary in clear, concise bullet points under respective headings. Use Markdown for formatting.',
+    props: {
+      promptTemplate: 'Summarize the following document text, identifying key points, arguments, and action items: {userInput}',
+      placeholder: 'Paste the text from your PDF or DOCX file here...',
+    },
+    context: {
+      purpose: "Distills long document text into a quick, easy-to-read summary.",
+      benefit: "Saves significant time by allowing you to quickly understand the essence of reports, articles, and documents without reading them in full.",
+      proFeature: "Ask it to 'create a one-paragraph executive summary' for a very high-level overview."
+    }
+  },
+  {
+    id: 'document-rewriter',
+    name: 'Document Content Rewriter',
+    description: 'Rewrite and improve text from your documents. Change tone, style, or fix grammar.',
+    category: ToolCategory.FileUtilities,
+    icon: <PenIcon />,
+    component: ToolComponentType.ToneChangerTool,
+    systemInstruction: 'You are an expert editor. Your task is to rewrite the provided text from a document to match the specified tone and intensity, improving clarity, flow, and overall quality while preserving the core message.',
+    props: {
+      promptTemplate: 'Rewrite the following document text with a {intensity} {tone} tone: {userInput}',
+      placeholder: 'Paste the text from your document that you want to rewrite...',
+      tones: ['More Professional', 'More Casual', 'More Persuasive', 'Simpler', 'More Academic', 'More Confident'],
+      intensities: ['Subtle', 'Noticeable', 'Complete Overhaul'],
+    },
+    context: {
+      purpose: 'Edits and enhances text content from any document.',
+      benefit: 'Quickly adapt your writing for different audiences or purposes, improving the impact and professionalism of your documents.',
+      proFeature: 'Use the "Complete Overhaul" intensity to get a fundamentally different version of your original text.'
+    }
+  },
+  {
+    id: 'text-merger',
+    name: 'Text Content Merger & Synthesizer',
+    description: 'Merge text from multiple sources into a cohesive, synthesized document.',
+    category: ToolCategory.FileUtilities,
+    icon: <DocumentPlusIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: "You are an expert at synthesizing information. The user will provide multiple text blocks separated by '---'. Your task is to merge them into a single, cohesive document, removing redundancies, creating smooth transitions, and organizing the content logically. After the merged text, provide a brief summary of the combined content. Use Markdown formatting.",
+    props: {
+      promptTemplate: 'Merge the following text blocks into a single, cohesive document, then summarize it:\n\n{userInput}',
+      placeholder: 'Paste your first block of text here...\n\n---\n\nPaste your second block of text here...\n\n---\n\n...and so on.',
+    },
+    context: {
+      purpose: 'Combines multiple separate texts into one unified document.',
+      benefit: 'Saves time by automatically creating a first draft from various sources, ideal for creating reports or literature reviews from scattered notes.',
+      proFeature: "Ask it to 'adopt the style of the first text block' for the entire merged document."
+    }
+  },
+  {
+    id: 'text-splitter',
+    name: 'Text Content Splitter',
+    description: 'Split a long document into smaller, themed sections or chapters.',
+    category: ToolCategory.FileUtilities,
+    icon: <ScissorsIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: "You are an expert at organizing content. Analyze the provided text and split it into logical sections based on the topics discussed. Provide a clear, descriptive heading (using Markdown H2 `##`) for each new section. The output should be the full text, but restructured with these headings.",
+    props: {
+      promptTemplate: 'Analyze and split the following text into logical, themed sections with clear headings:\n\n{userInput}',
+      placeholder: 'Paste the full text of a long document you want to split and organize...',
+    },
+    context: {
+      purpose: 'Automatically structures a long, unformatted text into logical sections.',
+      benefit: 'Improves the readability and organization of long documents, making it easier to create chapters for a book or sections for a report.',
+      proFeature: "Specify the number of desired sections (e.g., 'split this into 5 main sections') to guide the AI's organization."
+    }
+  },
+  {
+    id: 'content-converter',
+    name: 'Content Format Converter',
+    description: 'Convert raw text into different structured formats like a report, JSON, or HTML.',
+    category: ToolCategory.FileUtilities,
+    icon: <ArrowsRightLeftIcon />,
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: "You are a data formatting expert. Your task is to take the user's raw text and convert it into a well-structured, clean {selectValue} format. Ensure the output is valid for the chosen format.",
+    props: {
+      promptTemplate: 'Convert the following raw text into a well-structured {selectValue}:\n\n{userInput}',
+      placeholder: 'Paste your raw text or data here...',
+      select: {
+        label: 'Target Format',
+        options: ['Professional Report (Markdown)', 'JSON Array of Objects', 'Bulleted List Summary', 'Formal Email', 'Basic HTML Document'],
+      },
+    },
+    context: {
+      purpose: 'Restructures raw text into a specific, structured format.',
+      benefit: 'Saves significant time in manually reformatting text for different uses, from data entry to creating structured documents.',
+      proFeature: 'For JSON conversion, you can specify the desired keys in your prompt (e.g., "use keys: name, email, and message").'
+    }
+  },
+  {
+    id: 'image-compression-advisor',
+    name: 'Image Compression Advisor',
+    description: 'Get expert advice on how to best compress your images for web, print, or other uses.',
+    category: ToolCategory.FileUtilities,
+    icon: <ArrowDownOnSquareIcon />,
+    component: ToolComponentType.ImageInput,
+    systemInstruction: "You are an expert in digital image processing and web optimization. Analyze the provided image and the user's intended use for it. Provide a detailed recommendation for compressing it in a Markdown-formatted report. The report must include:\n1.  **Analysis:** A brief analysis of the image's characteristics (e.g., complexity, color palette, presence of transparency).\n2.  **Recommended Format:** Suggest the best format (JPEG, PNG, WebP, AVIF) and explain why.\n3.  **Compression Settings:** Provide specific quality settings (e.g., JPEG quality 75-85, or WebP lossless).\n4.  **Trade-offs:** Explain the trade-offs between file size and visual quality for the user's specific goal.",
+    props: {
+        promptTemplate: 'Analyze this image and provide a compression strategy for the following use case: {userInput}',
+        placeholder: 'Describe the intended use of this image (e.g., website hero image, email attachment, print).',
+    },
+    context: {
+        purpose: "Provides an expert, AI-driven strategy for image compression.",
+        benefit: "Helps you achieve optimal image quality with the smallest possible file size, improving website performance and user experience, without needing to be a graphics expert.",
+        proFeature: "Ask for a 'comparison between WebP and AVIF for this image' to get cutting-edge advice."
+    }
+  },
+  {
+    id: 'video-compression-strategist',
+    name: 'Video Compression Strategist',
+    description: 'Get a detailed strategy for compressing videos for streaming, social media, or archival.',
+    category: ToolCategory.FileUtilities,
+    icon: <FilmIcon />,
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: "You are a professional video engineer. Your task is to provide a detailed video compression strategy based on the user's description and chosen use case. The strategy should be presented in a Markdown format. Include recommendations for:\n1.  **Codec:** (e.g., H.264 for compatibility, H.265/HEVC for efficiency, AV1 for cutting-edge web).\n2.  **Bitrate:** (Suggest a variable or constant bitrate in kbps or Mbps).\n3.  **Resolution & Framerate:** (e.g., 1080p at 30fps).\n4.  **Container Format:** (e.g., MP4, WebM).\n5.  **Rationale:** Briefly explain why these settings are ideal for the selected use case.",
+    props: {
+      promptTemplate: 'I have a video with the following characteristics: {userInput}. Please generate a detailed compression strategy for the "{selectValue}" use case.',
+      placeholder: 'Describe your video, e.g., "a 5-minute, 4K talking head video with some screen recording sections."',
+      select: {
+        label: 'Primary Use Case',
+        options: ['Web Streaming (e.g., YouTube)', 'Social Media (e.g., Instagram)', 'Archival/Storage', 'Email Attachment'],
+      },
+    },
+    context: {
+      purpose: "Generates a professional plan for encoding and compressing video files.",
+      benefit: "Saves you from the complex guesswork of video encoding, ensuring your videos have the best balance of quality and file size for any application.",
+      proFeature: "Specify the source file's properties (e.g., 'source is a 2GB ProRes file') to get a more tailored strategy."
     }
   },
 ];

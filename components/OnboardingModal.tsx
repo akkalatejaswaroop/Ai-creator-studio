@@ -22,7 +22,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
         <WelcomeIcon />
         <h2 className="text-3xl font-bold text-white mb-4">Welcome to IntelliForge Ai!</h2>
         <p className="text-gray-400 mb-6">
-          Your new AI-powered toolkit is ready. Here are a few tips to get you started:
+          Welcome to your creative co-pilot. IntelliForge AI is designed to help you bring your ideas to life, faster. Whether you're writing, coding, or creating, there's a specialized tool waiting for you. Here's how to dive in:
         </p>
         <ul className="text-left space-y-3 text-gray-300 mb-8">
           <li className="flex items-start gap-3">

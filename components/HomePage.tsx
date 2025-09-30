@@ -64,11 +64,8 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                     <LogoIcon />
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                    IntelliForge Ai
+                    Welcome to IntelliForge AI
                 </h1>
-                <p className="text-gray-400 mt-4 max-w-xl mx-auto">
-                    An AI-powered toolkit to accelerate your creativity and productivity. What will you build today?
-                </p>
                 <div className="relative mt-8 w-full max-w-lg">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <SearchIcon />
@@ -115,12 +112,12 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                         <h2 className="text-3xl font-bold text-white mb-4">A Universe of Capabilities</h2>
                         <p className="text-gray-400 mb-12 max-w-2xl mx-auto">Explore a powerful suite of AI tools designed to enhance your workflow, from content creation and code assistance to professional and career development.</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <FeatureCard icon={<PenIcon />} title="Advanced Content Creation" description="Generate blog posts, marketing copy, emails, and creative stories with fine-tuned control over tone and style." />
-                            <FeatureCard icon={<CodeIcon />} title="Intelligent Code Assistance" description="Explain, debug, refactor, and document your code. Translate natural language into SQL queries or pseudocode." />
-                            <FeatureCard icon={<BriefcaseIcon />} title="Professional Career Development" description="Craft the perfect resume, write tailored cover letters, and prepare for interviews with targeted questions and feedback." />
-                            <FeatureCard icon={<GraduationCapIcon />} title="Accelerated Learning & Research" description="Summarize lectures, create study guides and quizzes, and get up-to-date answers on current events with cited sources." />
-                            <FeatureCard icon={<MegaphoneIcon />} title="SEO & Marketing Suite" description="Discover keywords, generate ad copy, and create social media posts to boost your online presence and engagement." />
-                            <FeatureCard icon={<PhotoIcon />} title="Creative Visual Generation" description="Turn your text descriptions into unique images, and enhance simple ideas into detailed prompts for stunning AI art." />
+                            <FeatureCard icon={<PenIcon />} title="Advanced Content Creation" description="Effortlessly generate SEO-optimized blog posts, persuasive marketing copy, professional emails, and captivating stories. Fine-tune every creation with precise control over tone, style, and voice." />
+                            <FeatureCard icon={<CodeIcon />} title="Intelligent Code Assistance" description="Accelerate your development workflow. Explain complex code, find and fix bugs, generate unit tests, refactor for readability, and translate between programming languages with expert precision." />
+                            <FeatureCard icon={<BriefcaseIcon />} title="Professional Career Development" description="Navigate your career path with confidence. Craft achievement-oriented resumes, write tailored cover letters, and prepare for interviews with targeted questions and constructive feedback." />
+                            <FeatureCard icon={<GraduationCapIcon />} title="Accelerated Learning & Research" description="Transform how you learn and research. Summarize dense lectures, create dynamic study guides, and get up-to-date, verifiable answers on any topic with cited sources from the web." />
+                            <FeatureCard icon={<MegaphoneIcon />} title="SEO & Marketing Suite" description="Dominate your digital landscape. Discover high-impact SEO keywords, generate compelling ad copy, and create a full month's social media calendar to amplify your message and drive engagement." />
+                            <FeatureCard icon={<PhotoIcon />} title="Creative Visual Generation" description="Bring your vision to life. Turn simple text descriptions into stunning, unique images for your projects, and enhance your ideas into detailed prompts for breathtaking AI-generated art." />
                         </div>
                     </div>
                 )}
