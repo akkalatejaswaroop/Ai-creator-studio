@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo, useEffect } from 'react';
 import { Tool, ToolCategory } from '../types';
 
@@ -91,7 +92,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
             <div className="flex items-center justify-between mb-6 px-2 shrink-0">
                 <button onClick={onLogoClick} className="flex items-center gap-2">
                     <LogoIcon />
-                    <span className="font-bold text-lg whitespace-nowrap">Creator AI</span>
+                    <span className="font-bold text-lg whitespace-nowrap">IntelliForge Ai</span>
                 </button>
                 <button onClick={onToggle} className="p-1 rounded-md hover:bg-white/10" aria-label="Close sidebar">
                     <ChevronDoubleLeftIcon />
@@ -137,7 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
                 </ul>
             </nav>
             <footer className="text-center py-2 px-4 text-gray-600 text-xs shrink-0 whitespace-nowrap">
-                 &copy; {new Date().getFullYear()} Creator Studio AI.
+                 &copy; {new Date().getFullYear()} IntelliForge Ai.
             </footer>
         </aside>
     );

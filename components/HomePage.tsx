@@ -1,5 +1,6 @@
 
 
+
 import React, { useMemo } from 'react';
 import { Tool } from '../types';
 
@@ -113,7 +114,7 @@ export const HomePage: React.FC<HomePageProps> = ({ searchTerm, setSearchTerm, t
                     <LogoIcon />
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                    Creator Studio AI
+                    IntelliForge Ai
                 </h1>
                 <p className="text-gray-400 mt-4 max-w-xl mx-auto">
                     Your intelligent partner for content creation. Select a tool from the sidebar or search below to begin.
