@@ -26,7 +26,7 @@ export const isApiAvailable = (): boolean => {
     return !!API_KEY;
 };
 
-// For standard text generation tools
+// For standard text generation tools (now deprecated in favor of streaming)
 export const generateTextContent = async (
   prompt: string, 
   systemInstruction: string, 
@@ -42,11 +42,35 @@ export const generateTextContent = async (
       contents: prompt,
       config: {
         systemInstruction: instruction,
-        thinkingConfig: { thinkingBudget: 0 } 
       }
     });
     return response.text;
 };
+
+// For streaming text generation
+export async function* generateTextStream(
+  prompt: string,
+  systemInstruction: string,
+  language?: string
+): AsyncGenerator<string> {
+  const client = await getAiClient();
+  const instruction = language && language !== 'English'
+    ? `${systemInstruction} The final output must be in ${language}.`
+    : systemInstruction;
+
+  const responseStream = await client.models.generateContentStream({
+    model: 'gemini-2.5-flash',
+    contents: prompt,
+    config: {
+      systemInstruction: instruction,
+    }
+  });
+
+  for await (const chunk of responseStream) {
+    yield chunk.text;
+  }
+}
+
 
 // For multimodal input (text + image)
 export const generateTextFromImage = async (

@@ -2,6 +2,7 @@ import type React from 'react';
 
 export enum ToolCategory {
   Writing = 'Writing',
+  Business = 'Business & Marketing', // Renamed for clarity
   Learning = 'Learning & Academia',
   Research = 'Research & Review',
   Coding = 'Coding & Development',
@@ -160,4 +161,12 @@ export interface Tool {
 export interface ChatMessage {
   role: 'user' | 'model';
   content: string;
+}
+
+export interface GenerationHistoryItem {
+    id: string;
+    toolName: string;
+    inputSummary: string;
+    output: string;
+    timestamp: number;
 }

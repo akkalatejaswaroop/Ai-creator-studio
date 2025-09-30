@@ -1,5 +1,4 @@
 
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { Tool, ToolCategory } from '../types';
 
@@ -8,6 +7,8 @@ interface SidebarProps {
   categories: ToolCategory[];
   onSelectTool: (tool: Tool) => void;
   onLogoClick: () => void;
+  onSelectHistory: () => void;
+  currentView: 'home' | 'tool' | 'history';
   selectedToolId?: string;
   searchTerm: string;
   isOpen: boolean;
@@ -22,6 +23,13 @@ const LogoIcon = () => (
     </svg>
 );
 
+const HistoryIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+);
+
+
 const ChevronRightIcon = ({ isExpanded }: { isExpanded: boolean }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transform transition-transform ${isExpanded ? 'rotate-90' : 'rotate-0'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -35,7 +43,7 @@ const ChevronDoubleLeftIcon = () => (
 );
 
 
-export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectTool, onLogoClick, selectedToolId, searchTerm, isOpen, onToggle }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectTool, onLogoClick, onSelectHistory, currentView, selectedToolId, searchTerm, isOpen, onToggle }) => {
     const [expandedCategories, setExpandedCategories] = useState<Set<ToolCategory>>(() => {
         if (selectedToolId) {
             const tool = tools.find(t => t.id === selectedToolId);
@@ -101,6 +109,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
             
             <nav className="flex-grow overflow-y-auto -mr-4 pr-3">
                 <ul className="space-y-2">
+                     <li>
+                        <button
+                            onClick={onSelectHistory}
+                            className={`w-full flex items-center gap-3 text-left px-2 py-2 rounded-md text-sm transition-colors ${
+                                currentView === 'history'
+                                ? 'bg-cyan-500/20 text-cyan-300 font-semibold'
+                                : 'text-gray-300 hover:bg-white/10'
+                            }`}
+                        >
+                            <HistoryIcon />
+                            <span>History</span>
+                        </button>
+                    </li>
+                    <div className="border-t border-white/10 my-2"></div>
                     {categories.map(category => {
                         const categoryTools = toolsByCategory[category];
                         if (!categoryTools || categoryTools.length === 0) return null;
@@ -120,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
                                                 <button 
                                                     onClick={() => onSelectTool(tool)} 
                                                     className={`w-full flex items-center gap-3 text-left p-2 rounded-md text-sm transition-colors ${
-                                                        selectedToolId === tool.id 
+                                                        selectedToolId === tool.id && currentView === 'tool'
                                                         ? 'bg-cyan-500/20 text-cyan-300 font-semibold' 
                                                         : 'text-gray-400 hover:bg-white/10 hover:text-gray-200'
                                                     }`}
