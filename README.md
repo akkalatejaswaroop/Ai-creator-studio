@@ -178,7 +178,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 For any questions, suggestions, or collaborations, feel free to reach out:
 
-*   **Project Lead:** [Akkala Teja Swaroop]
+*   **Project Lead:** [Akkala Teja Swaroop](https://akkalatejaswaroop.github.io/portifolio/)
 *   **Email:** Tejaswaroopakkala@gmail.com
 *   **GitHub Issues:** [https://github.com/akkalatejaswaroop/IntelliForge-AI/issues](https://github.com/akkalatejaswaroop/IntelliForge-AI)
 
