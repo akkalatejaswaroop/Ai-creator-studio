@@ -20,6 +20,13 @@ const componentMap: { [key in ToolComponentType]: React.LazyExoticComponent<Reac
     [ToolComponentType.DoubleSelectTool]: React.lazy(() => import('./tools/DoubleSelectTool')),
     [ToolComponentType.DualTextareaTool]: React.lazy(() => import('./tools/DualTextareaTool')),
     [ToolComponentType.IndustryInputTool]: React.lazy(() => import('./tools/IndustryInputTool')),
+    [ToolComponentType.MessageReplyTool]: React.lazy(() => import('./tools/MessageReplyTool')),
+    [ToolComponentType.NoticeGeneratorTool]: React.lazy(() => import('./tools/NoticeGeneratorTool')),
+    [ToolComponentType.AnnouncementGeneratorTool]: React.lazy(() => import('./tools/AnnouncementGeneratorTool')),
+    [ToolComponentType.SyllabusDesignerTool]: React.lazy(() => import('./tools/SyllabusDesignerTool')),
+    [ToolComponentType.TimetableOptimizerTool]: React.lazy(() => import('./tools/TimetableOptimizerTool')),
+    [ToolComponentType.GrantProposalTool]: React.lazy(() => import('./tools/GrantProposalTool')),
+    [ToolComponentType.EssayAnalyzerTool]: React.lazy(() => import('./tools/EssayAnalyzerTool')),
 };
 
 const LANGUAGES = ['English', 'Spanish', 'French', 'German', 'Japanese', 'Chinese', 'Russian', 'Arabic'];
@@ -60,7 +67,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ tool, onBack, onAddT
     });
   }, [onAddToHistory, tool.name]);
 
-  const showLanguageSelector = tool.component !== ToolComponentType.ImageGenerator && tool.component !== ToolComponentType.GroundedQA;
+  const showLanguageSelector = tool.component !== ToolComponentType.ImageGenerator && tool.component !== ToolComponentType.GroundedQA && tool.component !== ToolComponentType.SyllabusDesignerTool;
   
   const ToolComponent = componentMap[tool.component] || componentMap[ToolComponentType.Generic];
   const toolProps = { tool, language, onGenerationComplete: handleGenerationComplete };

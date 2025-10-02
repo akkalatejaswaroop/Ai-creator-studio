@@ -3,6 +3,7 @@ import type React from 'react';
 export enum ToolCategory {
   Writing = 'Writing',
   Business = 'Business & Marketing', // Renamed for clarity
+  Communication = 'Communication',
   Learning = 'Learning & Academia',
   Research = 'Research & Review',
   Coding = 'Coding & Development',
@@ -31,6 +32,14 @@ export enum ToolComponentType {
   DoubleSelectTool = 'DoubleSelectTool',
   DualTextareaTool = 'DualTextareaTool',
   IndustryInputTool = 'IndustryInputTool',
+  MessageReplyTool = 'MessageReplyTool',
+  NoticeGeneratorTool = 'NoticeGeneratorTool',
+  AnnouncementGeneratorTool = 'AnnouncementGeneratorTool',
+  // University Tools
+  SyllabusDesignerTool = 'SyllabusDesignerTool',
+  TimetableOptimizerTool = 'TimetableOptimizerTool',
+  GrantProposalTool = 'GrantProposalTool',
+  EssayAnalyzerTool = 'EssayAnalyzerTool',
 }
 
 export interface ToolContext {
@@ -145,6 +154,42 @@ export interface IndustryInputToolProps {
   industryPlaceholder: string;
 }
 
+export interface MessageReplyToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  contextPlaceholder: string;
+  intents: string[];
+  tones: string[];
+  formalities: string[];
+}
+
+export interface NoticeGeneratorToolProps {
+  promptTemplate: string;
+  noticeTypes: string[];
+  channels: string[];
+  urgencyLevels: string[];
+}
+
+export interface AnnouncementGeneratorToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  ctaPlaceholder: string;
+  announcementTypes: string[];
+}
+
+export interface SyllabusDesignerToolProps {
+  promptTemplate: string;
+  titlePlaceholder: string;
+  descriptionPlaceholder: string;
+  levels: string[];
+}
+
+export interface GrantProposalToolProps {
+    promptTemplate: string;
+    placeholder: string;
+    fundingBodyLabel: string;
+    fundingBodyPlaceholder: string;
+}
 
 export interface Tool {
   id: string;
@@ -153,7 +198,7 @@ export interface Tool {
   category: ToolCategory;
   icon: React.ReactNode;
   component: ToolComponentType;
-  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | GrammarToolProps | ToneChangerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps;
+  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | GrammarToolProps | ToneChangerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps | MessageReplyToolProps | NoticeGeneratorToolProps | AnnouncementGeneratorToolProps | SyllabusDesignerToolProps | GrantProposalToolProps;
   systemInstruction: string;
   context: ToolContext;
   featured?: boolean;

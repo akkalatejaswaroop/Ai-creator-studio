@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Tool, ToolCategory, ToolComponentType } from './types';
 
@@ -45,6 +44,9 @@ const CalendarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-
 const GitCommitIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h3m-3 12h3m-6-6h9M4.5 12a7.5 7.5 0 1115 0 7.5 7.5 0 01-15 0z" /></svg>;
 const ShieldCheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>;
 const MapIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.5-10.5h.75a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25-2.25h-7.5a2.25 2.25 0 01-2.25-2.25V8.25a2.25 2.25 0 012.25-2.25h.75" /></svg>;
+// New Icons for Communication Tools
+const ArrowUturnLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" /></svg>;
+const ExclamationTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>;
 // New Icons for File Utilities
 const FileDocumentIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>;
 const ArrowDownOnSquareIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3v11.25" /></svg>;
@@ -56,6 +58,7 @@ const ScissorsIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" v
 export const CATEGORIES: ToolCategory[] = [
   ToolCategory.Writing,
   ToolCategory.Business,
+  ToolCategory.Communication,
   ToolCategory.Marketing,
   ToolCategory.Learning,
   ToolCategory.Research,
@@ -369,6 +372,128 @@ export const TOOLS: Tool[] = [
       proFeature: "Ask for ideas that combine two seemingly unrelated industries, like 'AI and gardening' or 'blockchain and travel'."
     }
   },
+    {
+    id: 'timetable-optimizer',
+    name: 'Automated Timetable Optimizer',
+    description: 'Generate a draft university timetable based on a set of constraints.',
+    category: ToolCategory.Business,
+    icon: <CalendarIcon />,
+    component: ToolComponentType.TimetableOptimizerTool,
+    systemInstruction: "You are a university administrator specializing in logistics and scheduling. Your task is to generate a draft timetable based on a list of constraints. The output should be a clear, well-formatted schedule, likely in a Markdown table. You must try your best to satisfy all constraints, but if conflicts are unavoidable, you should flag them. Crucially, you must start your response with a disclaimer in bold: **Disclaimer: This is an AI-generated draft schedule. All constraints and potential conflicts must be manually verified before implementation.**",
+    props: {
+        promptTemplate: 'Generate a draft timetable based on these constraints: {userInput}',
+        placeholder: 'Enter all constraints, e.g., Professor availability (Prof. Smith, MWF 9am-12pm), classroom capacities (Hall A, 100 seats), course dependencies (CS101 before CS201), student course loads, etc.',
+    },
+    context: {
+        purpose: 'Generates an optimized, conflict-free draft timetable for a university or school.',
+        benefit: 'Solves a major logistical challenge for administrators, improving resource allocation and student satisfaction by creating a workable schedule from complex constraints.',
+        proFeature: 'For best results, structure your constraints clearly using bullet points for each category (Professors, Rooms, Courses).'
+    }
+  },
+  {
+    id: 'alumni-engagement-personalizer',
+    name: 'Alumni Engagement Personalizer',
+    description: 'Draft highly personalized outreach emails to alumni based on their professional profiles.',
+    category: ToolCategory.Business,
+    icon: <UserCircleIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: "You are an experienced alumni relations and development officer. Your task is to draft a warm, personalized, and professional outreach email based on an alumnus's professional information. The email should reference their specific industry and achievements, connect them to relevant university initiatives, and gently lead towards a call-to-action (like donating, mentoring, or attending an event), without being overly aggressive.",
+    props: {
+        promptTemplate: 'Draft a personalized outreach email to an alumnus with the following professional profile: {userInput}',
+        placeholder: "Paste the alumnus's information here, e.g., from a LinkedIn profile: 'Jane Doe, VP of Engineering at TechCorp, specializes in machine learning. Graduated in 2010 with a B.S. in Computer Science...'",
+    },
+    context: {
+        purpose: "Creates personalized outreach emails for alumni relations and fundraising campaigns.",
+        benefit: "Increases the effectiveness of alumni outreach by creating genuine, personal connections at scale, making fundraising appeals far more resonant than generic templates.",
+        proFeature: "Specify a goal for the email, e.g., 'The goal is to invite them to be a guest speaker' or 'The goal is to ask for a donation to the new engineering building'."
+    }
+  },
+  // --- Communication ---
+  {
+    id: 'message-reply-generator',
+    name: 'Message Reply Generator',
+    description: 'Generate sophisticated, goal-oriented replies to any message or email.',
+    category: ToolCategory.Communication,
+    icon: <ArrowUturnLeftIcon />,
+    component: ToolComponentType.MessageReplyTool,
+    systemInstruction: 'You are a professional communication assistant. Your task is to generate 2-3 distinct, context-aware replies to a given message based on the user\'s specified goal, tone, and formality. Each variation should be clearly labeled using Markdown headings (e.g., ### Variation 1).',
+    props: {
+      promptTemplate: 'The original message is: "{userInput}". My goal is to "{intent}". The tone should be "{tone}" with "{formality}" formality. Optional context: "{context}". Please generate 2-3 distinct reply variations based on this.',
+      placeholder: 'Paste the message or email you received here...',
+      contextPlaceholder: 'e.g., This is from my boss, or This is an angry customer.',
+      intents: ['Accept Invitation', 'Politely Decline', 'Request More Information', 'Acknowledge Receipt', 'Express Gratitude'],
+      tones: ['Friendly', 'Formal', 'Assertive', 'Empathetic'],
+      formalities: ['Casual', 'Neutral', 'Very Formal'],
+    },
+    context: {
+      purpose: "Crafts multiple, nuanced reply options for emails and messages.",
+      benefit: "Saves time and reduces communication anxiety by generating professional, appropriate responses for any situation.",
+      proFeature: "Use the 'Context' field to provide details like 'This is from an angry customer' to get highly tailored de-escalation responses."
+    }
+  },
+  {
+    id: 'notice-message-generator',
+    name: 'Notice Message Generator',
+    description: 'Create clear, structured notices for internal communications like maintenance or policy updates.',
+    category: ToolCategory.Communication,
+    icon: <ExclamationTriangleIcon />,
+    component: ToolComponentType.NoticeGeneratorTool,
+    systemInstruction: 'You are a corporate communications specialist. Your task is to generate a clear, professional notice message formatted for a specific channel, based on structured user inputs.',
+    props: {
+      promptTemplate: `
+        Generate a notice message with the following details:
+        - Notice Type: {noticeType}
+        - Target Audience: {audience}
+        - Channel: {channel}
+        - Urgency: {urgency}
+        - Date & Time of Event: {dateTime}
+        - Services/Areas Affected: {affectedServices}
+        - Reason/Purpose: {reason}
+        - Contact Person for Questions: {contactPerson}
+
+        The message should be formatted appropriately for the "{channel}" channel (e.g., with a subject line for email), be clear, concise, and convey the correct level of "{urgency}".
+      `,
+      noticeTypes: ['Scheduled Maintenance', 'Office Closure', 'Policy Update', 'System Outage', 'Event Reminder'],
+      channels: ['Email', 'Slack/Teams', 'Intranet Post'],
+      urgencyLevels: ['Informational', 'Action Required', 'Urgent'],
+    },
+    context: {
+      purpose: "Generates structured, professional notices for internal company communications.",
+      benefit: "Ensures clarity and consistency in important announcements, reduces confusion, and saves time drafting messages from scratch.",
+      proFeature: "Select the 'Channel' (e.g., Email, Slack) and 'Urgency' to get a message perfectly formatted and toned for its purpose."
+    }
+  },
+  {
+      id: 'announcement-generator',
+      name: 'Announcement Generator',
+      description: 'Generate multi-channel announcements for product launches, new hires, or company milestones.',
+      category: ToolCategory.Communication,
+      icon: <MegaphoneIcon />,
+      component: ToolComponentType.AnnouncementGeneratorTool,
+      systemInstruction: `You are a senior public relations and corporate communications manager. Your task is to generate a package of content for a major announcement, tailored for different channels. The output must be in Markdown format, with each channel's content under a clear heading (e.g., ### Press Release Draft). You must incorporate the user's specified Call-to-Action and include a placeholder for a quote where appropriate (e.g., in the press release).`,
+      props: {
+          promptTemplate: `
+          Generate an announcement package for the following:
+          - Announcement Type: {announcementType}
+          - Details: {userInput}
+          - Call to Action: {cta}
+  
+          The package must include:
+          1.  A professional Press Release draft (including a headline, dateline, introduction, body paragraphs, a placeholder like [Insert quote from CEO/Team Lead here], about section, and media contact).
+          2.  An engaging LinkedIn post (professional tone, using hashtags).
+          3.  A short, punchy Twitter/X post (concise, with hashtags).
+          4.  An enthusiastic internal Email for the team (celebratory tone).
+          `,
+          placeholder: 'Provide all the key details for the announcement. e.g., We are launching our new product "SynthWave AI" on October 26th. It helps musicians generate royalty-free background music...',
+          ctaPlaceholder: 'e.g., Visit our new landing page at synthwave.ai',
+          announcementTypes: ['New Hire/Promotion', 'Product Launch', 'Company Milestone', 'Partnership News', 'Event Announcement'],
+      },
+      context: {
+          purpose: "Creates a complete communication package for a major announcement, with content tailored for multiple channels.",
+          benefit: "Saves hours of work and ensures a consistent, professional message across your press release, social media, and internal communications.",
+          proFeature: "The tool automatically generates content for a press release, LinkedIn, Twitter/X, and an internal email all at once."
+      }
+  },
   // --- SEO & Marketing ---
   {
     id: 'social-media',
@@ -559,6 +684,26 @@ export const TOOLS: Tool[] = [
         proFeature: "Ask follow-up questions to dig deeper into a topic, just like you would with a real research assistant."
     }
   },
+    {
+    id: 'syllabus-designer',
+    name: 'AI Curriculum & Syllabus Designer',
+    description: 'Generate a complete syllabus with topics, readings, and objectives from a course idea.',
+    category: ToolCategory.Learning,
+    icon: <ClipboardListIcon />,
+    component: ToolComponentType.SyllabusDesignerTool,
+    systemInstruction: "You are an expert curriculum designer and university professor. Generate a comprehensive, well-structured syllabus in Markdown format based on the user's input. The syllabus must include learning objectives, a week-by-week schedule with topics, suggested assignments, and a 'Suggested Readings' section. For the readings, use your knowledge but also leverage web search to find relevant, publicly accessible academic papers, articles, or book chapters, and provide direct links to them.",
+    props: {
+      promptTemplate: 'Generate a syllabus for a course titled "{title}" with the following description: "{description}". The course is for the "{level}" level.',
+      titlePlaceholder: 'e.g., Introductory Quantum Mechanics',
+      descriptionPlaceholder: 'e.g., A one-semester course covering the fundamental principles of quantum mechanics, including wave-particle duality, the Schrödinger equation, and quantum tunneling.',
+      levels: ['Undergraduate', 'Graduate', 'Doctoral'],
+    },
+    context: {
+      purpose: "Generates a complete, structured syllabus draft from a course concept.",
+      benefit: "Massively accelerates the course design process for faculty, ensuring a high standard of curriculum structure and providing a solid foundation for a new course.",
+      proFeature: "The 'Suggested Readings' are powered by Google Search to provide up-to-date and relevant academic resources with links."
+    }
+  },
   {
     id: 'lecture-summary',
     name: 'Lecture Summarizer',
@@ -694,6 +839,63 @@ export const TOOLS: Tool[] = [
       proFeature: "Use the difficulty selector to create quizzes that match your current knowledge level."
     }
   },
+  {
+    id: 'admissions-essay-analyzer',
+    name: 'Admissions Essay Thematic Analyzer',
+    description: 'Analyze admissions essays for themes, clarity, and potential integrity issues.',
+    category: ToolCategory.Learning,
+    icon: <ClipboardCheckIcon />,
+    component: ToolComponentType.EssayAnalyzerTool,
+    systemInstruction: "You are an experienced admissions officer at a top-tier university. Your task is to analyze one or more admissions essays. Provide a concise report in Markdown format that includes: 1. **Thematic Analysis**: A bulleted list of the main themes and arguments. 2. **Clarity & Writing Quality**: A brief assessment of the writing style and clarity (1-3 sentences). 3. **Integrity Check**: A section that flags any potential issues, such as overly generic phrasing, clichés, or language patterns that might suggest the use of an AI writing tool or plagiarism. Be cautious and frame these as 'points for further review' rather than definitive accusations.",
+    props: {
+        promptTemplate: 'Analyze the following admissions essay(s) and provide a report covering Thematic Analysis, Writing Quality, and an Integrity Check: {userInput}',
+        placeholder: 'Paste one or more admissions essays here. Separate multiple essays with a line of "---".',
+    },
+    context: {
+        purpose: 'Acts as a pre-screening tool for admissions departments to analyze application essays.',
+        benefit: 'Streamlines the admissions process by helping staff quickly identify key themes, assess writing quality, and flag essays for further human review, allowing for more effective evaluation at scale.',
+        proFeature: 'Paste multiple essays separated by "---" to get a comparative analysis in a single run.'
+    }
+  },
+  {
+    id: 'student-retention-modeler',
+    name: 'Student Retention Risk Modeler',
+    description: 'Analyze anonymized student data to identify patterns and factors correlated with attrition risk.',
+    category: ToolCategory.Learning,
+    icon: <ChartPieIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: "You are a data scientist specializing in educational data mining. Your task is to analyze a large, anonymized dataset description to identify patterns and factors correlating with student attrition risk. **You must not attempt to identify individual students.** Your output should be a report summarizing key findings in a clear, actionable format for university administrators. Start the report with a bold disclaimer: **This analysis is based on anonymized, aggregated data and should be used to design support programs, not to target individual students.**",
+    props: {
+        promptTemplate: 'Analyze the following anonymized institutional data to find factors that correlate with student attrition: {userInput}',
+        placeholder: "Describe your anonymized dataset here. e.g., 'Dataset includes: course drop rates, first-year GPA, library usage frequency, LMS activity logs, declared major, and a binary 'dropped_out' variable...'",
+    },
+    context: {
+        purpose: "Identifies high-level patterns in anonymized data that correlate with student dropout rates.",
+        benefit: "Empowers institutions to be proactive by designing targeted support programs for at-risk student populations, improving overall student success and retention.",
+        proFeature: "For a more focused analysis, ask the AI to 'focus specifically on the correlation between first-semester grades and second-year retention'."
+    }
+  },
+  {
+    id: 'course-catalog-validator',
+    name: 'Automated Course Catalog & Prerequisite Validator',
+    description: 'Generate optimal, conflict-free semester plans based on a course catalog and student\'s progress.',
+    category: ToolCategory.Learning,
+    icon: <MapIcon />,
+    component: ToolComponentType.DualTextareaTool,
+    systemInstruction: "You are an expert university academic advisor and registrar. Your task is to analyze a provided course catalog and a student's record to generate an optimal, conflict-free semester-by-semester plan for timely graduation. The output should be clearly structured. Start your response with a bold disclaimer: **Disclaimer: This is an AI-generated academic plan. It is a suggestion and must be verified with a human academic advisor before registration.**",
+    props: {
+        promptTemplate: 'Given the course catalog below, and the student\'s record, create an optimal semester-by-semester plan to graduation.\n\nCourse Catalog:\n{userInput1}\n\nStudent Record:\n{userInput2}',
+        label1: 'Course Catalog & Prerequisites',
+        placeholder1: 'Paste the relevant course catalog information here. e.g., "CS101: Intro to Programming. CS201: Data Structures (Prereq: CS101). MATH150: Calculus I..."',
+        label2: 'Student\'s Major & Completed Courses',
+        placeholder2: 'e.g., "Major: Computer Science. Completed: CS101, MATH150..."',
+    },
+    context: {
+        purpose: "Creates an optimal, semester-by-semester academic plan for students.",
+        benefit: "Reduces human error in academic advising, helps students plan their journey efficiently, and prevents last-minute graduation roadblocks caused by missed prerequisites.",
+        proFeature: "Add constraints to the student record like 'Cannot take more than 15 credits per semester' or 'Prefers to take summer classes' for a more tailored plan."
+    }
+  },
   // --- Research & Review ---
   {
     id: 'research-abstract',
@@ -767,6 +969,26 @@ export const TOOLS: Tool[] = [
       proFeature: "Specify the conference theme or name in the prompt to get a pitch tailored to that specific event."
     }
   },
+    {
+    id: 'grant-proposal-assistant',
+    name: 'Grant Proposal Assistant',
+    description: 'Draft a grant proposal, identify funding bodies, and refine your research impact statement.',
+    category: ToolCategory.Research,
+    icon: <RocketLaunchIcon />,
+    component: ToolComponentType.GrantProposalTool,
+    systemInstruction: "You are a seasoned research administrator and grant writing expert. Your task is to draft a compelling grant proposal based on a research idea, tailored to the specific guidelines of a funding body. The draft should include sections like Introduction/Background, Research Aims, Methodology, and a persuasive Impact Statement. You should also suggest 2-3 other potential funding bodies that would be a good fit for this type of research.",
+    props: {
+        promptTemplate: 'Draft a grant proposal for the funding body "{fundingBody}" based on the following research idea: {userInput}',
+        placeholder: 'Describe your research idea in detail, including its background, primary objectives, and potential impact...',
+        fundingBodyLabel: 'Target Funding Body',
+        fundingBodyPlaceholder: 'e.g., NIH, NSF, or specific foundation name',
+    },
+    context: {
+        purpose: 'Helps faculty draft high-quality grant proposals tailored to specific funding bodies.',
+        benefit: 'Increases the quality and success rate of grant applications by providing a structured draft, which helps bring more funding and prestige to the institution.',
+        proFeature: 'If you are unsure of the funding body, you can type "Suggest some" and the AI will provide ideas based on your research topic.'
+    }
+  },
   {
     id: 'hypothesis-generator',
     name: 'Hypothesis Generator',
@@ -780,7 +1002,7 @@ export const TOOLS: Tool[] = [
       placeholder: 'e.g., The effect of sleep deprivation on cognitive performance in college students',
     },
     context: {
-      purpose: "Creates well-formed, testable hypotheses from a research idea.",
+      purpose: "Creates a well-formed, testable hypotheses from a research idea.",
       benefit: "Provides a crucial starting point for any scientific study, ensuring that research questions are framed in a way that can be empirically tested.",
       proFeature: "Ask for a null hypothesis (H0) and an alternative hypothesis (H1) for each generated idea to formalize your research plan."
     }
@@ -1276,652 +1498,16 @@ export const TOOLS: Tool[] = [
     icon: <DatabaseIcon />,
     component: ToolComponentType.Generic,
     systemInstruction: 'You are a senior database administrator and SQL expert. Your task is to translate a natural language request into a clean, efficient, and standard SQL query. Return the query inside a Markdown SQL code block.',
+    // FIX: The props for this tool were corrupted and incomplete.
+    // GenericTool requires both promptTemplate and placeholder.
     props: {
-        promptTemplate: 'Translate the following request into an SQL query: {userInput}.',
-        placeholder: 'e.g., Find all users from the "users" table who signed up in the last 30 days and live in California.',
+        promptTemplate: 'Translate the following request into an SQL query: {userInput}',
+        placeholder: 'e.g., "Find all users from California who signed up in the last month."\n\nTo get a more accurate query, you can optionally provide your table schema below your request. For example:\n\n---\nSchema:\nusers(id, name, email, signup_date, state)\norders(id, user_id, amount, date)',
     },
     context: {
-        purpose: "Converts natural language into SQL code.",
-        benefit: "Empowers developers, analysts, and students to interact with databases without needing to memorize complex SQL syntax.",
-        proFeature: "Provide the table schema (e.g., 'users table has columns: id, name, email, signup_date, state') for a more accurate and robust query."
-    }
-  },
-  {
-    id: 'code-refactorer',
-    name: 'Code Refactorer',
-    description: 'Improve the readability, efficiency, and structure of your existing code.',
-    category: ToolCategory.Coding,
-    icon: <ArrowPathIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a senior software architect specializing in code quality and best practices. Your task is to refactor the provided code to be more efficient, readable, and maintainable. Provide the refactored code inside a Markdown code block and a brief explanation of the changes made.',
-    props: {
-      promptTemplate: 'Refactor the following code and explain the improvements:\n\n```\n{userInput}\n```',
-      placeholder: 'Paste your code snippet here that you want to improve...'
-    },
-    context: {
-      purpose: "Rewrites existing code to improve its internal structure without changing its external behavior.",
-      benefit: "Helps developers create cleaner, more efficient, and easier-to-maintain code, reducing technical debt.",
-      proFeature: "Specify a particular goal for the refactoring, such as 'make this more readable' or 'improve performance'."
-    }
-  },
-  {
-    id: 'api-docs-writer',
-    name: 'API Documentation Writer',
-    description: 'Generate clear and professional documentation for your API endpoints.',
-    category: ToolCategory.Coding,
-    icon: <BookIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a technical writer specializing in API documentation. Your task is to generate clear, concise documentation for an API endpoint based on a code snippet or description. The documentation should include the endpoint\'s purpose, parameters, request body, and a sample response. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Generate API documentation for the following code/endpoint: {userInput}',
-      placeholder: 'Paste the function or controller code for your API endpoint, or describe it. e.g., "A POST endpoint at /api/users that creates a new user with a name and email."'
-    },
-    context: {
-      purpose: "Creates structured documentation for API endpoints.",
-      benefit: "Saves developers significant time in writing documentation, leading to better-documented and easier-to-use APIs.",
-      proFeature: "Provide a code snippet and ask it to generate documentation in a specific format, like OpenAPI (Swagger) YAML."
-    }
-  },
-  {
-    id: 'github-readme-generator',
-    name: 'GitHub README Generator',
-    description: 'Create a professional README.md for your project repository.',
-    category: ToolCategory.Coding,
-    icon: <DocumentTextIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a developer relations expert and technical writer. Your task is to create a professional, well-formatted GitHub README.md file in Markdown, based on user-provided project details. The README should be clear, concise, and encourage community engagement.',
-    props: {
-        promptTemplate: 'Generate a GitHub README.md file for the following project: {userInput}. Include sections for: Project Title, a brief Description, key Features, Tech Stack used, Installation/Getting Started instructions, and a simple Usage example.',
-        placeholder: 'Provide details about your project. e.g.,\nTitle: Image-Optimizer-CLI\nFeatures: Compresses JPEGs and PNGs, resizes images.\nTech Stack: Node.js, Sharp.js, Commander.js',
-    },
-    context: {
-        purpose: "Generates a well-structured and professional README file for your code repositories.",
-        benefit: "Improves your project's presentation, making it easier for other developers to understand, use, and contribute to your work.",
-        proFeature: "Ask it to include a 'Contributing' section with a template for bug reports and feature requests to foster collaboration."
-    }
-  },
-  // --- Engineering & Tech ---
-  {
-    id: 'technical-explainer',
-    name: 'Technical Concept Explainer',
-    description: 'Simplify complex engineering and technical topics.',
-    category: ToolCategory.Engineering,
-    icon: <LightbulbIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an experienced engineer and educator. Your skill is in explaining highly technical concepts to students and non-experts using analogies and simple terms.',
-    props: {
-      promptTemplate: 'Explain the technical concept of "{userInput}" in simple terms, using an analogy to help with understanding.',
-      placeholder: 'e.g., How a blockchain works, or the principles of a PID controller',
-    },
-    context: {
-      purpose: "Breaks down complex technical subjects into easy-to-understand explanations.",
-      benefit: "Aids students and professionals in grasping difficult concepts quickly, improving learning and knowledge retention.",
-      proFeature: "Ask it to explain the concept 'to a 5-year-old' or 'to a marketing manager' for different levels of simplification."
-    }
-  },
-  {
-    id: 'prd-generator',
-    name: 'Project Requirements (PRD) Generator',
-    description: 'Generate a comprehensive Project Requirements Document from a high-level idea.',
-    category: ToolCategory.Engineering,
-    icon: <ClipboardListIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a Senior Product Manager at a leading tech company. Your task is to generate a comprehensive Project Requirements Document (PRD) in Markdown format based on a user\'s high-level project idea. The PRD must be well-structured and include all essential sections.',
-    props: {
-        promptTemplate: 'Generate a Project Requirements Document (PRD) in Markdown for the following project idea: {userInput}. The PRD must include these sections:\n\n1.  **Problem Statement:** (What problem are we solving?)\n2.  **Target Audience:** (Who are the primary users?)\n3.  **Features & User Stories:** (List key features with user stories in the format: "As a [user type], I want to [action] so that [benefit].")\n4.  **Non-Functional Requirements:** (e.g., Performance, Security, Scalability)\n5.  **Success Metrics:** (How will we measure success? e.g., User engagement, conversion rate)',
-        placeholder: 'e.g., A mobile app that helps users find and book local sports facilities.',
-    },
-    context: {
-        purpose: "Transforms a high-level project idea into a structured Project Requirements Document (PRD).",
-        benefit: "Provides a solid foundation for project planning, aligning stakeholders and giving engineering teams a clear specification to build from.",
-        proFeature: "Specify a project management methodology (e.g., 'with a focus on Agile principles') to get a PRD tailored to that workflow."
-    }
-  },
-  {
-    id: 'project-plan',
-    name: 'Project Plan Generator',
-    description: 'Create a structured plan and timeline for a technical project.',
-    category: ToolCategory.Engineering,
-    icon: <ClipboardListIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a senior project manager in a tech company. Your task is to create a structured project plan with phases, key milestones, and estimated timelines. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Create a high-level project plan for the following technical project: {userInput}. Break it down into phases (e.g., Discovery, Design, Development, Testing, Deployment) and list key milestones for each phase.',
-      placeholder: 'e.g., Building a mobile app for local event discovery',
-    },
-    context: {
-      purpose: "Outlines the key phases, milestones, and tasks for a technical project.",
-      benefit: "Provides a clear roadmap for project execution, helping to organize tasks, manage time, and ensure all requirements are met.",
-      proFeature: "Include potential risks or challenges in your prompt to get a plan that includes a 'Risk Mitigation' section."
-    }
-  },
-  {
-    id: 'system-design-explainer',
-    name: 'System Design Explainer',
-    description: 'Get a high-level explanation of how to design a complex system.',
-    category: ToolCategory.Engineering,
-    icon: <ServerStackIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a principal software engineer and system design expert. Your task is to provide a high-level system design for a given application. You should cover key components like load balancers, web servers, application servers, databases, caches, and how they interact. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Provide a high-level system design for a system like {userInput}.',
-      placeholder: 'e.g., Twitter, Netflix, or a URL shortening service'
-    },
-    context: {
-      purpose: "Outlines the architectural components for building scalable applications.",
-      benefit: "Helps engineers and students prepare for system design interviews and understand the building blocks of large-scale tech products.",
-      proFeature: "Ask for trade-offs between different database choices, like 'SQL vs NoSQL for this system'."
-    }
-  },
-  {
-    id: 'troubleshooting-guide',
-    name: 'Technical Troubleshooting Guide',
-    description: 'Generate a step-by-step guide to diagnose and solve a technical problem.',
-    category: ToolCategory.Engineering,
-    icon: <WrenchScrewdriverIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an experienced IT support specialist and systems engineer. Your task is to create a step-by-step troubleshooting guide for a given technical problem. The steps should be logical, starting from the simplest solutions and progressing to more complex ones. Use Markdown formatting.',
-    props: {
-      promptTemplate: 'Create a step-by-step troubleshooting guide for the following problem: {userInput}',
-      placeholder: 'e.g., "My home WiFi is slow" or "My computer is not turning on"'
-    },
-    context: {
-      purpose: "Creates a logical sequence of steps to solve a technical issue.",
-      benefit: "Empowers users to solve their own technical problems and provides a structured approach for support professionals, leading to faster resolutions.",
-      proFeature: "Specify the user's technical skill level (e.g., 'for a complete beginner') to get a more tailored guide."
-    }
-  },
-  {
-    id: 'hackathon-idea-generator',
-    name: 'Hackathon & Project Idea Generator',
-    description: 'Generate innovative project ideas for technical competitions like hackathons.',
-    category: ToolCategory.Engineering,
-    icon: <RocketLaunchIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an innovation expert and a seasoned hackathon judge. Your task is to generate creative and technically feasible project ideas for a competition based on a user\'s theme or technology stack. Each idea should include a catchy name, a one-sentence pitch, a brief description of the core functionality, the potential tech stack, and a unique \'wow\' factor. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Generate 3 unique project ideas for a technical competition. The theme or technology stack is: {userInput}. For each idea, provide a project name, a one-sentence pitch, a description, a potential tech stack, and a unique \'wow\' factor to make it stand out.',
-      placeholder: 'e.g., AI for social good, Web3 gaming, or using Python and React.',
-    },
-    context: {
-      purpose: "Brainstorms innovative and viable project ideas for hackathons, coding competitions, and personal portfolio building.",
-      benefit: "Helps you quickly find a creative and impactful project to work on, giving you a competitive edge and a solid starting point for development.",
-      proFeature: "Specify constraints like 'a project that can be built in 24 hours' or 'must use a specific API' to get more tailored and realistic ideas."
-    }
-  },
-  // --- Professional Growth ---
-  {
-    id: 'resume-writer',
-    name: 'Resume Bullet Points',
-    description: 'Craft powerful, action-oriented bullet points for your resume.',
-    category: ToolCategory.Professional,
-    icon: <DocumentTextIcon />,
-    component: ToolComponentType.IndustryInputTool,
-    systemInstruction: 'You are a professional resume writer and career coach specializing in various industries. Your expertise is in crafting impactful, action-oriented resume bullet points that incorporate industry-specific keywords.',
-    props: {
-      promptTemplate: 'For the {industry} industry, write 3-5 impactful, action-oriented resume bullet points using the STAR (Situation, Task, Action, Result) method for this responsibility: {userInput}.',
-      placeholder: 'e.g., Managed social media accounts for a tech startup',
-      industryLabel: 'Target Industry (Optional)',
-      industryPlaceholder: 'e.g., Tech, Healthcare, Finance',
-    },
-    context: {
-      purpose: "Transforms job duties into compelling, achievement-oriented resume bullet points.",
-      benefit: "Makes your resume stand out to recruiters by showcasing your accomplishments, not just your responsibilities.",
-      proFeature: "Provide a target industry to get bullet points tailored with relevant keywords and action verbs for that field."
-    }
-  },
-   {
-    id: 'resume-summary',
-    name: 'Resume Summary Generator',
-    description: 'Create a concise, impactful professional summary for your resume.',
-    category: ToolCategory.Professional,
-    icon: <UserCircleIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a professional resume writer. Generate a concise and impactful professional summary for a resume based on the user\'s key experiences and skills.',
-    props: {
-      promptTemplate: 'Write a professional resume summary (3-4 sentences) based on these key skills and experiences: {userInput}',
-      placeholder: 'e.g., 5+ years of experience in software development, skilled in Python and AWS, led a team of 3 engineers...',
-    },
-    context: {
-      purpose: 'Generates a powerful "About" or "Summary" section for your resume.',
-      benefit: 'Captures a recruiter\'s attention immediately with a strong, concise summary of your qualifications and career goals.',
-      proFeature: 'Specify your target job title (e.g., "for a Senior Data Analyst role") to get a more tailored summary.'
-    }
-  },
-  {
-    id: 'resume-job-match',
-    name: 'Resume Job Match Analyzer',
-    description: 'Analyze your resume against a job description to identify gaps and keywords.',
-    category: ToolCategory.Professional,
-    icon: <ClipboardCheckIcon />,
-    component: ToolComponentType.DualTextareaTool,
-    systemInstruction: 'You are an expert ATS (Applicant Tracking System) analyst and career coach. Your task is to compare a resume to a job description, identify missing keywords, and provide actionable advice to improve the resume\'s match score. Use Markdown formatting.',
-    props: {
-      promptTemplate: 'Analyze the following resume against the provided job description. Provide a match score out of 100, list missing keywords from the job description, and suggest specific improvements to the resume. My Resume:\n\n{userInput1}\n\n---JOB DESCRIPTION---\n\n{userInput2}',
-      label1: 'Your Resume',
-      placeholder1: 'Paste your full resume here...',
-      label2: 'Job Description',
-      placeholder2: 'Paste the target job description here...',
-    },
-    context: {
-      purpose: 'Compares your resume to a job description to see how well it matches.',
-      benefit: 'Helps you tailor your resume for specific jobs, increasing your chances of passing automated screening (ATS) and getting an interview.',
-      proFeature: 'After getting feedback, paste in a specific bullet point and ask, "How can I rephrase this to better include the keyword \'project management\'?"'
-    }
-  },
-  {
-    id: 'skills-gap-analyzer',
-    name: 'Skills Gap Analyzer',
-    description: 'Compare your resume to a job description to identify skills you need to develop.',
-    category: ToolCategory.Professional,
-    icon: <MagnifyingGlassIcon />,
-    component: ToolComponentType.DualTextareaTool,
-    systemInstruction: 'You are a career development coach and skills analyst. Your task is to compare a user\'s resume to a target job description and identify the key skills that are present in the job description but missing from the resume. Provide a "Skills Gap" list and suggest ways to acquire those skills (e.g., online courses, certifications, projects). Use Markdown formatting.',
-    props: {
-      promptTemplate: 'Analyze my resume against my dream job description. Identify my skills gap and suggest ways to fill it. My Resume:\n\n{userInput1}\n\n---DREAM JOB DESCRIPTION---\n\n{userInput2}',
-      label1: 'Your Resume',
-      placeholder1: 'Paste your full resume here...',
-      label2: 'Dream Job Description',
-      placeholder2: 'Paste the description of a job you aspire to have...',
-    },
-    context: {
-      purpose: "Identifies the skills you need to develop to qualify for a target job.",
-      benefit: "Provides a clear roadmap for your professional development, helping you focus your learning on the skills that will have the most impact on your career goals.",
-      proFeature: "Ask for 'project ideas to help me learn and demonstrate [specific skill]' to get actionable ways to build your portfolio."
-    }
-  },
-  {
-    id: 'cover-letter',
-    name: 'Cover Letter Helper',
-    description: 'Generate a professional cover letter tailored to a job description.',
-    category: ToolCategory.Professional,
-    icon: <BriefcaseIcon />,
-    component: ToolComponentType.DualTextareaTool,
-    systemInstruction: 'You are a career coach and expert cover letter writer. Your task is to write a professional and persuasive cover letter that is tailored to a specific job description, using the user\'s experience.',
-    props: {
-      promptTemplate: 'Write a professional and persuasive cover letter. Here is my information:\n\nMy Experience: {userInput1}\n\nAnd here is the Job Description I am applying for:\n\n{userInput2}\n\nPlease tailor the cover letter to the job description, highlighting my most relevant skills and experience.',
-      label1: 'Your Experience / Resume',
-      placeholder1: 'Paste your resume or a summary of your key experiences...',
-      label2: 'Job Description',
-      placeholder2: 'Paste the job description you are applying for...',
-    },
-    context: {
-      purpose: "Generates a tailored cover letter based on your experience and a job description.",
-      benefit: "Saves time and effort in writing custom cover letters, increasing your chances of landing an interview.",
-      proFeature: "Add a sentence about why you're specifically interested in *that company* to make your cover letter even more personal."
-    }
-  },
-  {
-    id: 'interview-prep',
-    name: 'Interview Prep Questions',
-    description: 'Generate common interview questions for a specific job role.',
-    category: ToolCategory.Professional,
-    icon: <QuestionMarkCircleIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an experienced hiring manager and interview coach. Your task is to generate a list of likely interview questions for a specific job role and provide tips on how to answer them effectively. Use Markdown formatting.',
-    props: {
-      promptTemplate: 'Generate a list of 10 common interview questions (including behavioral and technical questions) for a "{userInput}" role. For each question, provide a brief tip on what the interviewer is looking for.',
-      placeholder: 'e.g., Junior Software Engineer or Product Marketing Manager',
-    },
-    context: {
-      purpose: "Creates a list of potential interview questions for a specific job title.",
-      benefit: "Helps you prepare for job interviews by anticipating questions, reducing anxiety, and allowing you to practice your answers.",
-      proFeature: "Ask for questions based on the 'STAR method' to practice telling compelling stories about your experience."
-    }
-  },
-  {
-    id: 'tell-me-about-yourself',
-    name: '"Tell Me About Yourself" Pitch Generator',
-    description: 'Craft a concise and powerful elevator pitch for interviews.',
-    category: ToolCategory.Professional,
-    icon: <ChatBubbleLeftRightIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert interview coach. Your task is to help a user craft a compelling and concise answer to the "Tell me about yourself" interview question. The answer should be a brief narrative that connects their past experience, present role, and future aspirations to the job they are applying for.',
-    props: {
-      promptTemplate: 'Write a 90-second "Tell me about yourself" pitch based on these key points: {userInput}',
-      placeholder: 'List your key experiences, skills, and the job you\'re applying for. e.g., "5 years in marketing, skilled in SEO, applying for a Digital Marketing Manager role because I want to lead a team."',
-    },
-    context: {
-      purpose: "Crafts a polished and impactful answer to the most common interview question.",
-      benefit: "Helps you make a strong first impression in interviews by presenting your story clearly and confidently.",
-      proFeature: "Specify the company's industry (e.g., 'for a role at a healthcare startup') to get a pitch tailored to that context."
-    }
-  },
-  {
-    id: 'salary-negotiation-scripter',
-    name: 'Salary Negotiation Scripter',
-    description: 'Get talking points and a script to confidently negotiate your salary.',
-    category: ToolCategory.Professional,
-    icon: <BriefcaseIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a seasoned career coach and negotiation expert. Your task is to create a professional script with key talking points for a salary negotiation conversation. The script should be confident, polite, and based on the value the user brings to the role.',
-    props: {
-      promptTemplate: 'Create a salary negotiation script for the following situation: {userInput}. The script should include an opening, points to justify the higher salary based on value and market rate, and a confident closing.',
-      placeholder: 'e.g., "I have received a job offer for a Software Engineer role at $100k, but my research shows the market rate is closer to $115k for my experience level."',
-    },
-    context: {
-      purpose: "Provides a script and strategy for salary negotiation.",
-      benefit: "Empowers you to confidently and effectively negotiate for a higher salary, potentially increasing your earnings.",
-      proFeature: "Include your 'walk-away' number in the prompt to get a script that respectfully maintains your boundaries."
-    }
-  },
-  {
-    id: 'career-path-explorer',
-    name: 'Career Path Explorer',
-    description: 'Suggests potential career paths based on your skills and interests.',
-    category: ToolCategory.Professional,
-    icon: <MapIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a knowledgeable career counselor. Your task is to analyze a user\'s skills and interests and suggest 3-5 potential career paths. For each path, describe the typical responsibilities and why it might be a good fit. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Based on the following skills and interests, suggest 3-5 potential career paths: {userInput}',
-      placeholder: 'e.g., "I am good at creative writing and data analysis, and I am interested in technology and media."',
-    },
-    context: {
-      purpose: "Helps individuals discover potential career options they may not have considered.",
-      benefit: "Provides clarity and direction for students and professionals looking to make a career change or plan their future.",
-      proFeature: "Ask for 'the typical educational requirements and starting salary range' for one of the suggested paths to get more detailed information."
-    }
-  },
-   {
-    id: 'linkedin-optimizer',
-    name: 'LinkedIn Profile Optimizer',
-    description: 'Optimize your LinkedIn headline and summary to attract recruiters.',
-    category: ToolCategory.Professional,
-    icon: <UserCircleIcon />,
-    component: ToolComponentType.IndustryInputTool,
-    systemInstruction: 'You are a personal branding expert and career coach specializing in LinkedIn. Your goal is to rewrite a LinkedIn profile section (like a headline or summary) to be more impactful and keyword-rich for a specific target role, attracting recruiters.',
-    props: {
-      promptTemplate: 'Optimize the following LinkedIn profile section to be more compelling and professional for a target role in "{industry}". Include relevant keywords. Section: {userInput}',
-      placeholder: 'Paste your current LinkedIn headline or "About" summary here...',
-      industryLabel: 'Target Role or Industry',
-      industryPlaceholder: 'e.g., Senior Product Manager at a SaaS company'
-    },
-    context: {
-      purpose: "Rewrites your LinkedIn headline and 'About' section for maximum impact.",
-      benefit: "Improves your profile's visibility to recruiters and presents your personal brand in a more professional and compelling way.",
-      proFeature: "Ask it to generate 3 different headline variations to A/B test on your profile."
-    }
-  },
-  {
-    id: 'interview-feedback',
-    name: 'Interview Answer Feedback',
-    description: 'Get constructive feedback on your answers to interview questions.',
-    category: ToolCategory.Professional,
-    icon: <ChatBubbleLeftRightIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an experienced hiring manager. Your task is to provide constructive feedback on an interview answer. Analyze the answer for clarity, structure (like the STAR method), and relevance. Provide specific, actionable suggestions for improvement. Use Markdown formatting.',
-    props: {
-      promptTemplate: 'Please provide constructive feedback on the following interview answer. Analyze it for structure, clarity, and impact. \n\n{userInput}',
-      placeholder: 'First, write the interview question (e.g., "Question: Tell me about a time you handled a difficult stakeholder."). Then, on a new line, write your full answer.',
-    },
-    context: {
-      purpose: "Analyzes your interview answers and provides constructive feedback.",
-      benefit: "Helps you refine your communication, structure your answers more effectively (using methods like STAR), and interview with more confidence.",
-      proFeature: "After getting feedback, provide a revised answer and ask 'Is this version stronger and why?'"
-    }
-  },
-  {
-    id: 'support-reply-generator',
-    name: 'Customer Support Reply Generator',
-    description: 'Generate empathetic and helpful replies to common customer support queries.',
-    category: ToolCategory.Professional,
-    icon: <ChatBubbleLeftRightIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an experienced and empathetic customer support specialist. Your task is to draft a helpful, polite, and clear response to a customer query.',
-    props: {
-        promptTemplate: 'Draft a customer support reply for the following customer query: {userInput}. The reply should acknowledge the problem, show empathy, provide a solution or next step, and end politely.',
-        placeholder: 'e.g., "My order arrived damaged," or "I forgot my password and can\'t log in."',
-    },
-    context: {
-        purpose: "Creates professional and empathetic replies for customer service.",
-        benefit: "Improves customer satisfaction and saves support agents time by providing consistent, high-quality response templates.",
-        proFeature: "Add a constraint, such as 'The customer is very angry,' to get a reply tailored for de-escalation."
-    }
-  },
-  {
-    id: 'meeting-agenda-creator',
-    name: 'Meeting Agenda Creator',
-    description: 'Generate a structured agenda for a meeting based on its objective and key topics.',
-    category: ToolCategory.Professional,
-    icon: <ClipboardListIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert executive assistant and productivity specialist. Your task is to create a clear, structured, and effective meeting agenda. Use Markdown formatting.',
-    props: {
-        promptTemplate: 'Create a meeting agenda based on the following information: {userInput}. The agenda should include the meeting objective, a list of attendees, topics with allocated times, and any required preparation.',
-        placeholder: 'e.g., Objective: Plan the Q3 marketing campaign. Topics: Budget review, channel strategy, content calendar. Attendees: Marketing team.',
-    },
-    context: {
-        purpose: "Generates a structured agenda for any type of meeting.",
-        benefit: "Leads to more productive and focused meetings by setting clear expectations, managing time effectively, and ensuring all topics are covered.",
-        proFeature: "Specify the total meeting duration (e.g., 'for a 60-minute meeting') to get realistic time allocations for each topic."
-    }
-  },
-  {
-    id: 'performance-review-helper',
-    name: 'Performance Review Helper',
-    description: 'Write professional and constructive self-assessments for performance reviews.',
-    category: ToolCategory.Professional,
-    icon: <ChartPieIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an HR business partner and career coach. Your task is to help a user write a professional and impactful self-assessment for their performance review. You will turn their bullet points into well-structured prose. Use Markdown formatting for structure.',
-    props: {
-      promptTemplate: 'Write a self-assessment for a performance review based on these points: {userInput}',
-      placeholder: 'List your accomplishments as bullet points. e.g., - Led the Project X launch - Increased team efficiency by 15% - Mentored a junior developer'
-    },
-    context: {
-      purpose: "Helps you articulate your achievements for performance reviews.",
-      benefit: "Ensures you present your accomplishments in a professional, impactful way, which can support your case for a promotion or raise.",
-      proFeature: "Ask it to frame your accomplishments using the company's specific values, if you provide them."
-    }
-  },
-  {
-    id: 'public-speaking-coach',
-    name: 'Public Speaking Coach',
-    description: 'Get feedback on your speech scripts and tips to improve delivery and confidence.',
-    category: ToolCategory.Professional,
-    icon: <MegaphoneIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a world-class public speaking coach and communication expert. Your task is to analyze a speech or presentation script. Provide constructive feedback on its structure, clarity, and persuasiveness. Offer specific suggestions to improve engagement, flow, and impact. Also, provide 3 general tips for confident delivery based on the script\'s content. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Please provide feedback on the following speech script: {userInput}',
-      placeholder: 'Paste your speech or presentation script here...',
-    },
-    context: {
-      purpose: "Analyzes your speech script to provide actionable feedback on structure, clarity, and impact.",
-      benefit: "Helps you craft more compelling presentations and builds your confidence as a speaker.",
-      proFeature: "Ask for feedback on a specific section, like 'How can I make my introduction more impactful?' or 'Is my call to action strong enough?'"
-    }
-  },
-  {
-    id: 'conflict-resolution-scripter',
-    name: 'Conflict Resolution Scripter',
-    description: 'Generate talking points for navigating difficult professional conversations.',
-    category: ToolCategory.Professional,
-    icon: <ChatBubbleLeftRightIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert in conflict resolution, HR, and professional communication. The user will describe a difficult situation. Your task is to provide a structured set of talking points and a strategy for the conversation. Use a calm, professional, and empathetic tone. The output should include an \'Opening Statement\', \'Key Talking Points\' (using phrases that focus on behavior and impact, not blame), and \'Potential Resolutions\'. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Provide a script and strategy for the following difficult conversation: {userInput}',
-      placeholder: 'e.g., Giving a team member feedback about missing deadlines, or asking your boss for a raise.',
-    },
-    context: {
-      purpose: "Provides a roadmap and talking points for navigating challenging workplace conversations.",
-      benefit: "Reduces anxiety and prepares you to handle difficult situations constructively, professionally, and effectively.",
-      proFeature: "Specify the other person's likely personality (e.g., 'they might get defensive') to get tailored de-escalation tactics."
-    }
-  },
-  {
-    id: 'active-listening-trainer',
-    name: 'Active Listening Trainer',
-    description: 'Generate paraphrasing and clarifying questions to become a better listener.',
-    category: ToolCategory.Professional,
-    icon: <QuestionMarkCircleIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a communication skills trainer specializing in active listening. The user will provide a statement that someone might say. Your task is to generate examples of good active listening responses. The output should include: 1. A Paraphrased version (to confirm understanding). 2. A Clarifying Question (to gather more information). 3. An Empathetic Response (to validate feelings). Use Markdown for formatting.',
-    props: {
-      promptTemplate: "Generate active listening responses for the following statement: '{userInput}'",
-      placeholder: "Enter a statement you might hear at work, e.g., 'I'm so overwhelmed with this project, I don't think I can meet the deadline.'",
-    },
-    context: {
-      purpose: "Teaches the core skills of active listening by generating example responses.",
-      benefit: "Improves your communication skills, helps build stronger professional relationships, and makes you a more effective team member and leader.",
-      proFeature: "Provide a longer piece of dialogue and ask the AI to 'identify key points and generate clarifying questions for the entire conversation'."
-    }
-  },
-  {
-    id: 'networking-icebreakers',
-    name: 'Networking Icebreakers',
-    description: 'Generate context-aware icebreakers for professional networking events.',
-    category: ToolCategory.Professional,
-    icon: <UserCircleIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are a networking expert and career coach. The user will describe a networking event or situation. Your task is to generate 5-7 context-aware icebreakers and opening questions that are professional, open-ended, and encourage conversation.',
-    props: {
-      promptTemplate: 'Generate networking icebreakers for the following situation: {userInput}',
-      placeholder: 'e.g., A tech conference on AI, a local business meetup, or reaching out to someone on LinkedIn.',
-    },
-    context: {
-      purpose: "Provides conversation starters for professional networking situations.",
-      benefit: "Reduces networking anxiety and helps you make meaningful connections by starting conversations that go beyond small talk.",
-      proFeature: "Specify your own job title and goals (e.g., 'As a student looking for an internship...') to get icebreakers that align with your objectives."
-    }
-  },
-  // --- File & Media Utilities ---
-  {
-    id: 'document-summarizer',
-    name: 'PDF & DOCX Summarizer',
-    description: 'Paste text from a document to get a concise summary of its key points.',
-    category: ToolCategory.FileUtilities,
-    icon: <FileDocumentIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: 'You are an expert at summarizing technical and business documents. Analyze the provided text and extract the key findings, main arguments, and any action items. Present the summary in clear, concise bullet points under respective headings. Use Markdown for formatting.',
-    props: {
-      promptTemplate: 'Summarize the following document text, identifying key points, arguments, and action items: {userInput}',
-      placeholder: 'Paste the text from your PDF or DOCX file here...',
-    },
-    context: {
-      purpose: "Distills long document text into a quick, easy-to-read summary.",
-      benefit: "Saves significant time by allowing you to quickly understand the essence of reports, articles, and documents without reading them in full.",
-      proFeature: "Ask it to 'create a one-paragraph executive summary' for a very high-level overview."
-    }
-  },
-  {
-    id: 'document-rewriter',
-    name: 'Document Content Rewriter',
-    description: 'Rewrite and improve text from your documents. Change tone, style, or fix grammar.',
-    category: ToolCategory.FileUtilities,
-    icon: <PenIcon />,
-    component: ToolComponentType.ToneChangerTool,
-    systemInstruction: 'You are an expert editor. Your task is to rewrite the provided text from a document to match the specified tone and intensity, improving clarity, flow, and overall quality while preserving the core message.',
-    props: {
-      promptTemplate: 'Rewrite the following document text with a {intensity} {tone} tone: {userInput}',
-      placeholder: 'Paste the text from your document that you want to rewrite...',
-      tones: ['More Professional', 'More Casual', 'More Persuasive', 'Simpler', 'More Academic', 'More Confident'],
-      intensities: ['Subtle', 'Noticeable', 'Complete Overhaul'],
-    },
-    context: {
-      purpose: 'Edits and enhances text content from any document.',
-      benefit: 'Quickly adapt your writing for different audiences or purposes, improving the impact and professionalism of your documents.',
-      proFeature: 'Use the "Complete Overhaul" intensity to get a fundamentally different version of your original text.'
-    }
-  },
-  {
-    id: 'text-merger',
-    name: 'Text Content Merger & Synthesizer',
-    description: 'Merge text from multiple sources into a cohesive, synthesized document.',
-    category: ToolCategory.FileUtilities,
-    icon: <DocumentPlusIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: "You are an expert at synthesizing information. The user will provide multiple text blocks separated by '---'. Your task is to merge them into a single, cohesive document, removing redundancies, creating smooth transitions, and organizing the content logically. After the merged text, provide a brief summary of the combined content. Use Markdown formatting.",
-    props: {
-      promptTemplate: 'Merge the following text blocks into a single, cohesive document, then summarize it:\n\n{userInput}',
-      placeholder: 'Paste your first block of text here...\n\n---\n\nPaste your second block of text here...\n\n---\n\n...and so on.',
-    },
-    context: {
-      purpose: 'Combines multiple separate texts into one unified document.',
-      benefit: 'Saves time by automatically creating a first draft from various sources, ideal for creating reports or literature reviews from scattered notes.',
-      proFeature: "Ask it to 'adopt the style of the first text block' for the entire merged document."
-    }
-  },
-  {
-    id: 'text-splitter',
-    name: 'Text Content Splitter',
-    description: 'Split a long document into smaller, themed sections or chapters.',
-    category: ToolCategory.FileUtilities,
-    icon: <ScissorsIcon />,
-    component: ToolComponentType.Generic,
-    systemInstruction: "You are an expert at organizing content. Analyze the provided text and split it into logical sections based on the topics discussed. Provide a clear, descriptive heading (using Markdown H2 `##`) for each new section. The output should be the full text, but restructured with these headings.",
-    props: {
-      promptTemplate: 'Analyze and split the following text into logical, themed sections with clear headings:\n\n{userInput}',
-      placeholder: 'Paste the full text of a long document you want to split and organize...',
-    },
-    context: {
-      purpose: 'Automatically structures a long, unformatted text into logical sections.',
-      benefit: 'Improves the readability and organization of long documents, making it easier to create chapters for a book or sections for a report.',
-      proFeature: "Specify the number of desired sections (e.g., 'split this into 5 main sections') to guide the AI's organization."
-    }
-  },
-  {
-    id: 'content-converter',
-    name: 'Content Format Converter',
-    description: 'Convert raw text into different structured formats like a report, JSON, or HTML.',
-    category: ToolCategory.FileUtilities,
-    icon: <ArrowsRightLeftIcon />,
-    component: ToolComponentType.SingleSelectTool,
-    systemInstruction: "You are a data formatting expert. Your task is to take the user's raw text and convert it into a well-structured, clean {selectValue} format. Ensure the output is valid for the chosen format.",
-    props: {
-      promptTemplate: 'Convert the following raw text into a well-structured {selectValue}:\n\n{userInput}',
-      placeholder: 'Paste your raw text or data here...',
-      select: {
-        label: 'Target Format',
-        options: ['Professional Report (Markdown)', 'JSON Array of Objects', 'Bulleted List Summary', 'Formal Email', 'Basic HTML Document'],
-      },
-    },
-    context: {
-      purpose: 'Restructures raw text into a specific, structured format.',
-      benefit: 'Saves significant time in manually reformatting text for different uses, from data entry to creating structured documents.',
-      proFeature: 'For JSON conversion, you can specify the desired keys in your prompt (e.g., "use keys: name, email, and message").'
-    }
-  },
-  {
-    id: 'image-compression-advisor',
-    name: 'Image Compression Advisor',
-    description: 'Get expert advice on how to best compress your images for web, print, or other uses.',
-    category: ToolCategory.FileUtilities,
-    icon: <ArrowDownOnSquareIcon />,
-    component: ToolComponentType.ImageInput,
-    systemInstruction: "You are an expert in digital image processing and web optimization. Analyze the provided image and the user's intended use for it. Provide a detailed recommendation for compressing it in a Markdown-formatted report. The report must include:\n1.  **Analysis:** A brief analysis of the image's characteristics (e.g., complexity, color palette, presence of transparency).\n2.  **Recommended Format:** Suggest the best format (JPEG, PNG, WebP, AVIF) and explain why.\n3.  **Compression Settings:** Provide specific quality settings (e.g., JPEG quality 75-85, or WebP lossless).\n4.  **Trade-offs:** Explain the trade-offs between file size and visual quality for the user's specific goal.",
-    props: {
-        promptTemplate: 'Analyze this image and provide a compression strategy for the following use case: {userInput}',
-        placeholder: 'Describe the intended use of this image (e.g., website hero image, email attachment, print).',
-    },
-    context: {
-        purpose: "Provides an expert, AI-driven strategy for image compression.",
-        benefit: "Helps you achieve optimal image quality with the smallest possible file size, improving website performance and user experience, without needing to be a graphics expert.",
-        proFeature: "Ask for a 'comparison between WebP and AVIF for this image' to get cutting-edge advice."
-    }
-  },
-  {
-    id: 'video-compression-strategist',
-    name: 'Video Compression Strategist',
-    description: 'Get a detailed strategy for compressing videos for streaming, social media, or archival.',
-    category: ToolCategory.FileUtilities,
-    icon: <FilmIcon />,
-    component: ToolComponentType.SingleSelectTool,
-    systemInstruction: "You are a professional video engineer. Your task is to provide a detailed video compression strategy based on the user's description and chosen use case. The strategy should be presented in a Markdown format. Include recommendations for:\n1.  **Codec:** (e.g., H.264 for compatibility, H.265/HEVC for efficiency, AV1 for cutting-edge web).\n2.  **Bitrate:** (Suggest a variable or constant bitrate in kbps or Mbps).\n3.  **Resolution & Framerate:** (e.g., 1080p at 30fps).\n4.  **Container Format:** (e.g., MP4, WebM).\n5.  **Rationale:** Briefly explain why these settings are ideal for the selected use case.",
-    props: {
-      promptTemplate: 'I have a video with the following characteristics: {userInput}. Please generate a detailed compression strategy for the "{selectValue}" use case.',
-      placeholder: 'Describe your video, e.g., "a 5-minute, 4K talking head video with some screen recording sections."',
-      select: {
-        label: 'Primary Use Case',
-        options: ['Web Streaming (e.g., YouTube)', 'Social Media (e.g., Instagram)', 'Archival/Storage', 'Email Attachment'],
-      },
-    },
-    context: {
-      purpose: "Generates a professional plan for encoding and compressing video files.",
-      benefit: "Saves you from the complex guesswork of video encoding, ensuring your videos have the best balance of quality and file size for any application.",
-      proFeature: "Specify the source file's properties (e.g., 'source is a 2GB ProRes file') to get a more tailored strategy."
+        purpose: 'Converts natural language questions into SQL queries.',
+        benefit: 'Empowers non-technical users to query databases and saves developers time writing boilerplate SQL.',
+        proFeature: 'Provide a schema description in the prompt for more accurate queries tailored to your database structure.'
     }
   },
 ];
