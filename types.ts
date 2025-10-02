@@ -159,6 +159,12 @@ export interface Tool {
   featured?: boolean;
 }
 
+export interface AiToolComponentProps {
+    tool: Tool;
+    language: string;
+    onGenerationComplete: (input: string, output: string) => void;
+}
+
 export interface ChatMessage {
   role: 'user' | 'model';
   content: string;
