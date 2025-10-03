@@ -23,10 +23,13 @@ const componentMap: { [key in ToolComponentType]: React.LazyExoticComponent<Reac
     [ToolComponentType.MessageReplyTool]: React.lazy(() => import('./tools/MessageReplyTool')),
     [ToolComponentType.NoticeGeneratorTool]: React.lazy(() => import('./tools/NoticeGeneratorTool')),
     [ToolComponentType.AnnouncementGeneratorTool]: React.lazy(() => import('./tools/AnnouncementGeneratorTool')),
+    [ToolComponentType.TranslatorTool]: React.lazy(() => import('./tools/TranslatorTool')),
     [ToolComponentType.SyllabusDesignerTool]: React.lazy(() => import('./tools/SyllabusDesignerTool')),
     [ToolComponentType.TimetableOptimizerTool]: React.lazy(() => import('./tools/TimetableOptimizerTool')),
     [ToolComponentType.GrantProposalTool]: React.lazy(() => import('./tools/GrantProposalTool')),
     [ToolComponentType.EssayAnalyzerTool]: React.lazy(() => import('./tools/EssayAnalyzerTool')),
+    [ToolComponentType.VoiceMessageTool]: React.lazy(() => import('./tools/VoiceMessageTool')),
+    [ToolComponentType.SentimentAnalyzerTool]: React.lazy(() => import('./tools/SentimentAnalyzerTool')),
 };
 
 const LANGUAGES = ['English', 'Spanish', 'French', 'German', 'Japanese', 'Chinese', 'Russian', 'Arabic'];
@@ -67,7 +70,12 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ tool, onBack, onAddT
     });
   }, [onAddToHistory, tool.name]);
 
-  const showLanguageSelector = tool.component !== ToolComponentType.ImageGenerator && tool.component !== ToolComponentType.GroundedQA && tool.component !== ToolComponentType.SyllabusDesignerTool;
+  const showLanguageSelector = tool.component !== ToolComponentType.ImageGenerator 
+    && tool.component !== ToolComponentType.GroundedQA 
+    && tool.component !== ToolComponentType.SyllabusDesignerTool
+    && tool.component !== ToolComponentType.TranslatorTool
+    && tool.component !== ToolComponentType.VoiceMessageTool
+    && tool.component !== ToolComponentType.SentimentAnalyzerTool;
   
   const ToolComponent = componentMap[tool.component] || componentMap[ToolComponentType.Generic];
   const toolProps = { tool, language, onGenerationComplete: handleGenerationComplete };

@@ -35,11 +35,15 @@ export enum ToolComponentType {
   MessageReplyTool = 'MessageReplyTool',
   NoticeGeneratorTool = 'NoticeGeneratorTool',
   AnnouncementGeneratorTool = 'AnnouncementGeneratorTool',
+  TranslatorTool = 'TranslatorTool',
   // University Tools
   SyllabusDesignerTool = 'SyllabusDesignerTool',
   TimetableOptimizerTool = 'TimetableOptimizerTool',
   GrantProposalTool = 'GrantProposalTool',
   EssayAnalyzerTool = 'EssayAnalyzerTool',
+  // New Communication/Analysis Tools
+  VoiceMessageTool = 'VoiceMessageTool',
+  SentimentAnalyzerTool = 'SentimentAnalyzerTool',
 }
 
 export interface ToolContext {
@@ -71,6 +75,8 @@ export interface BlogPostToolProps {
   tones: string[];
   styles: string[];
   audiences: string[];
+  voices: string[];
+  lengths: string[];
 }
 
 export interface ImageInputToolProps {
@@ -177,6 +183,12 @@ export interface AnnouncementGeneratorToolProps {
   announcementTypes: string[];
 }
 
+export interface TranslatorToolProps {
+    promptTemplate: string;
+    placeholder: string;
+    formalityLevels: string[];
+}
+
 export interface SyllabusDesignerToolProps {
   promptTemplate: string;
   titlePlaceholder: string;
@@ -191,6 +203,20 @@ export interface GrantProposalToolProps {
     fundingBodyPlaceholder: string;
 }
 
+// FIX: Added missing EssayAnalyzerToolProps interface definition.
+export interface EssayAnalyzerToolProps {
+    promptTemplate: string;
+    placeholder: string;
+}
+
+export interface VoiceMessageToolProps {
+    placeholder: string;
+}
+
+export interface SentimentAnalyzerToolProps {
+    placeholder: string;
+}
+
 export interface Tool {
   id: string;
   name: string;
@@ -198,7 +224,7 @@ export interface Tool {
   category: ToolCategory;
   icon: React.ReactNode;
   component: ToolComponentType;
-  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | GrammarToolProps | ToneChangerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps | MessageReplyToolProps | NoticeGeneratorToolProps | AnnouncementGeneratorToolProps | SyllabusDesignerToolProps | GrantProposalToolProps;
+  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | GrammarToolProps | ToneChangerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps | MessageReplyToolProps | NoticeGeneratorToolProps | AnnouncementGeneratorToolProps | SyllabusDesignerToolProps | GrantProposalToolProps | TranslatorToolProps | VoiceMessageToolProps | SentimentAnalyzerToolProps | EssayAnalyzerToolProps;
   systemInstruction: string;
   context: ToolContext;
   featured?: boolean;

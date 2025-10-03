@@ -12,7 +12,7 @@ const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h
 const DocumentTextIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>;
 const MagnifyingGlassIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>;
 const LightbulbIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>;
-const CogIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>;
+const CogIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>;
 const PresentationChartBarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>;
 const QuestionMarkCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
 const ClipboardListIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>;
@@ -44,6 +44,8 @@ const CalendarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-
 const GitCommitIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h3m-3 12h3m-6-6h9M4.5 12a7.5 7.5 0 1115 0 7.5 7.5 0 01-15 0z" /></svg>;
 const ShieldCheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>;
 const MapIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.5-10.5h.75a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25-2.25h-7.5a2.25 2.25 0 01-2.25-2.25V8.25a2.25 2.25 0 012.25-2.25h.75" /></svg>;
+const TranslateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m0 0a9 9 0 019-9m-9 9a9 9 0 009 9" /><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 21v-5.25m10.5 5.25v-5.25" /></svg>;
+
 // New Icons for Communication Tools
 const ArrowUturnLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" /></svg>;
 const ExclamationTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>;
@@ -53,7 +55,14 @@ const ArrowDownOnSquareIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill
 const ArrowsRightLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>;
 const DocumentPlusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>;
 const ScissorsIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.848 8.25l1.536 1.536m-1.536-1.536l6.364 6.364m-7.9 0l6.364-6.364m-1.536 1.536l1.536-1.536M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm-3.375 0h.008v.008h-.008V6.375zm10.5 8.25a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm-3.375 0h.008v.008h-.008v-.008z" /></svg>;
-
+// Icons for the latest batch of new tools
+const ChatBubbleBottomCenterTextIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const TicketIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-1.5h5.25m-5.25 0h5.25m0 0h5.25m-10.5 0h5.25m-5.25 0h5.25M6 6.75h.75m-3.75 3h.75m-3.75 3h.75m3.75 3h.75m-3.75-9h15a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25v-9A2.25 2.25 0 016 4.5h15" /></svg>;
+const BuildingOfficeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21v-2.25a2.25 2.25 0 012.25-2.25h6a2.25 2.25 0 012.25 2.25V21M6.75 3v2.25a2.25 2.25 0 01-2.25 2.25h-1.5a2.25 2.25 0 01-2.25-2.25V3m17.25 0v2.25a2.25 2.25 0 002.25 2.25h1.5a2.25 2.25 0 002.25-2.25V3" /></svg>;
+const ClockIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const EnvelopeOpenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488a2.25 2.25 0 01-2.18 0l-6.478-3.488A2.25 2.25 0 012.25 9.906V9M21.75 9a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 9m19.5 0v.906c0 .623-.243 1.201-.658 1.622l-6.478 3.488a2.25 2.25 0 01-2.18 0l-6.478-3.488A2.25 2.25 0 012.25 9.906V9m19.5 0a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 9" /></svg>;
+const WaveformIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h.007v.007H3.75V12zm4.125 0h.007v.007h-.007V12zm4.125 0h.007v.007h-.007V12zm4.125 0h.007v.007h-.007V12zm4.125 0h.007v.007h-.007V12z" /></svg>;
+const FaceSmileIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 110-18 9 9 0 010 18z" /><path strokeLinecap="round" strokeLinejoin="round" d="M9 10.5h.01m5.98 0h.01M9 15h6" /></svg>;
 
 export const CATEGORIES: ToolCategory[] = [
   ToolCategory.Writing,
@@ -73,23 +82,30 @@ export const TOOLS: Tool[] = [
   // --- Writing ---
   {
     id: 'blog-post',
-    name: 'Blog Post Generator',
-    description: 'Create engaging, SEO-friendly blog posts on any topic.',
+    name: 'Blog Post Studio',
+    description: 'A multi-step workflow to brainstorm, outline, draft, and enhance high-quality blog posts.',
     category: ToolCategory.Writing,
     icon: <PenIcon />,
     component: ToolComponentType.BlogPost,
-    systemInstruction: 'You are an expert copywriter, SEO specialist, and content strategist. Your goal is to write a compelling, well-structured, and SEO-friendly blog post based on the user\'s topic, keywords, tone, style, and target audience. The output should be comprehensive, including SEO metadata and related social media posts. Where appropriate, enrich the content with relevant data or conceptual quotes. The output MUST be in Markdown format.',
+    systemInstruction: `You are a world-class content strategist and copywriter AI, operating as "Blog Post Studio". Your expertise spans SEO, content marketing, and engaging writing. You will guide the user through a multi-step process:
+1.  **Brainstorming**: Given a topic, you will generate compelling article ideas, suggest target audiences, and provide primary keywords.
+2.  **Outlining**: Based on a chosen idea, you will create a detailed, logical, and SEO-friendly article outline.
+3.  **Drafting**: Using an outline, you will write a complete, high-quality blog post, adhering to specified tone, style, voice, and length. You must seamlessly integrate keywords, suggest internal/external link placements (using placeholders like [Link to relevant internal page] or [Link to authoritative external source]), generate SEO metadata, and create related social media posts.
+4.  **Enhancement**: You will analyze the final draft for SEO, suggest relevant visuals by providing descriptive prompts for an AI image generator, and provide a readability analysis.
+Your output at each stage should be clear, well-structured, and in Markdown format.`,
     props: {
-      promptTemplate: 'Write a blog post about the following topic or text: "{userInput}".\n\nOptional Keywords for guidance: {keywords}\nRequested Tone: {tone}\nRequested Style: {style}\nTarget Audience: {audience}\n\nThe output must be a single block of text in Markdown format and include the following clearly labeled sections in order:\n\n1.  **SEO Title:** (A compelling title around 60 characters)\n2.  **Meta Description:** (An engaging summary around 160 characters)\n3.  **SEO Keywords:** (A comma-separated list of 10-15 relevant keywords based on the content)\n4.  **Blog Post Body:** (The full article, with a catchy title using a H1 tag (`#`), introduction, several body paragraphs with subheadings using H2 tags (`##`), and a strong conclusion. It must be written for a {audience} audience in a {tone}, {style} manner.)\n5.  **Related Social media Posts:** (Two short posts, one for Twitter/X and one for LinkedIn, to promote the article.)',
-      placeholder: 'e.g., The future of AI in marketing. You can also paste a long article here to have it summarized and rewritten as a blog post.',
+      promptTemplate: 'Write a full blog post based on the following detailed outline: \n\n{outline}\n\nStrictly adhere to the structure and points in the outline. The blog post should be written for a {audience} audience in a {tone}, {style} manner, with a {voice} voice. The desired length is {length}. The primary keywords to naturally integrate are: {keywords}.\n\nThe output must be a single block of text in Markdown format and include the following clearly labeled sections in order:\n\n1.  **SEO Title:** (A compelling title based on the outline, around 60 characters)\n2.  **Meta Description:** (An engaging summary based on the outline, around 160 characters)\n3.  **SEO Keywords:** (A comma-separated list of 10-15 relevant keywords)\n4.  **Blog Post Body:** (The full article, following the provided outline, with a catchy main title using H1 (`#`), and subheadings using H2 (`##`) and H3 (`###`) as specified in the outline. Place suggestions for links in brackets, e.g., [Link to our pricing page].)\n5.  **Suggested Call-to-Action:** (A relevant CTA for the end of the post.)\n6.  **Related Social Media Posts:** (Two short posts, one for Twitter/X and one for LinkedIn, to promote the article.)',
+      placeholder: 'Enter a broad topic to start, e.g., "The future of AI in marketing."',
       tones: ['Formal', 'Conversational', 'Technical', 'Humorous', 'Persuasive'],
       styles: ['News Report', 'How-To Guide', 'Listicle', 'Opinion Piece', 'Case Study'],
-      audiences: ['General Public', 'Industry Experts', 'Beginners', 'Students'],
+      audiences: ['General Public', 'Industry Experts', 'Beginners', 'Students', 'C-Suite Executives'],
+      voices: ['Authoritative', 'Friendly', 'Journalistic', 'Inspirational', 'Analytical'],
+      lengths: ['Short Form (~500 words)', 'Standard (~1000 words)', 'In-depth (~2000 words)'],
     },
     context: {
-      purpose: "Generates full-length blog articles from a single topic idea, complete with SEO metadata and social media snippets.",
-      benefit: "Saves hours of writing time, overcomes writer's block, produces SEO-optimized content, and provides promotional material in one go.",
-      proFeature: "Paste a long article or transcript into the main input to have it summarized and restructured into a polished blog post."
+      purpose: "An all-in-one studio that takes you from a raw idea to a polished, SEO-optimized blog post with a guided, multi-step process.",
+      benefit: "Streamlines the entire content creation workflow, from brainstorming and outlining to drafting and refining, saving hours of work and ensuring high-quality, strategic content.",
+      proFeature: "Each step is interactive. You can edit the AI-generated outline before drafting, and use post-drafting tools to analyze SEO, get image ideas, and more."
     }
   },
   {
@@ -314,6 +330,24 @@ export const TOOLS: Tool[] = [
       proFeature: "Ask it to 'Summarize the top 3 competitors for a product like Slack' to get a quick competitive landscape overview."
     }
   },
+    {
+    id: 'company-profile',
+    name: 'Company Profile Generator',
+    description: 'Converts basic organizational details into a professional company profile.',
+    category: ToolCategory.Business,
+    icon: <BuildingOfficeIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a corporate communications specialist and copywriter. Your task is to write a professional and compelling company profile based on the provided details. The profile should be suitable for a website "About Us" page or a press kit. Structure it with sections like "Our Mission," "Our Story," and "What We Do." Use an engaging and brand-appropriate tone.',
+    props: {
+        promptTemplate: 'Write a professional company profile based on the following key details: {userInput}',
+        placeholder: 'Enter key details: Company Name, Industry, Mission Statement, Founding Story, Core Products/Services, Target Audience...',
+    },
+    context: {
+        purpose: 'Generates a well-structured company profile from key information points.',
+        benefit: 'Saves time creating foundational business documents and ensures your company is presented professionally and consistently.',
+        proFeature: 'Specify a desired tone in your details, such as "a playful, startup tone" or "a formal, corporate tone," for a tailored profile.'
+    }
+  },
   {
     id: 'swot-analysis',
     name: 'SWOT Analysis Generator',
@@ -410,6 +444,46 @@ export const TOOLS: Tool[] = [
   },
   // --- Communication ---
   {
+    id: 'translator',
+    name: 'Advanced AI Translator',
+    description: 'Translate text with formality controls and text-to-speech output.',
+    category: ToolCategory.Communication,
+    icon: <TranslateIcon />,
+    component: ToolComponentType.TranslatorTool,
+    systemInstruction: 'You are an expert multilingual translator. Your task is to accurately translate the given text from the source language to the target language, paying close attention to the requested formality level. Preserve the core meaning and nuances of the original text. Provide only the translated text as output, without any additional comments or explanations.',
+    props: {
+        promptTemplate: 'Translate the following text from "{sourceLang}" to "{targetLang}" with a "{formality}" formality level. Text: {userInput}',
+        placeholder: 'Enter text to translate...',
+        formalityLevels: ['Formal (Business)', 'Neutral (Default)', 'Informal (Conversational)'],
+    },
+    context: {
+        purpose: "Translates text between a wide range of languages accurately.",
+        benefit: "Overcomes language barriers in communication, whether for business, travel, or learning, with added control over the tone of the output.",
+        proFeature: "Use the 'Formality' setting to get translations suitable for different contexts, and use the text-to-speech button to hear the correct pronunciation."
+    }
+  },
+    {
+    id: 'review-responder',
+    name: 'Review & Feedback Responder',
+    description: 'Suggests thoughtful, brand-consistent replies to customer reviews and feedback.',
+    category: ToolCategory.Communication,
+    icon: <ChatBubbleBottomCenterTextIcon />,
+    component: ToolComponentType.DualTextareaTool,
+    systemInstruction: 'You are a customer relationship expert specializing in online reputation management. Your task is to write a professional, empathetic, and brand-consistent reply to the customer review. Your response should address specific points from the review and reflect the desired stance provided in the context.',
+    props: {
+        promptTemplate: 'The customer review is: "{userInput1}". Our desired stance/context for the reply is: "{userInput2}". Please draft a suitable response.',
+        placeholder1: 'Paste the customer review here. e.g., "The product broke after one week. Very disappointed!"',
+        label1: 'Customer Review/Feedback',
+        placeholder2: 'e.g., "Apologize sincerely, offer a free replacement, and provide a support email link."',
+        label2: 'Desired Stance / Context for Reply',
+    },
+    context: {
+        purpose: 'Generates professional responses to customer reviews for platforms like Google, Yelp, or e-commerce sites.',
+        benefit: 'Saves time and helps maintain a positive brand image by crafting thoughtful and consistent replies to both positive and negative feedback.',
+        proFeature: 'Use the "Desired Stance" box to guide the AI, whether you want to be "apologetic," "thankful," or "defensive with facts."'
+    }
+  },
+  {
     id: 'message-reply-generator',
     name: 'Message Reply Generator',
     description: 'Generate sophisticated, goal-oriented replies to any message or email.',
@@ -429,6 +503,48 @@ export const TOOLS: Tool[] = [
       purpose: "Crafts multiple, nuanced reply options for emails and messages.",
       benefit: "Saves time and reduces communication anxiety by generating professional, appropriate responses for any situation.",
       proFeature: "Use the 'Context' field to provide details like 'This is from an angry customer' to get highly tailored de-escalation responses."
+    }
+  },
+  {
+    id: 'follow-up-generator',
+    name: 'Follow-Up Reminder Generator',
+    description: 'Creates timely, polite follow-up reminders for emails, DMs, and project threads.',
+    category: ToolCategory.Communication,
+    icon: <ClockIcon />,
+    component: ToolComponentType.DualTextareaTool,
+    systemInstruction: 'You are a highly organized and professional executive assistant. Your task is to write a polite, concise, and effective follow-up message. The message should gently remind the recipient of the original message without sounding demanding, and it should have a clear call-to-action.',
+    props: {
+        promptTemplate: 'The original message was about: "{userInput1}". The goal of this follow-up is: "{userInput2}". Please draft a polite and effective follow-up email.',
+        placeholder1: 'Briefly describe the original message. e.g., "The proposal I sent last Tuesday regarding the Q4 marketing budget."',
+        label1: 'Original Message Context',
+        placeholder2: 'e.g., "To get their feedback on the proposal and see if they have any questions."',
+        label2: 'Goal of This Follow-Up',
+    },
+    context: {
+        purpose: 'Drafts professional follow-up emails to get responses without being pushy.',
+        benefit: 'Improves response rates and keeps conversations moving forward, saving you the mental energy of crafting the perfect reminder.',
+        proFeature: 'In the "Goal" box, specify how much time has passed (e.g., "It has been one week") to get a more context-aware message.'
+    }
+  },
+    {
+    id: 'faq-reply-generator',
+    name: 'FAQ & Help Desk Responder',
+    description: 'Handles customer inquiries by suggesting prompt, accurate help desk or FAQ responses.',
+    category: ToolCategory.Communication,
+    icon: <QuestionMarkCircleIcon />,
+    component: ToolComponentType.DualTextareaTool,
+    systemInstruction: 'You are a knowledgeable and patient customer support agent for a help desk. Your primary goal is to provide a clear, helpful, and empathetic answer to the customer\'s question. Use the provided knowledge base information to formulate your response. If the information is not in the knowledge base, state that you will need to find out and will get back to them.',
+    props: {
+        promptTemplate: 'The customer\'s question is: "{userInput1}". The relevant information from our knowledge base is: "{userInput2}". Please draft a helpful and clear response to the customer.',
+        placeholder1: 'Paste the customer\'s question here. e.g., "How do I reset my password?"',
+        label1: 'Customer Question',
+        placeholder2: 'Provide any relevant info, FAQs, or documentation. e.g., "To reset a password, users must go to the login page, click \'Forgot Password\', and follow the email instructions."',
+        label2: 'Knowledge Base / Context',
+    },
+    context: {
+        purpose: 'Generates accurate and polite responses to common customer support questions.',
+        benefit: 'Speeds up response times for customer service teams and ensures the information provided is consistent and accurate, improving customer satisfaction.',
+        proFeature: 'Paste a long document into the "Knowledge Base" box and let the AI find the relevant information to answer the question.'
     }
   },
   {
@@ -493,6 +609,45 @@ export const TOOLS: Tool[] = [
           benefit: "Saves hours of work and ensures a consistent, professional message across your press release, social media, and internal communications.",
           proFeature: "The tool automatically generates content for a press release, LinkedIn, Twitter/X, and an internal email all at once."
       }
+  },
+    {
+    id: 'event-invitation-creator',
+    name: 'Event Invitation Creator',
+    description: 'Designs and crafts personalized invitations for meetings, webinars, or events.',
+    category: ToolCategory.Communication,
+    icon: <TicketIcon />,
+    component: ToolComponentType.SingleSelectTool,
+    systemInstruction: 'You are a professional event coordinator and copywriter. Your task is to write a clear, engaging, and informative invitation based on the provided details. The invitation should be persuasive and encourage recipients to RSVP. The tone should match the event type.',
+    props: {
+        promptTemplate: 'Write an invitation for a "{selectValue}" based on the following details: {userInput}. The invitation should include a catchy opening, key details (what, when, where), a clear call-to-action for RSVP, and a closing.',
+        placeholder: 'Enter all event details: Event Title, Date, Time, Location (or virtual link), Purpose/Agenda, Speaker (if any), RSVP deadline...',
+        select: {
+          label: 'Event Type',
+          options: ['Business Meeting', 'Webinar', 'Corporate Party', 'Networking Event', 'Workshop'],
+        },
+    },
+    context: {
+        purpose: 'Generates professional and engaging text for event invitations.',
+        benefit: 'Quickly creates polished invitations that improve RSVP rates by clearly communicating value and details to attendees.',
+        proFeature: 'Specify the target audience in the details (e.g., "for senior executives") to get a more appropriately toned invitation.'
+    }
+  },
+  {
+    id: 'voice-message-generator',
+    name: 'Voice Message Generator',
+    description: 'Converts text into natural-sounding voice messages for hands-free communications.',
+    category: ToolCategory.Communication,
+    icon: <WaveformIcon />,
+    component: ToolComponentType.VoiceMessageTool,
+    systemInstruction: '', // Not needed, this tool uses browser TTS.
+    props: {
+        placeholder: 'Enter the text you want to convert to speech...',
+    },
+    context: {
+        purpose: 'Converts any written text into a spoken audio message using your browser\'s built-in voices.',
+        benefit: 'Creates audio versions of text for accessibility, proof-listening, or hands-free communication.',
+        proFeature: 'You can adjust the voice, pitch, and speed to customize the audio output to your liking.'
+    }
   },
   // --- SEO & Marketing ---
   {
@@ -567,6 +722,24 @@ export const TOOLS: Tool[] = [
       benefit: 'Maximizes content visibility on search engines and social platforms, saving time by generating all necessary text in one go.',
       proFeature: 'Specify your target audience in the prompt (e.g., "...for a B2B audience") to get more tailored keywords and hashtags.',
     },
+  },
+    {
+    id: 'subject-line-generator',
+    name: 'Email Subject Line Generator',
+    description: 'Crafts attention-grabbing subject lines to maximize open rates for email campaigns.',
+    category: ToolCategory.Marketing,
+    icon: <EnvelopeOpenIcon />,
+    component: ToolComponentType.Generic,
+    systemInstruction: 'You are a world-class direct-response copywriter specializing in email marketing. Your task is to generate 5-10 compelling and high-converting email subject lines based on the user\'s input. Provide a variety of styles, including urgency, curiosity, benefit-driven, and personalized subject lines. Clearly label each style.',
+    props: {
+        promptTemplate: 'Generate 5-10 compelling email subject lines for an email about: {userInput}. Provide a mix of styles.',
+        placeholder: 'Enter the topic or paste the body of your email here...',
+    },
+    context: {
+        purpose: 'Generates multiple, creative subject lines for an email.',
+        benefit: 'Dramatically improves email open rates by creating subject lines that are designed to capture attention and drive engagement.',
+        proFeature: 'Specify the target audience (e.g., "for a B2B audience of software developers") to get more tailored and effective subject lines.'
+    }
   },
   {
     id: 'ad-copy',
@@ -897,6 +1070,30 @@ export const TOOLS: Tool[] = [
     }
   },
   // --- Research & Review ---
+    {
+    id: 'sentiment-analyzer',
+    name: 'Sentiment Analyzer',
+    description: 'Analyze text to determine its sentiment, emotions, and key topics.',
+    category: ToolCategory.Research,
+    icon: <FaceSmileIcon />,
+    component: ToolComponentType.SentimentAnalyzerTool,
+    systemInstruction: `You are an expert in Natural Language Processing and sentiment analysis. Your task is to analyze the provided text and return a structured JSON object with the following schema. Provide only the raw JSON object and nothing else.
+Schema:
+{
+  "overall_sentiment": "string (Positive, Negative, or Neutral)",
+  "sentiment_score": "number (from -1.0 for very negative, to 1.0 for very positive)",
+  "key_emotions": "array of strings (e.g., ['Joy', 'Anger', 'Surprise'])",
+  "summary": "string (A brief, one-sentence explanation for the sentiment analysis.)"
+}`,
+    props: {
+        placeholder: 'Paste the text you want to analyze here, such as a customer review, social media comment, or document.',
+    },
+    context: {
+        purpose: 'Identifies the emotional tone and sentiment of any piece of text.',
+        benefit: 'Provides quick insights into customer feedback, social media conversations, or any text, helping you understand audience perception without manual reading.',
+        proFeature: 'The tool provides a structured JSON output, making it useful for developers who want to integrate sentiment analysis into their own applications.'
+    }
+  },
   {
     id: 'research-abstract',
     name: 'Research Abstract Generator',
