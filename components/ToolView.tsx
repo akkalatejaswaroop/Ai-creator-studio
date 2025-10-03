@@ -11,8 +11,8 @@ const componentMap: { [key in ToolComponentType]: React.LazyExoticComponent<Reac
     [ToolComponentType.ImageGenerator]: React.lazy(() => import('./tools/ImageGeneratorTool')),
     [ToolComponentType.GroundedQA]: React.lazy(() => import('./tools/GroundedQATool')),
     [ToolComponentType.BlogPost]: React.lazy(() => import('./tools/BlogPostTool')),
-    [ToolComponentType.GrammarTool]: React.lazy(() => import('./tools/GrammarTool')),
-    [ToolComponentType.ToneChangerTool]: React.lazy(() => import('./tools/ToneChangerTool')),
+    [ToolComponentType.AdvancedWritingTool]: React.lazy(() => import('./tools/AdvancedWritingTool')),
+    [ToolComponentType.AdvancedToneTunerTool]: React.lazy(() => import('./tools/AdvancedToneTunerTool')),
     [ToolComponentType.EmailWriterTool]: React.lazy(() => import('./tools/EmailWriterTool')),
     [ToolComponentType.StudyTool]: React.lazy(() => import('./tools/StudyTool')),
     [ToolComponentType.ResumeTool]: React.lazy(() => import('./tools/IndustryInputTool')), // Fallback for deprecated tool

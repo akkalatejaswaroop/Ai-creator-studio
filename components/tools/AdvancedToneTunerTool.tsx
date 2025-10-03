@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { AiToolComponentProps, SingleSelectToolProps } from '../../types';
+import { AiToolComponentProps, AdvancedToneTunerToolProps } from '../../types';
 import { Loader } from '../Loader';
 import { Select } from './shared/Select';
 import { OutputDisplay } from './shared/OutputDisplay';
@@ -7,10 +7,18 @@ import { streamTextGeneration } from './shared/utils';
 
 const MicrophoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 016 0v8.25a3 3 0 01-3 3z" /></svg>;
 
-const SingleSelectTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenerationComplete }) => {
-    const { placeholder, select } = tool.props as SingleSelectToolProps;
+const AdvancedToneTunerTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenerationComplete }) => {
+    const { placeholder, tones, scenarios, audiences, formalities, languageVariants } = tool.props as AdvancedToneTunerToolProps;
+
+    // State for inputs
     const [userInput, setUserInput] = useState('');
-    const [selectValue, setSelectValue] = useState(select.options[0]);
+    const [tone, setTone] = useState(tones[0]);
+    const [scenario, setScenario] = useState(scenarios[0]);
+    const [audience, setAudience] = useState(audiences[0]);
+    const [formality, setFormality] = useState(formalities[1]); // Default to semi-formal
+    const [languageVariant, setLanguageVariant] = useState(languageVariants[0]);
+    
+    // State for generation
     const [generatedContent, setGeneratedContent] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -53,16 +61,20 @@ const SingleSelectTool: React.FC<AiToolComponentProps> = ({ tool, language, onGe
             setIsListening(true);
         }
     };
-
+    
     const handleGenerate = useCallback(() => {
-        const inputs = { selectValue, userInput };
+        const inputs = { tone, scenario, audience, formality, languageVariant, userInput };
         streamTextGeneration(tool, language, inputs, onGenerationComplete, setGeneratedContent, setIsLoading, setError);
-    }, [tool, language, onGenerationComplete, selectValue, userInput]);
+    }, [tool, language, onGenerationComplete, tone, scenario, audience, formality, languageVariant, userInput]);
 
     return (
         <div className="flex flex-col h-full gap-4">
-            <div className="max-w-xs">
-                <Select label={select.label} value={selectValue} onChange={(e) => setSelectValue(e.target.value)} options={select.options} />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <Select label="Target Tone" value={tone} onChange={(e) => setTone(e.target.value)} options={tones} />
+                <Select label="Scenario" value={scenario} onChange={(e) => setScenario(e.target.value)} options={scenarios} />
+                <Select label="Audience" value={audience} onChange={(e) => setAudience(e.target.value)} options={audiences} />
+                <Select label="Formality" value={formality} onChange={(e) => setFormality(e.target.value)} options={formalities} />
+                <Select label="Language Variant" value={languageVariant} onChange={(e) => setLanguageVariant(e.target.value)} options={languageVariants} />
             </div>
             <div className="relative flex-grow">
                 <textarea
@@ -82,11 +94,13 @@ const SingleSelectTool: React.FC<AiToolComponentProps> = ({ tool, language, onGe
                 )}
             </div>
             <button onClick={handleGenerate} disabled={isLoading || !userInput} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all">
-                {isLoading ? <><Loader /> Generating...</> : 'Generate'}
+                {isLoading ? <><Loader /> Tuning Text...</> : 'Tune Text'}
             </button>
-            <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your generated content will appear here." tool={tool} />
+            <div className="flex-grow h-1/2 min-h-[200px]">
+                <OutputDisplay isLoading={isLoading} error={error} content={generatedContent} defaultText="Your fine-tuned text and analysis will appear here." tool={tool} />
+            </div>
         </div>
     );
 };
 
-export default SingleSelectTool;
+export default AdvancedToneTunerTool;

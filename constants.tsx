@@ -45,6 +45,7 @@ const GitCommitIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
 const ShieldCheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>;
 const MapIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.5-10.5h.75a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25-2.25h-7.5a2.25 2.25 0 01-2.25-2.25V8.25a2.25 2.25 0 012.25-2.25h.75" /></svg>;
 const TranslateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m0 0a9 9 0 019-9m-9 9a9 9 0 009 9" /><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 21v-5.25m10.5 5.25v-5.25" /></svg>;
+const CubeTransparentIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>;
 
 // New Icons for Communication Tools
 const ArrowUturnLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" /></svg>;
@@ -110,42 +111,91 @@ Your output at each stage should be clear, well-structured, and in Markdown form
     }
   },
   {
-    id: 'grammar-fixer',
-    name: 'Grammar & Style Fixer',
-    description: 'Correct grammar and improve the style and clarity of your writing.',
+    id: 'advanced-writing-assistant',
+    name: 'Advanced Writing Assistant',
+    description: 'A complete communication coach to fix, rephrase, and analyze your text for any audience.',
     category: ToolCategory.Writing,
-    icon: <CheckBadgeIcon />,
-    component: ToolComponentType.GrammarTool,
-    systemInstruction: 'You are an expert copy editor. Your task is to correct grammar and spelling, and rewrite the provided text to match a specified style. You should also improve sentence clarity and conciseness, and enhance vocabulary. Present the corrected text first, followed by a bulleted list explaining the key changes (Grammar, Style, Vocabulary, Clarity). Use Markdown for formatting.',
+    icon: <CubeTransparentIcon />,
+    component: ToolComponentType.AdvancedWritingTool,
+    systemInstruction: `You are a world-class communication coach and expert copy editor AI. Your task is to analyze and improve text based on a variety of professional criteria. Your output must be a detailed, structured report in Markdown format.
+
+Given the user's text and their specified settings (Tone, Audience, Formality, Goal, Language Variant), you must provide the following sections in your response:
+
+1.  **Corrected Text**: First, present the fully corrected and rewritten version of the text, incorporating all improvements.
+2.  **Summary of Changes**: A bulleted list detailing the key modifications made. Group them into categories:
+    *   **Grammar & Spelling**: (e.g., Corrected subject-verb agreement).
+    *   **Clarity & Conciseness**: (e.g., Simplified a wordy sentence for better flow).
+    *   **Vocabulary Enhancement**: (e.g., Replaced 'good' with 'exceptional' for more impact).
+3.  **Tone & Style Analysis**: A brief paragraph explaining how the rewritten text now aligns with the user's desired **{tone}** and **{goal}**.
+4.  **Audience Appropriateness**: Assess how well the language and complexity suit the specified **{audience}**. (e.g., "The language is now appropriate for 'Technical Experts' as it uses precise industry terminology.").
+5.  **Inclusivity & Bias Check**: A critical review of the original text for any potentially biased, non-inclusive, or emotionally charged language. If issues are found, explain them and how the corrected text addresses them. If none are found, state "No inclusivity or bias issues were detected."
+6.  **Originality Check**: Briefly comment on whether the phrasing is generic or contains common clichés that could be improved for originality. This is not a formal plagiarism check but a style suggestion.
+
+Adhere strictly to this format.`,
     props: {
-      promptTemplate: 'Please correct the grammar and rewrite the following text in a {style} style. Improve its clarity and vocabulary. Text: {userInput}',
-      placeholder: 'Paste any text here to check for errors and get style suggestions...',
-      styles: ['Formal', 'Casual', 'Technical', 'Creative', 'Academic'],
+        promptTemplate: `Please analyze and rewrite the following text based on these settings:
+- Tone: {tone}
+- Audience: {audience}
+- Formality: {formality}
+- Primary Goal: {goal}
+- Language Variant: {languageVariant}
+
+Text to Analyze:
+"{userInput}"`,
+        placeholder: 'Enter any text here to analyze and improve, or use the microphone to dictate...',
+        tones: ['Professional', 'Casual', 'Persuasive', 'Empathetic', 'Confident', 'Humorous'],
+        audiences: ['General Public', 'Technical Experts', 'Beginners', 'Executives', 'Academic'],
+        formalities: ['Formal', 'Semi-Formal', 'Informal'],
+        goals: ['Inform', 'Persuade', 'Engage', 'De-escalate a conflict'],
+        languageVariants: ['American English', 'British English', 'Canadian English', 'Australian English'],
     },
     context: {
-      purpose: 'Checks your text for grammatical errors, spelling mistakes, and stylistic issues.',
-      benefit: 'Ensures your writing is professional, clear, and error-free, whether it\'s for an email, a report, or a blog post.',
-      proFeature: 'Select a target style (e.g., "Formal") to not only correct errors but also align the text with a specific voice.'
+        purpose: 'Acts as a comprehensive communication coach, going beyond simple grammar checks to analyze tone, audience fit, and inclusivity.',
+        benefit: 'Ensures your writing is not only correct but also effective, appropriate, and responsible for any personal or professional situation.',
+        proFeature: 'Use the microphone button to dictate your text. The AI will then transcribe and analyze your spoken words, providing feedback on the written version.'
     }
   },
    {
     id: 'tone-changer',
-    name: 'Writing Tone Changer',
-    description: 'Rewrite your text to adopt a different tone, such as professional, casual, or confident.',
+    name: 'Advanced Tone & Style Tuner',
+    description: 'A comprehensive assistant to adapt your writing for any audience, context, or goal.',
     category: ToolCategory.Writing,
-    icon: <AdjustmentsHorizontalIcon />,
-    component: ToolComponentType.ToneChangerTool,
-    systemInstruction: 'You are an expert editor and communication specialist. Your task is to rewrite the given text to match the specified tone and intensity, while preserving the core message.',
+    icon: <WrenchScrewdriverIcon />,
+    component: ToolComponentType.AdvancedToneTunerTool,
+    systemInstruction: `You are a world-class communication expert and AI copy editor. Your task is to analyze and rewrite text based on a sophisticated set of user-defined parameters. Your output must be a structured report in Markdown format.
+
+Given the user's text and their specified settings (Tone, Scenario, Audience, Formality, Language Variant), you must provide the following sections in your response:
+
+1.  **Rewritten Text**: The fully rewritten version of the text, meticulously adapted to the specified parameters.
+2.  **Tone & Style Analysis**:
+    *   **Original Tone Assessment**: Briefly describe the tone of the original text.
+    *   **Key Changes Made**: A bulleted list explaining the most significant changes in vocabulary, sentence structure, and phrasing to achieve the new tone.
+3.  **Impact Prediction**:
+    *   **Predicted Audience Reception**: Briefly explain how the target **{audience}** is likely to perceive the new tone in the context of the specified **{scenario}**.
+    *   **Effectiveness Score**: Provide a qualitative score (e.g., Highly Effective, Moderately Effective) and a one-sentence justification for how well the rewritten text meets its communication goal.
+
+Adhere strictly to this multi-part, Markdown-formatted output.`,
     props: {
-      promptTemplate: 'Rewrite the following text with a {intensity} {tone} tone: {userInput}',
-      placeholder: 'Paste the text you want to transform here...',
-      tones: ['Professional', 'Friendly', 'Persuasive', 'Humorous', 'Empathetic', 'Confident'],
-      intensities: ['Mild', 'Moderate', 'Strong'],
+        promptTemplate: `Please analyze and rewrite the following text based on these settings:
+- Target Tone: {tone}
+- Communication Scenario: {scenario}
+- Target Audience: {audience}
+- Formality Level: {formality}
+- Language Variant: {languageVariant}
+
+Original Text:
+"{userInput}"`,
+        placeholder: 'Paste the text you want to transform here...',
+        tones: ['Professional', 'Friendly', 'Persuasive', 'Humorous', 'Empathetic', 'Confident', 'Assertive', 'Neutral'],
+        scenarios: ['General Update', 'Sales Pitch', 'Customer Support', 'Conflict Resolution', 'Giving Feedback', 'Formal Report'],
+        audiences: ['General Public', 'Technical Experts', 'C-Suite Executives', 'Close Colleagues', 'New Customers'],
+        formalities: ['Formal (Corporate)', 'Semi-Formal (Business Casual)', 'Informal (Conversational)'],
+        languageVariants: ['American English', 'British English', 'Canadian English', 'Australian English'],
     },
     context: {
-      purpose: 'Modifies the tone of your writing to suit different audiences and situations.',
-      benefit: 'Helps you communicate more effectively by ensuring your message has the right emotional impact, from a formal business proposal to a friendly social media post.',
-      proFeature: 'Use the intensity control to fine-tune the strength of the selected tone for more nuanced results.'
+        purpose: "Precisely adapts your writing's tone and style for any situation, audience, or communication goal.",
+        benefit: "Goes beyond simple rewrites to ensure your message is not just understood, but is also effective, appropriate, and lands with the intended impact.",
+        proFeature: "Use the 'Scenario' and 'Audience' selectors to get highly contextual advice, turning this into a strategic communication coach."
     }
   },
   {
@@ -1516,7 +1566,7 @@ Schema:
     },
     context: {
         purpose: "Transforms a simple request into a professional, structured JSON prompt for advanced AI models.",
-        benefit: "Dramatically improves the quality and reliability of AI-generated content by providing clear, detailed, and unambiguous instructions.",
+        benefit: "Dramatically improves the quality and reliability of AI-generated content by providing a clear, detailed, and unambiguous instructions.",
         proFeature: "Ask it to include a 'chain-of-thought' section in the JSON to guide the AI's reasoning process for complex tasks."
     }
   },
@@ -1701,8 +1751,6 @@ Schema:
     icon: <DatabaseIcon />,
     component: ToolComponentType.Generic,
     systemInstruction: 'You are a senior database administrator and SQL expert. Your task is to translate a natural language request into a clean, efficient, and standard SQL query. Return the query inside a Markdown SQL code block.',
-    // FIX: The props for this tool were corrupted and incomplete.
-    // GenericTool requires both promptTemplate and placeholder.
     props: {
         promptTemplate: 'Translate the following request into an SQL query: {userInput}',
         placeholder: 'e.g., "Find all users from California who signed up in the last month."\n\nTo get a more accurate query, you can optionally provide your table schema below your request. For example:\n\n---\nSchema:\nusers(id, name, email, signup_date, state)\norders(id, user_id, amount, date)',

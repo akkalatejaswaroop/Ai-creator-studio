@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { AiToolComponentProps, MessageReplyToolProps } from '../../types';
 import { Loader } from '../Loader';
 import { Select } from './shared/Select';
 import { OutputDisplay } from './shared/OutputDisplay';
 import { streamTextGeneration } from './shared/utils';
+
+const MicrophoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 016 0v8.25a3 3 0 01-3 3z" /></svg>;
 
 const MessageReplyTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenerationComplete }) => {
     const { placeholder, contextPlaceholder, intents, tones, formalities } = tool.props as MessageReplyToolProps;
@@ -15,6 +17,51 @@ const MessageReplyTool: React.FC<AiToolComponentProps> = ({ tool, language, onGe
     const [generatedContent, setGeneratedContent] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+
+    // Speech recognition state
+    const [isSpeechSupported, setIsSpeechSupported] = useState(false);
+    const [listeningTarget, setListeningTarget] = useState<'userInput' | 'context' | null>(null);
+    const recognitionRef = useRef<any | null>(null);
+
+    useEffect(() => {
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            setIsSpeechSupported(true);
+            const recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.onresult = (event: any) => {
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    }
+                }
+                if (finalTranscript) {
+                    const toAdd = (prev: string) => prev.trim() + (prev ? ' ' : '') + finalTranscript;
+                    if (listeningTarget === 'userInput') {
+                        setUserInput(toAdd);
+                    } else if (listeningTarget === 'context') {
+                        setContext(toAdd);
+                    }
+                }
+            };
+            recognition.onend = () => setListeningTarget(null);
+            recognitionRef.current = recognition;
+        }
+        return () => recognitionRef.current?.stop();
+    }, [listeningTarget]);
+
+    const handleListen = (target: 'userInput' | 'context') => {
+        if (!recognitionRef.current) return;
+        if (listeningTarget === target) {
+            recognitionRef.current.stop();
+        } else {
+            if (listeningTarget) recognitionRef.current.stop();
+            setListeningTarget(target);
+            recognitionRef.current.start();
+        }
+    };
     
     const handleGenerate = useCallback(() => {
         const inputs = { userInput, intent, tone, formality, context: context || 'No additional context provided.' };
@@ -31,18 +78,32 @@ const MessageReplyTool: React.FC<AiToolComponentProps> = ({ tool, language, onGe
                 <Select label="Formality" value={formality} onChange={(e) => setFormality(e.target.value)} options={formalities} />
             </div>
             <div className="flex flex-col md:flex-row gap-4 flex-grow min-h-0">
-                <textarea
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    placeholder={placeholder}
-                    className="w-full md:w-1/2 h-full p-3 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
-                />
-                <textarea
-                    value={context}
-                    onChange={(e) => setContext(e.target.value)}
-                    placeholder={contextPlaceholder}
-                    className="w-full md:w-1/2 h-full p-3 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
-                />
+                <div className="relative w-full md:w-1/2 h-full">
+                    <textarea
+                        value={userInput}
+                        onChange={(e) => setUserInput(e.target.value)}
+                        placeholder={placeholder}
+                        className="w-full h-full p-3 pr-12 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+                    />
+                    {isSpeechSupported && (
+                        <button onClick={() => handleListen('userInput')} title="Dictate message" className={`absolute top-3 right-3 p-2 rounded-full transition-colors ${listeningTarget === 'userInput' ? 'bg-red-500 text-white animate-pulse' : 'bg-white/10 text-gray-300 hover:bg-white/20'}`}>
+                            <MicrophoneIcon />
+                        </button>
+                    )}
+                </div>
+                <div className="relative w-full md:w-1/2 h-full">
+                    <textarea
+                        value={context}
+                        onChange={(e) => setContext(e.target.value)}
+                        placeholder={contextPlaceholder}
+                        className="w-full h-full p-3 pr-12 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+                    />
+                    {isSpeechSupported && (
+                        <button onClick={() => handleListen('context')} title="Dictate context" className={`absolute top-3 right-3 p-2 rounded-full transition-colors ${listeningTarget === 'context' ? 'bg-red-500 text-white animate-pulse' : 'bg-white/10 text-gray-300 hover:bg-white/20'}`}>
+                            <MicrophoneIcon />
+                        </button>
+                    )}
+                </div>
             </div>
             <button
                 onClick={handleGenerate}

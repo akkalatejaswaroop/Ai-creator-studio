@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { AiToolComponentProps, TranslatorToolProps } from '../../types';
 import { Loader } from '../Loader';
 import { Select } from './shared/Select';
@@ -12,6 +12,7 @@ const LANGUAGES = [
     { code: 'ru-RU', name: 'Russian' }, { code: 'ja-JP', name: 'Japanese' },
     { code: 'ko-KR', name: 'Korean' }, { code: 'zh-CN', name: 'Chinese (Simplified)' },
     { code: 'ar-SA', name: 'Arabic' }, { code: 'hi-IN', name: 'Hindi' },
+    { code: 'te-IN', name: 'Telugu' },
 ];
 
 const SOURCE_LANGUAGES = [{ code: 'auto', name: 'Auto-detect' }, ...LANGUAGES];
@@ -22,6 +23,7 @@ const SpeakerOffIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="
 const CopyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>;
 const CheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>;
 const SwapIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>;
+const MicrophoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 016 0v8.25a3 3 0 01-3 3z" /></svg>;
 
 
 const TranslatorTool: React.FC<AiToolComponentProps> = ({ tool, onGenerationComplete }) => {
@@ -37,16 +39,57 @@ const TranslatorTool: React.FC<AiToolComponentProps> = ({ tool, onGenerationComp
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [copied, setCopied] = useState(false);
 
+    // State for speech recognition
+    const [isListening, setIsListening] = useState(false);
+    const [isSpeechSupported, setIsSpeechSupported] = useState(false);
+    const recognitionRef = useRef<any | null>(null);
+
     useEffect(() => {
+        // Speech Recognition setup
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            setIsSpeechSupported(true);
+            const recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.onresult = (event: any) => {
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    }
+                }
+                if (finalTranscript) {
+                    setInputText(prev => prev.trim() + (prev ? ' ' : '') + finalTranscript);
+                }
+            };
+            recognition.onend = () => setIsListening(false);
+            recognitionRef.current = recognition;
+        }
+
+        // TTS Voices setup
         const loadVoices = () => setVoices(speechSynthesis.getVoices());
         speechSynthesis.onvoiceschanged = loadVoices;
         loadVoices();
-        return () => { speechSynthesis.onvoiceschanged = null; };
+        
+        return () => { 
+            speechSynthesis.onvoiceschanged = null; 
+            if (recognitionRef.current) {
+                recognitionRef.current.stop();
+            }
+        };
     }, []);
 
-    // FIX: Refactored handleTranslate to use the shared streamTextGeneration utility.
-    // The previous implementation was attempting to re-implement the streaming logic
-    // and incorrectly called `generateTextStream`, which was not imported.
+    const handleListen = () => {
+        if (!recognitionRef.current) return;
+        if (isListening) {
+            recognitionRef.current.stop();
+        } else {
+            recognitionRef.current.start();
+            setIsListening(true);
+        }
+    };
+
     const handleTranslate = useCallback(() => {
         if (!inputText.trim()) return;
 
@@ -56,18 +99,7 @@ const TranslatorTool: React.FC<AiToolComponentProps> = ({ tool, onGenerationComp
             formality,
             userInput: inputText,
         };
-
-        // Pass an empty string for language to prevent the util from adding "output in language" text,
-        // as the target language is already part of the prompt template.
-        streamTextGeneration(
-            tool,
-            '',
-            inputs,
-            onGenerationComplete,
-            setTranslatedText,
-            setIsLoading,
-            setError
-        );
+        streamTextGeneration(tool, '', inputs, onGenerationComplete, setTranslatedText, setIsLoading, setError);
     }, [inputText, sourceLang, targetLang, formality, tool, onGenerationComplete]);
 
     const handleCopy = () => {
@@ -78,7 +110,7 @@ const TranslatorTool: React.FC<AiToolComponentProps> = ({ tool, onGenerationComp
 
     const handleSpeak = () => {
         if (!translatedText || isSpeaking) return;
-        speechSynthesis.cancel(); // Cancel any previous speech
+        speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(translatedText);
         const targetVoice = voices.find(voice => voice.lang.startsWith(targetLang.split('-')[0]));
         utterance.voice = targetVoice || null;
@@ -131,12 +163,23 @@ const TranslatorTool: React.FC<AiToolComponentProps> = ({ tool, onGenerationComp
             </div>
 
             <div className="flex-grow flex flex-col md:flex-row gap-4 min-h-0">
-                <textarea
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    placeholder={placeholder}
-                    className="w-full md:w-1/2 h-full p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
-                />
+                <div className="relative w-full md:w-1/2 h-full">
+                    <textarea
+                        value={inputText}
+                        onChange={(e) => setInputText(e.target.value)}
+                        placeholder={placeholder}
+                        className="w-full h-full p-4 pr-12 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200 transition-all text-sm"
+                    />
+                    {isSpeechSupported && (
+                        <button
+                            onClick={handleListen}
+                            title="Dictate text"
+                            className={`absolute bottom-3 right-3 p-2 rounded-full transition-colors ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-white/10 text-gray-300 hover:bg-white/20'}`}
+                        >
+                            <MicrophoneIcon />
+                        </button>
+                    )}
+                </div>
                 <div className="relative w-full md:w-1/2 h-full p-4 bg-black/20 border border-white/10 rounded-lg text-gray-200 text-sm overflow-y-auto">
                     {isLoading && !translatedText && <div className="absolute inset-0 flex items-center justify-center"><Loader /></div>}
                     {error && <div className="text-red-400">{error}</div>}

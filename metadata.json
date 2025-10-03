@@ -1,5 +1,7 @@
 {
   "name": "IntelliForge Ai",
   "description": "Welcome to IntelliForge AI, your all-in-one AI-powered toolkit for creators, developers, marketers, and learners. Forge brilliant ideas into reality with specialized tools for content creation, coding, marketing, and professional growth.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

@@ -1,13 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { AiToolComponentProps, BlogPostToolProps } from '../../types';
 import { Loader } from '../Loader';
 import { Select } from './shared/Select';
 import { OutputDisplay } from './shared/OutputDisplay';
-// FIX: Replaced the utility function with the direct service generator to fix async iterator errors.
 import { generateTextStream } from '../../services/geminiService';
 
 type Step = 'ideation' | 'outlining' | 'drafting' | 'enhancement';
 type BrainstormedIdea = { title: string; audience: string; keywords: string; };
+
+const MicrophoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 016 0v8.25a3 3 0 01-3 3z" /></svg>;
 
 const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenerationComplete }) => {
   const { placeholder, tones, styles, audiences, voices, lengths } = tool.props as BlogPostToolProps;
@@ -36,6 +37,50 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
 
   // Step 4: Enhancement state
   const [analysis, setAnalysis] = useState('');
+  
+  // Speech recognition state
+  const [isSpeechSupported, setIsSpeechSupported] = useState(false);
+  const [listeningTarget, setListeningTarget] = useState<'topic' | 'outline' | null>(null);
+  const recognitionRef = useRef<any | null>(null);
+
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      setIsSpeechSupported(true);
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.onresult = (event: any) => {
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript;
+          }
+        }
+        if (finalTranscript) {
+          if (listeningTarget === 'topic') {
+            setTopic(prev => prev.trim() + (prev ? ' ' : '') + finalTranscript);
+          } else if (listeningTarget === 'outline') {
+            setOutline(prev => prev.trim() + (prev ? ' ' : '') + finalTranscript);
+          }
+        }
+      };
+      recognition.onend = () => setListeningTarget(null);
+      recognitionRef.current = recognition;
+    }
+    return () => recognitionRef.current?.stop();
+  }, [listeningTarget]);
+
+  const handleListen = (target: 'topic' | 'outline') => {
+    if (!recognitionRef.current) return;
+    if (listeningTarget === target) {
+      recognitionRef.current.stop();
+    } else {
+      if (listeningTarget) recognitionRef.current.stop();
+      setListeningTarget(target);
+      recognitionRef.current.start();
+    }
+  };
 
   const handleStream = useCallback(async (prompt: string, setContent: (content: string) => void, inputSummary: string) => {
       setIsLoading(true);
@@ -43,7 +88,6 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
       setError('');
       try {
         let fullResponse = "";
-        // FIX: Was calling the util function 'streamTextGeneration' which is not a generator and had incorrect arguments.
         for await (const chunk of generateTextStream(prompt, tool.systemInstruction, language)) {
             fullResponse += chunk;
             setContent(fullResponse);
@@ -64,7 +108,6 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
     setError('');
     let rawResponse = "";
     try {
-        // FIX: Was calling the util function 'streamTextGeneration' which is not a generator and had incorrect arguments.
         for await (const chunk of generateTextStream(prompt, tool.systemInstruction, language)) {
             rawResponse += chunk;
         }
@@ -103,7 +146,6 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
         length,
         keywords: selectedKeywords
       };
-      // FIX: Cast tool.props to BlogPostToolProps to safely access promptTemplate.
       const promptTemplate = (tool.props as BlogPostToolProps).promptTemplate;
       let finalPrompt = promptTemplate;
       Object.entries(inputs).forEach(([key, value]) => {
@@ -111,7 +153,6 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
       });
       await handleStream(finalPrompt, setDraft, `Draft for: ${selectedTitle}`);
       setStep('enhancement');
-  // FIX: Use tool.props in dependency array instead of tool.props.promptTemplate.
   }, [outline, selectedAudience, tone, style, voice, length, selectedKeywords, tool.props, handleStream, selectedTitle]);
 
   // --- Step 4: Enhancement Logic ---
@@ -148,7 +189,14 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
       
       {step === 'ideation' && (
         <div className="flex flex-col h-full gap-4 animate-fade-in-up">
-          <textarea value={topic} onChange={e => setTopic(e.target.value)} placeholder={placeholder} className="w-full p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200" rows={3}/>
+          <div className="relative">
+            <textarea value={topic} onChange={e => setTopic(e.target.value)} placeholder={placeholder} className="w-full p-4 pr-12 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200" rows={3}/>
+            {isSpeechSupported && (
+                <button onClick={() => handleListen('topic')} title="Dictate topic" className={`absolute top-3 right-3 p-2 rounded-full transition-colors ${listeningTarget === 'topic' ? 'bg-red-500 text-white animate-pulse' : 'bg-white/10 text-gray-300 hover:bg-white/20'}`}>
+                    <MicrophoneIcon />
+                </button>
+            )}
+          </div>
           <button onClick={handleBrainstorm} disabled={isLoading || !topic} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600">
             {isLoading ? <><Loader /> Brainstorming...</> : 'Brainstorm Ideas'}
           </button>
@@ -173,7 +221,14 @@ const BlogPostTool: React.FC<AiToolComponentProps> = ({ tool, language, onGenera
             <button onClick={handleGenerateOutline} disabled={isLoading} className="w-full flex justify-center items-center gap-2 bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600">
                 {isLoading && !outline ? <><Loader /> Generating Outline...</> : 'Generate Outline'}
             </button>
-            <textarea value={outline} onChange={e => setOutline(e.target.value)} placeholder="Your outline will appear here. You can edit it before drafting." className="w-full flex-grow p-4 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200" />
+            <div className="relative flex-grow">
+              <textarea value={outline} onChange={e => setOutline(e.target.value)} placeholder="Your outline will appear here. You can edit it before drafting." className="w-full h-full p-4 pr-12 bg-black/30 border border-white/10 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200" />
+              {isSpeechSupported && (
+                  <button onClick={() => handleListen('outline')} title="Dictate outline" className={`absolute top-3 right-3 p-2 rounded-full transition-colors ${listeningTarget === 'outline' ? 'bg-red-500 text-white animate-pulse' : 'bg-white/10 text-gray-300 hover:bg-white/20'}`}>
+                      <MicrophoneIcon />
+                  </button>
+              )}
+            </div>
             <div className="flex gap-4">
                 <button onClick={() => setStep('ideation')} className="w-full bg-gray-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-gray-700">Back</button>
                 <button onClick={() => setStep('drafting')} disabled={!outline} className="w-full bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-700 disabled:bg-gray-600">Next: Draft Post</button>

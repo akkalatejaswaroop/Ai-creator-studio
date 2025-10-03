@@ -22,8 +22,8 @@ export enum ToolComponentType {
   ImageGenerator = 'ImageGenerator',
   GroundedQA = 'GroundedQA',
   BlogPost = 'BlogPost',
-  GrammarTool = 'GrammarTool',
-  ToneChangerTool = 'ToneChangerTool',
+  AdvancedWritingTool = 'AdvancedWritingTool',
+  AdvancedToneTunerTool = 'AdvancedToneTunerTool',
   EmailWriterTool = 'EmailWriterTool',
   StudyTool = 'StudyTool',
   ResumeTool = 'ResumeTool', // Deprecated, will be replaced by IndustryInputTool
@@ -92,17 +92,24 @@ export interface GroundedQAToolProps {
   placeholder: string;
 }
 
-export interface GrammarToolProps {
-  promptTemplate: string;
-  placeholder: string;
-  styles: string[];
-}
-
-export interface ToneChangerToolProps {
+export interface AdvancedWritingToolProps {
   promptTemplate: string;
   placeholder: string;
   tones: string[];
-  intensities: string[];
+  audiences: string[];
+  formalities: string[];
+  goals: string[];
+  languageVariants: string[];
+}
+
+export interface AdvancedToneTunerToolProps {
+  promptTemplate: string;
+  placeholder: string;
+  tones: string[];
+  scenarios: string[];
+  audiences: string[];
+  formalities: string[];
+  languageVariants: string[];
 }
 
 export interface EmailWriterToolProps {
@@ -224,7 +231,7 @@ export interface Tool {
   category: ToolCategory;
   icon: React.ReactNode;
   component: ToolComponentType;
-  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | GrammarToolProps | ToneChangerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps | MessageReplyToolProps | NoticeGeneratorToolProps | AnnouncementGeneratorToolProps | SyllabusDesignerToolProps | GrantProposalToolProps | TranslatorToolProps | VoiceMessageToolProps | SentimentAnalyzerToolProps | EssayAnalyzerToolProps;
+  props: GenericToolProps | SocialMediaToolProps | VideoScriptToolProps | ImageInputToolProps | ImageGeneratorToolProps | GroundedQAToolProps | BlogPostToolProps | AdvancedWritingToolProps | AdvancedToneTunerToolProps | EmailWriterToolProps | StudyToolProps | ResumeToolProps | SingleSelectToolProps | DoubleSelectToolProps | DualTextareaToolProps | IndustryInputToolProps | MessageReplyToolProps | NoticeGeneratorToolProps | AnnouncementGeneratorToolProps | SyllabusDesignerToolProps | GrantProposalToolProps | TranslatorToolProps | VoiceMessageToolProps | SentimentAnalyzerToolProps | EssayAnalyzerToolProps;
   systemInstruction: string;
   context: ToolContext;
   featured?: boolean;
