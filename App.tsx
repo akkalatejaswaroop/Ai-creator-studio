@@ -102,6 +102,7 @@ const App: React.FC = () => {
                   searchTerm={searchTerm} 
                   setSearchTerm={setSearchTerm} 
                   tools={TOOLS}
+                  categories={CATEGORIES}
                   onSelectTool={handleSelectTool}
                 />;
     }
@@ -132,7 +133,7 @@ const App: React.FC = () => {
                 <MenuIcon />
             </button>
         )}
-        <div className="p-4 md:p-8 lg:p-12 h-full">
+        <div className="p-6 md:p-10 h-full">
           {renderContent()}
         </div>
       </main>

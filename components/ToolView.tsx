@@ -37,12 +37,15 @@ const LANGUAGES = ['English', 'Spanish', 'French', 'German', 'Japanese', 'Chines
 const GlobeAltIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m0 0a9 9 0 019-9m-9 9a9 9 0 009 9" /></svg>;
 
 const ProTip = ({ context }: { context: ToolContext }) => (
-    <details className="bg-cyan-900/40 border border-cyan-500/30 rounded-lg p-4 mb-6 transition-all open:pb-4">
-        <summary className="font-semibold text-cyan-300 cursor-pointer flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 002 0v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>
-            How to Use This Tool
+    <details className="bg-cyan-900/30 border border-cyan-500/20 rounded-lg group transition-all duration-300 ease-in-out open:bg-cyan-900/40">
+        <summary className="font-semibold text-cyan-300 cursor-pointer flex items-center justify-between p-4 list-none">
+            <div className="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 002 0v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>
+                How to Use This Tool
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform transition-transform duration-300 group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
         </summary>
-        <div className="mt-4 text-sm space-y-3 text-gray-300 animate-fade-in-up">
+        <div className="px-4 pb-4 text-sm space-y-3 text-gray-300 border-t border-cyan-500/20 pt-4">
             <p><strong className="font-semibold text-white">Purpose:</strong> {context.purpose}</p>
             <p><strong className="font-semibold text-white">Benefit:</strong> {context.benefit}</p>
             <p><strong className="font-semibold text-cyan-300">Pro Tip:</strong> {context.proFeature}</p>
@@ -84,12 +87,12 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ tool, onBack, onAddT
     <div className="flex flex-col h-full opacity-0 animate-fade-in-up">
         <div className="flex flex-col md:flex-row md:items-start justify-between mb-6 gap-4">
             <div>
-                <button onClick={onBack} className="text-gray-400 hover:text-white transition-colors text-sm mb-2 flex items-center gap-2">
+                <button onClick={onBack} className="text-gray-400 hover:text-white transition-colors text-sm mb-3 flex items-center gap-2" aria-label="Back to all tools">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                    Back to all tools
+                    Back to Dashboard
                 </button>
                 <div className="flex items-center gap-4">
-                    <span className="text-cyan-400">{tool.icon}</span>
+                    <span className="text-cyan-400 text-3xl">{tool.icon}</span>
                     <div>
                         <h2 className="text-2xl font-bold text-white">{tool.name}</h2>
                         <p className="text-gray-400">{tool.description}</p>
@@ -114,7 +117,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ tool, onBack, onAddT
             )}
         </div>
         <ProTip context={tool.context} />
-        <div className="flex-grow h-full min-h-0">
+        <div className="flex-grow h-full min-h-0 mt-6">
             <Suspense fallback={
                 <div className="flex items-center justify-center h-full w-full">
                     <Loader />

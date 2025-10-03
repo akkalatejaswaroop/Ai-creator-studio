@@ -29,9 +29,9 @@ export const ActionButtons = ({ text, toolName }: { text: string, toolName: stri
   };
 
   return (
-    <div className="absolute top-3 right-3 flex items-center gap-2">
+    <div className="absolute top-3 right-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
        {/* Feedback Buttons */}
-       <div className="flex items-center bg-white/10 rounded-lg p-0.5">
+       <div className="flex items-center bg-black/30 backdrop-blur-sm rounded-lg p-0.5 border border-white/10">
           <button onClick={() => handleFeedback('up')} className={`p-1.5 rounded-md ${feedback === 'up' ? 'bg-green-500/50' : 'hover:bg-white/20'}`} aria-label="Good response">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 18.236V6.73c0-.355.19-.684.493-.865l1.8-1.04c.306-.177.68-.177.986 0l1.8 1.04c.303.181.493.51.493.865v3.27z" /></svg>
           </button>
@@ -41,12 +41,15 @@ export const ActionButtons = ({ text, toolName }: { text: string, toolName: stri
           </button>
        </div>
        {/* Action Buttons */}
-       <button onClick={handleDownload} className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors" aria-label="Download content">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-       </button>
-       <button onClick={handleCopy} className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors" aria-label="Copy content">
-         {copied ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
-       </button>
+       <div className="flex items-center bg-black/30 backdrop-blur-sm rounded-lg border border-white/10">
+        <button onClick={handleDownload} className="p-2 hover:bg-white/20 transition-colors rounded-l-md" aria-label="Download content">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+        </button>
+        <div className="w-px h-5 bg-white/20"></div>
+        <button onClick={handleCopy} className="p-2 hover:bg-white/20 transition-colors rounded-r-md" aria-label="Copy content">
+            {copied ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
+        </button>
+       </div>
     </div>
   );
 };

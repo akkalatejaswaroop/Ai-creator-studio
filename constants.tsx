@@ -87,6 +87,7 @@ export const TOOLS: Tool[] = [
     category: ToolCategory.Writing,
     icon: <PenIcon />,
     component: ToolComponentType.BlogPost,
+    featured: true,
     systemInstruction: `You are a world-class content strategist and copywriter AI, operating as "Blog Post Studio". Your expertise spans SEO, content marketing, and engaging writing. You will guide the user through a multi-step process:
 1.  **Brainstorming**: Given a topic, you will generate compelling article ideas, suggest target audiences, and provide primary keywords.
 2.  **Outlining**: Based on a chosen idea, you will create a detailed, logical, and SEO-friendly article outline.
@@ -320,6 +321,7 @@ Your output at each stage should be clear, well-structured, and in Markdown form
     category: ToolCategory.Business,
     icon: <ChartPieIcon />,
     component: ToolComponentType.GroundedQA,
+    featured: true,
     systemInstruction: 'You are a senior market research analyst. Provide a detailed, data-driven answer to the user\'s question using the latest information from the web. Synthesize the information into a coherent summary.',
     props: {
       placeholder: 'e.g., What are the current market trends for sustainable packaging?',
@@ -450,6 +452,7 @@ Your output at each stage should be clear, well-structured, and in Markdown form
     category: ToolCategory.Communication,
     icon: <TranslateIcon />,
     component: ToolComponentType.TranslatorTool,
+    featured: true,
     systemInstruction: 'You are an expert multilingual translator. Your task is to accurately translate the given text from the source language to the target language, paying close attention to the requested formality level. Preserve the core meaning and nuances of the original text. Provide only the translated text as output, without any additional comments or explanations.',
     props: {
         promptTemplate: 'Translate the following text from "{sourceLang}" to "{targetLang}" with a "{formality}" formality level. Text: {userInput}',
@@ -657,6 +660,7 @@ Your output at each stage should be clear, well-structured, and in Markdown form
     category: ToolCategory.Marketing,
     icon: <MegaphoneIcon />,
     component: ToolComponentType.SocialMedia,
+    featured: true,
     systemInstruction: 'You are a social media marketing expert. Your task is to create an engaging social media post tailored to a specific platform and tone. Include relevant hashtags and suggest trending ones if applicable.',
     props: {
       promptTemplate: 'Create a social media post for {platform} with a {tone} tone about: {userInput}. Include a caption, relevant hashtags, and a suggestion for a visual.',
@@ -1284,6 +1288,7 @@ Schema:
     category: ToolCategory.Creative,
     icon: <PhotoIcon />,
     component: ToolComponentType.ImageGenerator,
+    featured: true,
     systemInstruction: '', // Not needed for image gen
     props: {
         placeholder: 'e.g., A photorealistic image of a majestic lion wearing a crown, cinematic lighting',
@@ -1523,6 +1528,7 @@ Schema:
     category: ToolCategory.Coding,
     icon: <CodeIcon />,
     component: ToolComponentType.Generic,
+    featured: true,
     systemInstruction: 'You are an expert programmer and code reviewer with a talent for explaining complex topics simply. Your goal is to explain code clearly. Use Markdown for formatting, especially for code blocks.',
     props: {
       promptTemplate: 'Explain the following code snippet line-by-line in plain English. Describe what the code does, its logic, and any potential improvements. Code:\n```\n{userInput}\n```',

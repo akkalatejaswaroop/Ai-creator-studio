@@ -24,7 +24,7 @@ const LogoIcon = () => (
 );
 
 const HistoryIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
 );
@@ -98,7 +98,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
     return (
         <aside className={`h-screen bg-black/30 backdrop-blur-lg border-r border-white/10 flex flex-col shrink-0 transition-all duration-300 ease-in-out ${isOpen ? 'w-full max-w-xs p-4' : 'w-0 p-0 border-r-0 overflow-hidden'}`}>
             <div className="flex items-center justify-between mb-6 px-2 shrink-0">
-                <button onClick={onLogoClick} className="flex items-center gap-2">
+                <button onClick={onLogoClick} className="flex items-center gap-2" aria-label="Go to homepage">
                     <LogoIcon />
                     <span className="font-bold text-lg whitespace-nowrap">IntelliForge Ai</span>
                 </button>
@@ -108,16 +108,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
             </div>
             
             <nav className="flex-grow overflow-y-auto -mr-4 pr-3">
-                <ul className="space-y-2">
+                <ul className="space-y-1">
                      <li>
                         <button
                             onClick={onSelectHistory}
-                            className={`w-full flex items-center gap-3 text-left px-2 py-2 rounded-md text-sm transition-colors ${
+                            className={`w-full flex items-center gap-3 text-left pl-2 pr-2 py-2.5 rounded-md text-sm transition-colors relative ${
                                 currentView === 'history'
-                                ? 'bg-cyan-500/20 text-cyan-300 font-semibold'
+                                ? 'text-white font-semibold'
                                 : 'text-gray-300 hover:bg-white/10'
                             }`}
                         >
+                            {currentView === 'history' && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 bg-cyan-400 rounded-r-full"></div>}
                             <HistoryIcon />
                             <span>History</span>
                         </button>
@@ -141,14 +142,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ tools, categories, onSelectToo
                                             <li key={tool.id}>
                                                 <button 
                                                     onClick={() => onSelectTool(tool)} 
-                                                    className={`w-full flex items-center gap-3 text-left p-2 rounded-md text-sm transition-colors ${
+                                                    className={`w-full flex items-center gap-3 text-left p-2 rounded-md text-sm transition-colors relative ${
                                                         selectedToolId === tool.id && currentView === 'tool'
-                                                        ? 'bg-cyan-500/20 text-cyan-300 font-semibold' 
+                                                        ? 'bg-cyan-500/10 text-cyan-300 font-semibold' 
                                                         : 'text-gray-400 hover:bg-white/10 hover:text-gray-200'
                                                     }`}
                                                 >
-                                                    <span className="w-6 h-6 flex items-center justify-center shrink-0">{tool.icon}</span>
-                                                    <span className="whitespace-nowrap">{tool.name}</span>
+                                                     {selectedToolId === tool.id && currentView === 'tool' && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-0.5 bg-cyan-400 rounded-r-full"></div>}
+                                                    <span className="w-5 h-5 flex items-center justify-center shrink-0">{tool.icon}</span>
+                                                    <span className="whitespace-nowrap text-xs">{tool.name}</span>
                                                 </button>
                                             </li>
                                         ))}

@@ -22,20 +22,20 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClos
         <WelcomeIcon />
         <h2 className="text-3xl font-bold text-white mb-4">Welcome to IntelliForge Ai!</h2>
         <p className="text-gray-400 mb-6">
-          Welcome to your creative co-pilot. IntelliForge AI is designed to help you bring your ideas to life, faster. Whether you're writing, coding, or creating, there's a specialized tool waiting for you. Here's how to dive in:
+          This is your creative co-pilot, designed to help you bring ideas to life, faster. Whether you're writing, coding, or creating, there's a specialized tool waiting for you. Here's how to dive in:
         </p>
         <ul className="text-left space-y-3 text-gray-300 mb-8">
           <li className="flex items-start gap-3">
             <span className="text-cyan-400 mt-1">&#10148;</span>
-            <span><strong className="font-semibold text-white">Explore Tools:</strong> Use the sidebar to browse our ever-growing library of specialized AI tools for writing, coding, marketing, and more.</span>
+            <span><strong className="font-semibold text-white">Search Anything:</strong> Use the search bar on the dashboard to instantly find the perfect tool for your task.</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-cyan-400 mt-1">&#10148;</span>
-            <span><strong className="font-semibold text-white">Search Anything:</strong> Can't find a tool? Just type what you want to do in the search bar on the homepage to find the perfect match.</span>
+            <span><strong className="font-semibold text-white">Explore Tools:</strong> Discover powerful capabilities in the "Featured Tools" section or browse the full library using the sidebar.</span>
           </li>
            <li className="flex items-start gap-3">
             <span className="text-cyan-400 mt-1">&#10148;</span>
-            <span><strong className="font-semibold text-white">Check Your History:</strong> Your recent generations are automatically saved. Click the "History" tab to review and reuse your past creations.</span>
+            <span><strong className="font-semibold text-white">Check Your History:</strong> Your recent generations are automatically saved. Click the "History" tab in the sidebar to review and reuse your past creations.</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-cyan-400 mt-1">&#10148;</span>
